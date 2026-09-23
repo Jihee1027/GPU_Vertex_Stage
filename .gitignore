@@ -4,10 +4,11 @@ work/
 transcript
 *.wlf
 *.log
+coverage.ucdb
 
 # Generated synthesis
-mapped/*
-fpga/*
+fpga/
+mapped/
 
 # Vivado
 *.jou
