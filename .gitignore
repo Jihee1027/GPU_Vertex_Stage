@@ -1,0 +1,21 @@
+# Questa / ModelSim
+work/
+.deps/
+transcript
+*.wlf
+*.log
+
+# Generated synthesis
+mapped/*
+fpga/*
+
+# Vivado
+*.jou
+*.str
+.Xil/
+vivado*.log
+vivado*.jou
+
+# Temp
+*.bak
+*~
