@@ -145,6 +145,10 @@ SRCS             = $(addsuffix .v,$(VLSTEM)) \
 HDRS             = $(addsuffix .vh,$(HDSTEM))
 DEPS             = $(addsuffix .d,$(VLSTEM) $(SVSTEM) $(VHSTEM) $(HDSTEM))
 
+# Simulation dependencies
+PKG_SV = $(wildcard $(SRCDIR)/*_pkg.sv)
+SIM_DEPS_perspective_divide = reciprocal_nr vector_delay perspective_multiply ndc_output
+
 # Targets that should not trigger dependency generation
 NODEPS           = help clean clean_sim clean_map clean_deps clean_fpga \
 					all sim wav syn synt syntp lint_all dirs
@@ -273,9 +277,24 @@ $(LIBDIR):
 		$(LIBDIR).$(addsuffix _tb,$*)
 
 # Xilinx/Vivado simulation
-%_tb.sim %_tb.wav %.sim %.wav: %_tb
+%_tb.sim %_tb.wav %.sim %.wav: | $(LIBDIR)
+	@test -f $(SRCDIR)/$*.sv || { echo "Missing RTL: $(SRCDIR)/$*.sv"; exit 1; }
+	@test -f $(TBDIR)/$*_tb.sv || { echo "Missing testbench: $(TBDIR)/$*_tb.sv"; exit 1; }
+
 	@$(VIVADO_LIB_MAP)
+
+	@if [ -n "$(PKG_SV)" ]; then \
+		$(VLOG) -work $(LIBDIR) $(VERFLAGS) $(VIVADO_SIM_FLAGS) $(PKG_SV) || exit $$?; \
+	fi
+
+	@for dep in $(SIM_DEPS_$*); do \
+		$(VLOG) -work $(LIBDIR) $(VERFLAGS) $(VIVADO_SIM_FLAGS) $(SRCDIR)/$$dep.sv || exit $$?; \
+	done
+
+	@$(VLOG) -work $(LIBDIR) $(VERFLAGS) $(VIVADO_SIM_FLAGS) $(SRCDIR)/$*.sv
+	@$(VLOG) -work $(LIBDIR) $(VERFLAGS) $(VIVADO_SIM_FLAGS) $(TBDIR)/$*_tb.sv
 	@$(VLOG) -work $(LIBDIR) $(VERFLAGS) $(VIVADO_SIM_FLAGS) $(GLBL_PATH)
+
 	@$(VSIM) $(SIMTERM) -do $(SIMDO) \
 		$(VIVADO_SIM_FLAGS) \
 		-wlf $(addsuffix _tb,$*).wlf \
@@ -317,11 +336,19 @@ $(LIBDIR):
 %_tb.syntp %.syntp:
 	@mkdir -p $(MAPDIR) $(FPGADIR)
 	@echo "--- Running Xilinx project-mode timing synthesis for '$*' ($(TARGET_FREQ) MHz) ---"
-	@$(SYNX) -p -t -c -f $(TARGET_FREQ) $*
+
+	-@$(SYNX) -p -t -c -f $(TARGET_FREQ) $*
+
+	@echo "--- Generating timing report for '$*' ($(TARGET_FREQ) MHz) ---"
+	@vivado -mode batch \
+		-source $(SCRDIR)/report_timing.tcl \
+		-tclargs $* $(TARGET_FREQ)
+
 	@sed -i 's|\.EN_ECC_READ("FALSE")|\.EN_ECC_READ(0)|g' mapped/$*.sv mapped/$*_tb.sv 2>/dev/null || true
 	@sed -i 's|\.EN_ECC_READ("TRUE")|\.EN_ECC_READ(1)|g' mapped/$*.sv mapped/$*_tb.sv 2>/dev/null || true
 	@sed -i 's|\.EN_ECC_WRITE("FALSE")|\.EN_ECC_WRITE(0)|g' mapped/$*.sv mapped/$*_tb.sv 2>/dev/null || true
 	@sed -i 's|\.EN_ECC_WRITE("TRUE")|\.EN_ECC_WRITE(1)|g' mapped/$*.sv mapped/$*_tb.sv 2>/dev/null || true
+
 	-@rm -f $(DEPDIR)/${*F}_tb.svo
 
 # ==============================================================================

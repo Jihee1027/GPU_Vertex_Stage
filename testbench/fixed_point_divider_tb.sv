@@ -3,93 +3,118 @@
 module fixed_point_divider_tb;
 
 	parameter DATA_W = 24;
+	parameter FRAC_W = 8;
 
-	logic signed [DATA_W-1:0] numerator;
-	logic signed [DATA_W-1:0] denominator;
+	localparam EXT_W = DATA_W + FRAC_W;
 
+	logic clk, n_rst, start;
+	logic signed [DATA_W-1:0] numerator, denominator;
 	logic signed [DATA_W-1:0] quotient;
-	logic div_zero;
+	logic div_zero, busy, done;
 
-	integer stage;
+	string stage;
 
-	fixed_point_divider DUT (
+	fixed_point_divider #(
+		.DATA_W(DATA_W),
+		.FRAC_W(FRAC_W)
+	) DUT (
+		.clk(clk),
+		.n_rst(n_rst),
+		.start(start),
 		.numerator(numerator),
 		.denominator(denominator),
 		.quotient(quotient),
-		.div_zero(div_zero)
+		.div_zero(div_zero),
+		.busy(busy),
+		.done(done)
 	);
 
-	task check_result(
+	// 125 MHz clock
+	always #4 clk = ~clk;
+
+	task run_test(
+		input logic signed [DATA_W-1:0] test_numerator,
+		input logic signed [DATA_W-1:0] test_denominator,
 		input logic signed [DATA_W-1:0] expected,
 		input logic expected_div_zero,
 		input string test_name
 	);
-		begin
-			#10;
 
-			assert(quotient === expected && div_zero === expected_div_zero)
-				$display("Stage %0d PASS: %s", stage, test_name);
-			else
-				$error("Stage %0d FAIL: %s, quotient = %0d expected = %0d, div_zero = %0b",
-					stage, test_name, quotient, expected, div_zero);
+		integer cycles;
+
+		begin
+			@(negedge clk);
+
+			stage = test_name;
+			numerator = test_numerator;
+			denominator = test_denominator;
+			start = 1'b1;
+
+			@(negedge clk);
+			start = 1'b0;
+
+			cycles = 0;
+
+			// Wait for division and finalize
+			while (!done && cycles < EXT_W + 6) begin
+				@(negedge clk);
+				cycles = cycles + 1;
+			end
+
+			if (!done) begin
+				$error("%s FAIL: timed out", stage);
+			end
+			else if (quotient === expected && div_zero === expected_div_zero) begin
+				$display("%s PASS: quotient = %0d, cycles = %0d",
+					stage, quotient, cycles);
+			end
+			else begin
+				$error("%s FAIL: quotient = %0d expected = %0d, div_zero = %0b expected = %0b",
+					stage,
+					quotient, expected,
+					div_zero, expected_div_zero);
+			end
 		end
 	endtask
 
 	initial begin
-		stage = 0;
+		clk = 1'b0;
+		n_rst = 1'b0;
+		start = 1'b0;
 		numerator = '0;
 		denominator = '0;
-		#10;
+		stage = "Reset";
+
+		// Reset
+		repeat (2) @(posedge clk);
+		@(negedge clk);
+		n_rst = 1'b1;
 
 		// 4 / 2 = 2
-		stage = 1;
-		numerator = 24'sd1024;
-		denominator = 24'sd512;
-		check_result(24'sd512, 1'b0, "4 / 2");
+		run_test(24'sd1024, 24'sd512, 24'sd512, 1'b0, "Test 1: 4 / 2");
 
 		// 1 / 2 = 0.5
-		stage = 2;
-		numerator = 24'sd256;
-		denominator = 24'sd512;
-		check_result(24'sd128, 1'b0, "1 / 2");
+		run_test(24'sd256, 24'sd512, 24'sd128, 1'b0, "Test 2: 1 / 2");
 
 		// -4 / 2 = -2
-		stage = 3;
-		numerator = -24'sd1024;
-		denominator = 24'sd512;
-		check_result(-24'sd512, 1'b0, "-4 / 2");
+		run_test(-24'sd1024, 24'sd512, -24'sd512, 1'b0, "Test 3: -4 / 2");
 
 		// 1 / -2 = -0.5
-		stage = 4;
-		numerator = 24'sd256;
-		denominator = -24'sd512;
-		check_result(-24'sd128, 1'b0, "1 / -2");
+		run_test(24'sd256, -24'sd512, -24'sd128, 1'b0, "Test 4: 1 / -2");
 
 		// 3 / 2 = 1.5
-		stage = 5;
-		numerator = 24'sd768;
-		denominator = 24'sd512;
-		check_result(24'sd384, 1'b0, "3 / 2");
+		run_test(24'sd768, 24'sd512, 24'sd384, 1'b0, "Test 5: 3 / 2");
 
-		// divide by zero
-		stage = 6;
-		numerator = 24'sd256;
-		denominator = '0;
-		check_result(24'sd0, 1'b1, "divide by zero");
+		// Divide by zero
+		run_test(24'sd256, 24'sd0, 24'sd0, 1'b1, "Test 6: Divide by Zero");
 
-		// positive saturation
-		stage = 7;
-		numerator = 24'sh7FFFFF;
-		denominator = 24'sd128;
-		check_result(24'sh7FFFFF, 1'b0, "positive saturation");
+		// Positive saturation
+		run_test(24'sh7FFFFF, 24'sd128, 24'sh7FFFFF, 1'b0, "Test 7: Positive Saturation");
 
-		// negative saturation
-		stage = 8;
-		numerator = -24'sd8388608;
-		denominator = 24'sd128;
-		check_result(24'sh800000, 1'b0, "negative saturation");
+		// Negative saturation
+		run_test(24'sh800000, 24'sd128, 24'sh800000, 1'b0, "Test 8: Negative Saturation");
 
-		$display("All tests completed.");
+		$display("All fixed point divider tests completed.");
 		$finish;
 	end
 
