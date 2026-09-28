@@ -1,8 +1,8 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-| Date             : Wed Sep 23 21:04:07 2026
-| Host             : ececomp4.ecn.purdue.edu running 64-bit Oracle Linux Server release 8.10
+| Date             : Sun Sep 27 20:00:42 2026
+| Host             : ececomp1.ecn.purdue.edu running 64-bit Oracle Linux Server release 8.10
 | Command          : report_power -file perspective_divide_power_routed.rpt -pb perspective_divide_power_summary_routed.pb -rpx perspective_divide_power_routed.rpx
 | Design           : perspective_divide
 | Device           : xc7s50csga324-1
@@ -29,20 +29,20 @@ Table of Contents
 1. Summary
 ----------
 
-+--------------------------+----------------------------------+
-| Total On-Chip Power (W)  | 64.940 (Junction temp exceeded!) |
-| Design Power Budget (W)  | Unspecified*                     |
-| Power Budget Margin (W)  | NA                               |
-| Dynamic (W)              | 64.455                           |
-| Device Static (W)        | 0.485                            |
-| Effective TJA (C/W)      | 4.9                              |
-| Max Ambient (C)          | 0.0                              |
-| Junction Temperature (C) | 125.0                            |
-| Confidence Level         | Low                              |
-| Setting File             | ---                              |
-| Simulation Activity File | ---                              |
-| Design Nets Matched      | NA                               |
-+--------------------------+----------------------------------+
++--------------------------+-----------------------------------+
+| Total On-Chip Power (W)  | 103.598 (Junction temp exceeded!) |
+| Design Power Budget (W)  | Unspecified*                      |
+| Power Budget Margin (W)  | NA                                |
+| Dynamic (W)              | 103.114                           |
+| Device Static (W)        | 0.485                             |
+| Effective TJA (C/W)      | 4.9                               |
+| Max Ambient (C)          | 0.0                               |
+| Junction Temperature (C) | 125.0                             |
+| Confidence Level         | Low                               |
+| Setting File             | ---                               |
+| Simulation Activity File | ---                               |
+| Design Nets Matched      | NA                                |
++--------------------------+-----------------------------------+
 * Specify Design Power Budget using, set_operating_conditions -design_power_budget <value in Watts>
 
 
@@ -52,18 +52,18 @@ Table of Contents
 +-------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                 | Power (W) | Used     | Available | Utilization (%) |
 +-------------------------+-----------+----------+-----------+-----------------+
-| Slice Logic             |     6.693 |     1620 |       --- |             --- |
-|   LUT as Logic          |     6.014 |      729 |     32600 |            2.24 |
-|   Register              |     0.343 |      573 |     65200 |            0.88 |
-|   CARRY4                |     0.167 |       56 |      8150 |            0.69 |
-|   LUT as Shift Register |     0.163 |       81 |      9600 |            0.84 |
+| Slice Logic             |     8.446 |     1904 |       --- |             --- |
+|   LUT as Logic          |     7.352 |      848 |     32600 |            2.60 |
+|   Register              |     0.432 |      603 |     65200 |            0.92 |
+|   CARRY4                |     0.375 |       88 |      8150 |            1.08 |
+|   LUT as Shift Register |     0.281 |       93 |      9600 |            0.97 |
 |   BUFG                  |     0.006 |        1 |        32 |            3.13 |
-|   Others                |     0.000 |       13 |       --- |             --- |
-| Signals                 |     9.696 |     1563 |       --- |             --- |
-| DSPs                    |    13.449 |       14 |       120 |           11.67 |
-| I/O                     |    34.617 |      173 |       210 |           82.38 |
+|   Others                |     0.000 |       28 |       --- |             --- |
+| Signals                 |    11.456 |     1610 |       --- |             --- |
+| DSPs                    |    14.588 |       14 |       120 |           11.67 |
+| I/O                     |    68.624 |      173 |       210 |           82.38 |
 | Static Power            |     0.485 |          |           |                 |
-| Total                   |    64.940 |          |           |                 |
+| Total                   |   103.598 |          |           |                 |
 +-------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -73,11 +73,11 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |    30.571 |      30.230 |      0.341 |       NA    | Unspecified | NA         |
-| Vccaux    |       1.800 |     2.855 |       2.802 |      0.053 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |    35.223 |      34.882 |      0.341 |       NA    | Unspecified | NA         |
+| Vccaux    |       1.800 |     5.639 |       5.586 |      0.053 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
-| Vcco18    |       1.800 |    16.213 |      16.212 |      0.001 |       NA    | Unspecified | NA         |
+| Vcco18    |       1.800 |    32.322 |      32.321 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -135,14 +135,19 @@ Table of Contents
 3.1 By Hierarchy
 ----------------
 
-+--------------------+-----------+
-| Name               | Power (W) |
-+--------------------+-----------+
-| perspective_divide |    64.455 |
-|   delay            |     0.734 |
-|   mult             |     8.353 |
-|   output_stage     |     1.823 |
-|   recip            |    18.298 |
-+--------------------+-----------+
++-----------------------+-----------+
+| Name                  | Power (W) |
++-----------------------+-----------+
+| perspective_divide    |   103.114 |
+|   MULTIPLY            |     8.976 |
+|   RECIPROCAL          |    21.982 |
+|     FIRST_ITERATION   |     7.194 |
+|       FIRST_MULTIPLY  |     3.078 |
+|       SECOND_MULTIPLY |     3.129 |
+|     SECOND_ITERATION  |    12.297 |
+|       FIRST_MULTIPLY  |     3.158 |
+|       SECOND_MULTIPLY |     7.462 |
+|   VECTOR_DELAY        |     0.678 |
++-----------------------+-----------+
 
 

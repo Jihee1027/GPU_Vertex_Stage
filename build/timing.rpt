@@ -1,8 +1,8 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-| Date         : Wed Sep 23 21:05:01 2026
-| Host         : ececomp4.ecn.purdue.edu running 64-bit Oracle Linux Server release 8.10
+| Date         : Sun Sep 27 20:01:32 2026
+| Host         : ececomp1.ecn.purdue.edu running 64-bit Oracle Linux Server release 8.10
 | Command      : report_timing_summary -file ./build/timing.rpt
 | Design       : perspective_divide
 | Device       : 7s50-csga324
@@ -43,8 +43,8 @@ Timing Summary Report
 
 Rule       Severity          Description                  Violations  
 ---------  ----------------  ---------------------------  ----------  
-TIMING-17  Critical Warning  Non-clocked sequential cell  661         
-DPIR-1     Warning           Asynchronous driver check    523         
+TIMING-17  Critical Warning  Non-clocked sequential cell  719         
+DPIR-1     Warning           Asynchronous driver check    617         
 
 Note: This report is based on the most recent report_methodology run and may not be up-to-date. Run report_methodology on the current design for the latest report.
 
@@ -143,7 +143,7 @@ Table of Contents
 
     WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
     -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
-     -2.626     -169.742                    242                 1222        0.005        0.000                      0                 1222        3.020        0.000                       0                   662  
+     -1.751     -116.925                    174                 1270        0.164        0.000                      0                 1270        3.020        0.000                       0                   720  
 
 
 Timing constraints are not met.
@@ -166,7 +166,7 @@ clk    {0.000 4.000}        8.000           125.000
 
 Clock             WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
 -----             -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
-clk                -2.626     -169.742                    242                 1222        0.005        0.000                      0                 1222        3.020        0.000                       0                   662  
+clk                -1.751     -116.925                    174                 1270        0.164        0.000                      0                 1270        3.020        0.000                       0                   720  
 
 
 ------------------------------------------------------------------------------------------------
@@ -197,27 +197,27 @@ Path Group    From Clock    To Clock          WNS(ns)      TNS(ns)  TNS Failing 
 From Clock:  clk
   To Clock:  clk
 
-Setup :          242  Failing Endpoints,  Worst Slack       -2.626ns,  Total Violation     -169.742ns
-Hold  :            0  Failing Endpoints,  Worst Slack        0.005ns,  Total Violation        0.000ns
+Setup :          174  Failing Endpoints,  Worst Slack       -1.751ns,  Total Violation     -116.925ns
+Hold  :            0  Failing Endpoints,  Worst Slack        0.164ns,  Total Violation        0.000ns
 PW    :            0  Failing Endpoints,  Worst Slack        3.020ns,  Total Violation        0.000ns
 ---------------------------------------------------------------------------------------------------
 
 
 Max Delay Paths
 --------------------------------------------------------------------------------------
-Slack (VIOLATED) :        -2.626ns  (required time - arrival time)
-  Source:                 recip/r1_prod_comb__0/CLK
-                            (rising edge-triggered cell DSP48E1 clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
-  Destination:            recip/mr1_prod_s50__0/C[41]
-                            (rising edge-triggered cell DSP48E1 clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
+Slack (VIOLATED) :        -1.751ns  (required time - arrival time)
+  Source:                 RECIPROCAL/SECOND_ITERATION/shift_delay_reg[3][2]/C
+                            (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
+  Destination:            RECIPROCAL/reciprocal_reg[29]/D
+                            (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
   Path Group:             clk
   Path Type:              Setup (Max at Slow Process Corner)
   Requirement:            8.000ns  (clk rise@8.000ns - clk rise@0.000ns)
-  Data Path Delay:        8.883ns  (logic 4.399ns (49.524%)  route 4.484ns (50.476%))
-  Logic Levels:           2  (DSP48E1=1 LUT2=1)
-  Clock Path Skew:        -0.007ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    4.619ns = ( 12.619 - 8.000 ) 
-    Source Clock Delay      (SCD):    4.975ns
+  Data Path Delay:        9.781ns  (logic 2.751ns (28.127%)  route 7.030ns (71.873%))
+  Logic Levels:           12  (CARRY4=8 LUT5=1 LUT6=3)
+  Clock Path Skew:        -0.016ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.541ns = ( 12.541 - 8.000 ) 
+    Source Clock Delay      (SCD):    4.906ns
     Clock Pessimism Removal (CPR):    0.349ns
   Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
     Total System Jitter     (TSJ):    0.071ns
@@ -233,18 +233,44 @@ Slack (VIOLATED) :        -2.626ns  (required time - arrival time)
     C10                  IBUF (Prop_ibuf_I_O)         0.979     0.979 r  clk_IBUF_inst/O
                          net (fo=1, routed)           2.273     3.252    clk_IBUF
     BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.348 r  clk_IBUF_BUFG_inst/O
-                         net (fo=661, routed)         1.627     4.975    recip/clk_IBUF_BUFG
-    DSP48_X0Y29          DSP48E1                                      r  recip/r1_prod_comb__0/CLK
+                         net (fo=719, routed)         1.557     4.906    RECIPROCAL/SECOND_ITERATION/clk_IBUF_BUFG
+    SLICE_X10Y28         FDCE                                         r  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[3][2]/C
   -------------------------------------------------------------------    -------------------
-    DSP48_X0Y29          DSP48E1 (Prop_dsp48e1_CLK_P[8])
-                                                      0.434     5.409 r  recip/r1_prod_comb__0/P[8]
-                         net (fo=1, routed)           1.581     6.990    recip/r1_prod_comb__1[25]
-    SLICE_X13Y57         LUT2 (Prop_lut2_I0_O)        0.124     7.114 r  recip/r1_s5[2]_i_1/O
-                         net (fo=3, routed)           1.010     8.124    recip/r1_s4[2]
-    DSP48_X0Y23          DSP48E1 (Prop_dsp48e1_A[2]_P[47])
-                                                      3.841    11.965 r  recip/mr1_prod_s50/P[47]
-                         net (fo=18, routed)          1.893    13.857    recip/mr1_prod_s50_n_58
-    DSP48_X0Y22          DSP48E1                                      r  recip/mr1_prod_s50__0/C[41]
+    SLICE_X10Y28         FDCE (Prop_fdce_C_Q)         0.518     5.424 r  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[3][2]/Q
+                         net (fo=82, routed)          3.766     9.190    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/final_shift[2]
+    SLICE_X6Y33          LUT6 (Prop_lut6_I1_O)        0.124     9.314 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[28]_i_21/O
+                         net (fo=4, routed)           0.820    10.134    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[28]_i_21_n_0
+    SLICE_X6Y30          LUT6 (Prop_lut6_I0_O)        0.124    10.258 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[4]_i_8/O
+                         net (fo=1, routed)           0.701    10.959    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[4]_i_8_n_0
+    SLICE_X7Y30          CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.656    11.615 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[4]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    11.615    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[4]_i_3_n_0
+    SLICE_X7Y31          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.729 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[8]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    11.729    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[8]_i_3_n_0
+    SLICE_X7Y32          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.843 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[12]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    11.843    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[12]_i_3_n_0
+    SLICE_X7Y33          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.957 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[16]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    11.957    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[16]_i_3_n_0
+    SLICE_X7Y34          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.071 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[20]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    12.071    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[20]_i_3_n_0
+    SLICE_X7Y35          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.185 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[24]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    12.185    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[24]_i_3_n_0
+    SLICE_X7Y36          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.299 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[28]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    12.299    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[28]_i_3_n_0
+    SLICE_X7Y37          CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.222    12.521 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[31]_i_3/O[0]
+                         net (fo=2, routed)           1.072    13.593    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[31]_i_3_n_7
+    SLICE_X10Y36         LUT5 (Prop_lut5_I3_O)        0.299    13.892 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[29]_i_3/O
+                         net (fo=1, routed)           0.670    14.562    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[29]_i_3_n_0
+    SLICE_X10Y36         LUT6 (Prop_lut6_I5_O)        0.124    14.686 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[29]_i_1/O
+                         net (fo=1, routed)           0.000    14.686    RECIPROCAL/next_reciprocal[29]
+    SLICE_X10Y36         FDCE                                         r  RECIPROCAL/reciprocal_reg[29]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock clk rise edge)        8.000     8.000 r  
@@ -253,17 +279,16 @@ Slack (VIOLATED) :        -2.626ns  (required time - arrival time)
     C10                  IBUF (Prop_ibuf_I_O)         0.845     8.845 r  clk_IBUF_inst/O
                          net (fo=1, routed)           2.155    11.000    clk_IBUF
     BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    11.091 r  clk_IBUF_BUFG_inst/O
-                         net (fo=661, routed)         1.527    12.619    recip/clk_IBUF_BUFG
-    DSP48_X0Y22          DSP48E1                                      r  recip/mr1_prod_s50__0/CLK
-                         clock pessimism              0.349    12.968    
-                         clock uncertainty           -0.035    12.932    
-    DSP48_X0Y22          DSP48E1 (Setup_dsp48e1_CLK_C[41])
-                                                     -1.701    11.231    recip/mr1_prod_s50__0
+                         net (fo=719, routed)         1.449    12.541    RECIPROCAL/clk_IBUF_BUFG
+    SLICE_X10Y36         FDCE                                         r  RECIPROCAL/reciprocal_reg[29]/C
+                         clock pessimism              0.349    12.890    
+                         clock uncertainty           -0.035    12.854    
+    SLICE_X10Y36         FDCE (Setup_fdce_C_D)        0.081    12.935    RECIPROCAL/reciprocal_reg[29]
   -------------------------------------------------------------------
-                         required time                         11.231    
-                         arrival time                         -13.857    
+                         required time                         12.935    
+                         arrival time                         -14.686    
   -------------------------------------------------------------------
-                         slack                                 -2.626    
+                         slack                                 -1.751    
 
 
 
@@ -271,20 +296,20 @@ Slack (VIOLATED) :        -2.626ns  (required time - arrival time)
 
 Min Delay Paths
 --------------------------------------------------------------------------------------
-Slack (MET) :             0.005ns  (arrival time - required time)
-  Source:                 recip/valid_pipe_reg_c_5/C
+Slack (MET) :             0.164ns  (arrival time - required time)
+  Source:                 RECIPROCAL/nr_value_reg[1]/C
                             (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
-  Destination:            recip/scale_shift_s7_reg[4]/D
-                            (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
+  Destination:            RECIPROCAL/FIRST_ITERATION/value_delay_reg[1][1]_srl2_RECIPROCAL_nr_valid_reg_c/D
+                            (rising edge-triggered cell SRL16E clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
   Path Group:             clk
   Path Type:              Hold (Min at Fast Process Corner)
   Requirement:            0.000ns  (clk rise@0.000ns - clk rise@0.000ns)
-  Data Path Delay:        0.402ns  (logic 0.186ns (46.298%)  route 0.216ns (53.702%))
-  Logic Levels:           1  (LUT2=1)
-  Clock Path Skew:        0.276ns (DCD - SCD - CPR)
-    Destination Clock Delay (DCD):    2.129ns
-    Source Clock Delay      (SCD):    1.598ns
-    Clock Pessimism Removal (CPR):    0.255ns
+  Data Path Delay:        0.286ns  (logic 0.164ns (57.302%)  route 0.122ns (42.698%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.013ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    2.118ns
+    Source Clock Delay      (SCD):    1.596ns
+    Clock Pessimism Removal (CPR):    0.509ns
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
@@ -294,14 +319,12 @@ Slack (MET) :             0.005ns  (arrival time - required time)
     C10                  IBUF (Prop_ibuf_I_O)         0.208     0.208 r  clk_IBUF_inst/O
                          net (fo=1, routed)           0.802     1.009    clk_IBUF
     BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026     1.035 r  clk_IBUF_BUFG_inst/O
-                         net (fo=661, routed)         0.563     1.598    recip/clk_IBUF_BUFG
-    SLICE_X11Y51         FDCE                                         r  recip/valid_pipe_reg_c_5/C
+                         net (fo=719, routed)         0.561     1.596    RECIPROCAL/clk_IBUF_BUFG
+    SLICE_X10Y18         FDCE                                         r  RECIPROCAL/nr_value_reg[1]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X11Y51         FDCE (Prop_fdce_C_Q)         0.141     1.739 r  recip/valid_pipe_reg_c_5/Q
-                         net (fo=9, routed)           0.216     1.955    recip/valid_pipe_reg_c_5_n_0
-    SLICE_X10Y49         LUT2 (Prop_lut2_I1_O)        0.045     2.000 r  recip/scale_shift_s6_reg_gate__0/O
-                         net (fo=1, routed)           0.000     2.000    recip/scale_shift_s6_reg_gate__0_n_0
-    SLICE_X10Y49         FDCE                                         r  recip/scale_shift_s7_reg[4]/D
+    SLICE_X10Y18         FDCE (Prop_fdce_C_Q)         0.164     1.760 r  RECIPROCAL/nr_value_reg[1]/Q
+                         net (fo=4, routed)           0.122     1.882    RECIPROCAL/FIRST_ITERATION/Q[1]
+    SLICE_X10Y19         SRL16E                                       r  RECIPROCAL/FIRST_ITERATION/value_delay_reg[1][1]_srl2_RECIPROCAL_nr_valid_reg_c/D
   -------------------------------------------------------------------    -------------------
 
                          (clock clk rise edge)        0.000     0.000 r  
@@ -310,15 +333,16 @@ Slack (MET) :             0.005ns  (arrival time - required time)
     C10                  IBUF (Prop_ibuf_I_O)         0.397     0.397 r  clk_IBUF_inst/O
                          net (fo=1, routed)           0.865     1.261    clk_IBUF
     BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.029     1.290 r  clk_IBUF_BUFG_inst/O
-                         net (fo=661, routed)         0.839     2.129    recip/clk_IBUF_BUFG
-    SLICE_X10Y49         FDCE                                         r  recip/scale_shift_s7_reg[4]/C
-                         clock pessimism             -0.255     1.874    
-    SLICE_X10Y49         FDCE (Hold_fdce_C_D)         0.121     1.995    recip/scale_shift_s7_reg[4]
+                         net (fo=719, routed)         0.828     2.118    RECIPROCAL/FIRST_ITERATION/clk_IBUF_BUFG
+    SLICE_X10Y19         SRL16E                                       r  RECIPROCAL/FIRST_ITERATION/value_delay_reg[1][1]_srl2_RECIPROCAL_nr_valid_reg_c/CLK
+                         clock pessimism             -0.509     1.609    
+    SLICE_X10Y19         SRL16E (Hold_srl16e_CLK_D)
+                                                      0.109     1.718    RECIPROCAL/FIRST_ITERATION/value_delay_reg[1][1]_srl2_RECIPROCAL_nr_valid_reg_c
   -------------------------------------------------------------------
-                         required time                         -1.995    
-                         arrival time                           2.000    
+                         required time                         -1.718    
+                         arrival time                           1.882    
   -------------------------------------------------------------------
-                         slack                                  0.005    
+                         slack                                  0.164    
 
 
 
@@ -333,16 +357,16 @@ Sources:            { clk }
 
 Check Type        Corner  Lib Pin     Reference Pin  Required(ns)  Actual(ns)  Slack(ns)  Location        Pin
 Min Period        n/a     BUFG/I      n/a            2.155         8.000       5.845      BUFGCTRL_X0Y16  clk_IBUF_BUFG_inst/I
-Low Pulse Width   Slow    SRL16E/CLK  n/a            0.980         4.000       3.020      SLICE_X38Y15    delay/x_pipe_reg[6][0]_srl7_recip_valid_pipe_reg_c_5/CLK
-High Pulse Width  Slow    SRL16E/CLK  n/a            0.980         4.000       3.020      SLICE_X38Y15    delay/x_pipe_reg[6][0]_srl7_recip_valid_pipe_reg_c_5/CLK
+Low Pulse Width   Slow    SRL16E/CLK  n/a            0.980         4.000       3.020      SLICE_X10Y19    RECIPROCAL/FIRST_ITERATION/value_delay_reg[1][0]_srl2_RECIPROCAL_nr_valid_reg_c/CLK
+High Pulse Width  Slow    SRL16E/CLK  n/a            0.980         4.000       3.020      SLICE_X10Y19    RECIPROCAL/FIRST_ITERATION/value_delay_reg[1][0]_srl2_RECIPROCAL_nr_valid_reg_c/CLK
 
 
 
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-| Date         : Wed Sep 23 21:05:02 2026
-| Host         : ececomp4.ecn.purdue.edu running 64-bit Oracle Linux Server release 8.10
+| Date         : Sun Sep 27 20:01:32 2026
+| Host         : ececomp1.ecn.purdue.edu running 64-bit Oracle Linux Server release 8.10
 | Command      : report_timing -delay_type max -max_paths 10 -append -file ./build/timing.rpt
 | Design       : perspective_divide
 | Device       : 7s50-csga324
@@ -352,19 +376,19 @@ Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanc
 
 Timing Report
 
-Slack (VIOLATED) :        -2.626ns  (required time - arrival time)
-  Source:                 recip/r1_prod_comb__0/CLK
-                            (rising edge-triggered cell DSP48E1 clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
-  Destination:            recip/mr1_prod_s50__0/C[41]
-                            (rising edge-triggered cell DSP48E1 clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
+Slack (VIOLATED) :        -1.751ns  (required time - arrival time)
+  Source:                 RECIPROCAL/SECOND_ITERATION/shift_delay_reg[3][2]/C
+                            (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
+  Destination:            RECIPROCAL/reciprocal_reg[29]/D
+                            (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
   Path Group:             clk
   Path Type:              Setup (Max at Slow Process Corner)
   Requirement:            8.000ns  (clk rise@8.000ns - clk rise@0.000ns)
-  Data Path Delay:        8.883ns  (logic 4.399ns (49.524%)  route 4.484ns (50.476%))
-  Logic Levels:           2  (DSP48E1=1 LUT2=1)
-  Clock Path Skew:        -0.007ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    4.619ns = ( 12.619 - 8.000 ) 
-    Source Clock Delay      (SCD):    4.975ns
+  Data Path Delay:        9.781ns  (logic 2.751ns (28.127%)  route 7.030ns (71.873%))
+  Logic Levels:           12  (CARRY4=8 LUT5=1 LUT6=3)
+  Clock Path Skew:        -0.016ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.541ns = ( 12.541 - 8.000 ) 
+    Source Clock Delay      (SCD):    4.906ns
     Clock Pessimism Removal (CPR):    0.349ns
   Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
     Total System Jitter     (TSJ):    0.071ns
@@ -380,18 +404,44 @@ Slack (VIOLATED) :        -2.626ns  (required time - arrival time)
     C10                  IBUF (Prop_ibuf_I_O)         0.979     0.979 r  clk_IBUF_inst/O
                          net (fo=1, routed)           2.273     3.252    clk_IBUF
     BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.348 r  clk_IBUF_BUFG_inst/O
-                         net (fo=661, routed)         1.627     4.975    recip/clk_IBUF_BUFG
-    DSP48_X0Y29          DSP48E1                                      r  recip/r1_prod_comb__0/CLK
+                         net (fo=719, routed)         1.557     4.906    RECIPROCAL/SECOND_ITERATION/clk_IBUF_BUFG
+    SLICE_X10Y28         FDCE                                         r  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[3][2]/C
   -------------------------------------------------------------------    -------------------
-    DSP48_X0Y29          DSP48E1 (Prop_dsp48e1_CLK_P[8])
-                                                      0.434     5.409 r  recip/r1_prod_comb__0/P[8]
-                         net (fo=1, routed)           1.581     6.990    recip/r1_prod_comb__1[25]
-    SLICE_X13Y57         LUT2 (Prop_lut2_I0_O)        0.124     7.114 r  recip/r1_s5[2]_i_1/O
-                         net (fo=3, routed)           1.010     8.124    recip/r1_s4[2]
-    DSP48_X0Y23          DSP48E1 (Prop_dsp48e1_A[2]_P[47])
-                                                      3.841    11.965 r  recip/mr1_prod_s50/P[47]
-                         net (fo=18, routed)          1.893    13.857    recip/mr1_prod_s50_n_58
-    DSP48_X0Y22          DSP48E1                                      r  recip/mr1_prod_s50__0/C[41]
+    SLICE_X10Y28         FDCE (Prop_fdce_C_Q)         0.518     5.424 r  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[3][2]/Q
+                         net (fo=82, routed)          3.766     9.190    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/final_shift[2]
+    SLICE_X6Y33          LUT6 (Prop_lut6_I1_O)        0.124     9.314 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[28]_i_21/O
+                         net (fo=4, routed)           0.820    10.134    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[28]_i_21_n_0
+    SLICE_X6Y30          LUT6 (Prop_lut6_I0_O)        0.124    10.258 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[4]_i_8/O
+                         net (fo=1, routed)           0.701    10.959    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[4]_i_8_n_0
+    SLICE_X7Y30          CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.656    11.615 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[4]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    11.615    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[4]_i_3_n_0
+    SLICE_X7Y31          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.729 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[8]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    11.729    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[8]_i_3_n_0
+    SLICE_X7Y32          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.843 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[12]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    11.843    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[12]_i_3_n_0
+    SLICE_X7Y33          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.957 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[16]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    11.957    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[16]_i_3_n_0
+    SLICE_X7Y34          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.071 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[20]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    12.071    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[20]_i_3_n_0
+    SLICE_X7Y35          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.185 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[24]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    12.185    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[24]_i_3_n_0
+    SLICE_X7Y36          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.299 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[28]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    12.299    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[28]_i_3_n_0
+    SLICE_X7Y37          CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.222    12.521 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[31]_i_3/O[0]
+                         net (fo=2, routed)           1.072    13.593    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[31]_i_3_n_7
+    SLICE_X10Y36         LUT5 (Prop_lut5_I3_O)        0.299    13.892 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[29]_i_3/O
+                         net (fo=1, routed)           0.670    14.562    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[29]_i_3_n_0
+    SLICE_X10Y36         LUT6 (Prop_lut6_I5_O)        0.124    14.686 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[29]_i_1/O
+                         net (fo=1, routed)           0.000    14.686    RECIPROCAL/next_reciprocal[29]
+    SLICE_X10Y36         FDCE                                         r  RECIPROCAL/reciprocal_reg[29]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock clk rise edge)        8.000     8.000 r  
@@ -400,32 +450,31 @@ Slack (VIOLATED) :        -2.626ns  (required time - arrival time)
     C10                  IBUF (Prop_ibuf_I_O)         0.845     8.845 r  clk_IBUF_inst/O
                          net (fo=1, routed)           2.155    11.000    clk_IBUF
     BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    11.091 r  clk_IBUF_BUFG_inst/O
-                         net (fo=661, routed)         1.527    12.619    recip/clk_IBUF_BUFG
-    DSP48_X0Y22          DSP48E1                                      r  recip/mr1_prod_s50__0/CLK
-                         clock pessimism              0.349    12.968    
-                         clock uncertainty           -0.035    12.932    
-    DSP48_X0Y22          DSP48E1 (Setup_dsp48e1_CLK_C[41])
-                                                     -1.701    11.231    recip/mr1_prod_s50__0
+                         net (fo=719, routed)         1.449    12.541    RECIPROCAL/clk_IBUF_BUFG
+    SLICE_X10Y36         FDCE                                         r  RECIPROCAL/reciprocal_reg[29]/C
+                         clock pessimism              0.349    12.890    
+                         clock uncertainty           -0.035    12.854    
+    SLICE_X10Y36         FDCE (Setup_fdce_C_D)        0.081    12.935    RECIPROCAL/reciprocal_reg[29]
   -------------------------------------------------------------------
-                         required time                         11.231    
-                         arrival time                         -13.857    
+                         required time                         12.935    
+                         arrival time                         -14.686    
   -------------------------------------------------------------------
-                         slack                                 -2.626    
+                         slack                                 -1.751    
 
-Slack (VIOLATED) :        -2.595ns  (required time - arrival time)
-  Source:                 recip/scale_shift_s7_reg[0]/C
+Slack (VIOLATED) :        -1.580ns  (required time - arrival time)
+  Source:                 RECIPROCAL/SECOND_ITERATION/shift_delay_reg[3][2]/C
                             (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
-  Destination:            recip/reciprocal_reg[30]/D
+  Destination:            RECIPROCAL/reciprocal_reg[16]/D
                             (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
   Path Group:             clk
   Path Type:              Setup (Max at Slow Process Corner)
   Requirement:            8.000ns  (clk rise@8.000ns - clk rise@0.000ns)
-  Data Path Delay:        10.555ns  (logic 3.410ns (32.308%)  route 7.145ns (67.692%))
-  Logic Levels:           14  (CARRY4=8 LUT3=1 LUT4=1 LUT5=1 LUT6=3)
-  Clock Path Skew:        -0.036ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    4.612ns = ( 12.612 - 8.000 ) 
-    Source Clock Delay      (SCD):    4.904ns
-    Clock Pessimism Removal (CPR):    0.257ns
+  Data Path Delay:        9.596ns  (logic 2.393ns (24.938%)  route 7.203ns (75.062%))
+  Logic Levels:           8  (CARRY4=4 LUT5=1 LUT6=3)
+  Clock Path Skew:        -0.030ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.540ns = ( 12.540 - 8.000 ) 
+    Source Clock Delay      (SCD):    4.906ns
+    Clock Pessimism Removal (CPR):    0.336ns
   Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
     Total System Jitter     (TSJ):    0.071ns
     Total Input Jitter      (TIJ):    0.000ns
@@ -440,48 +489,32 @@ Slack (VIOLATED) :        -2.595ns  (required time - arrival time)
     C10                  IBUF (Prop_ibuf_I_O)         0.979     0.979 r  clk_IBUF_inst/O
                          net (fo=1, routed)           2.273     3.252    clk_IBUF
     BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.348 r  clk_IBUF_BUFG_inst/O
-                         net (fo=661, routed)         1.556     4.904    recip/clk_IBUF_BUFG
-    SLICE_X9Y50          FDCE                                         r  recip/scale_shift_s7_reg[0]/C
+                         net (fo=719, routed)         1.557     4.906    RECIPROCAL/SECOND_ITERATION/clk_IBUF_BUFG
+    SLICE_X10Y28         FDCE                                         r  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[3][2]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X9Y50          FDCE (Prop_fdce_C_Q)         0.419     5.323 r  recip/scale_shift_s7_reg[0]/Q
-                         net (fo=102, routed)         1.754     7.077    recip/scale_shift_s7[0]
-    SLICE_X9Y47          LUT4 (Prop_lut4_I1_O)        0.325     7.402 r  recip/reciprocal[31]_i_57/O
-                         net (fo=1, routed)           0.801     8.203    recip/reciprocal[31]_i_57_n_0
-    SLICE_X9Y46          LUT6 (Prop_lut6_I5_O)        0.326     8.529 r  recip/reciprocal[31]_i_42/O
-                         net (fo=3, routed)           0.667     9.196    recip/reciprocal[31]_i_42_n_0
-    SLICE_X9Y45          LUT3 (Prop_lut3_I1_O)        0.124     9.320 r  recip/reciprocal[20]_i_18/O
-                         net (fo=3, routed)           1.130    10.450    recip/reciprocal[20]_i_18_n_0
-    SLICE_X11Y42         LUT6 (Prop_lut6_I0_O)        0.124    10.574 r  recip/reciprocal[4]_i_8/O
-                         net (fo=1, routed)           0.913    11.487    recip/reciprocal[4]_i_8_n_0
-    SLICE_X10Y39         CARRY4 (Prop_carry4_S[0]_CO[3])
-                                                      0.637    12.124 r  recip/reciprocal_reg[4]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.124    recip/reciprocal_reg[4]_i_3_n_0
-    SLICE_X10Y40         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    12.241 r  recip/reciprocal_reg[8]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.241    recip/reciprocal_reg[8]_i_3_n_0
-    SLICE_X10Y41         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    12.358 r  recip/reciprocal_reg[12]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.358    recip/reciprocal_reg[12]_i_3_n_0
-    SLICE_X10Y42         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    12.475 r  recip/reciprocal_reg[16]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.475    recip/reciprocal_reg[16]_i_3_n_0
-    SLICE_X10Y43         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    12.592 r  recip/reciprocal_reg[20]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.592    recip/reciprocal_reg[20]_i_3_n_0
-    SLICE_X10Y44         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    12.709 r  recip/reciprocal_reg[24]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.709    recip/reciprocal_reg[24]_i_3_n_0
-    SLICE_X10Y45         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    12.826 r  recip/reciprocal_reg[28]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.826    recip/reciprocal_reg[28]_i_3_n_0
-    SLICE_X10Y46         CARRY4 (Prop_carry4_CI_O[1])
-                                                      0.323    13.149 r  recip/reciprocal_reg[31]_i_3/O[1]
-                         net (fo=2, routed)           1.213    14.362    recip/reciprocal_reg[31]_i_3_n_6
-    SLICE_X7Y44          LUT5 (Prop_lut5_I3_O)        0.306    14.668 r  recip/reciprocal[30]_i_3/O
-                         net (fo=1, routed)           0.667    15.335    recip/reciprocal[30]_i_3_n_0
-    SLICE_X7Y44          LUT6 (Prop_lut6_I5_O)        0.124    15.459 r  recip/reciprocal[30]_i_1/O
-                         net (fo=1, routed)           0.000    15.459    recip/reciprocal_final[30]
-    SLICE_X7Y44          FDCE                                         r  recip/reciprocal_reg[30]/D
+    SLICE_X10Y28         FDCE (Prop_fdce_C_Q)         0.518     5.424 r  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[3][2]/Q
+                         net (fo=82, routed)          3.766     9.190    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/final_shift[2]
+    SLICE_X6Y33          LUT6 (Prop_lut6_I1_O)        0.124     9.314 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[28]_i_21/O
+                         net (fo=4, routed)           0.820    10.134    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[28]_i_21_n_0
+    SLICE_X6Y30          LUT6 (Prop_lut6_I0_O)        0.124    10.258 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[4]_i_8/O
+                         net (fo=1, routed)           0.701    10.959    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[4]_i_8_n_0
+    SLICE_X7Y30          CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.656    11.615 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[4]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    11.615    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[4]_i_3_n_0
+    SLICE_X7Y31          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.729 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[8]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    11.729    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[8]_i_3_n_0
+    SLICE_X7Y32          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.843 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[12]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    11.843    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[12]_i_3_n_0
+    SLICE_X7Y33          CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313    12.156 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[16]_i_3/O[3]
+                         net (fo=2, routed)           1.246    13.401    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[16]_i_3_n_4
+    SLICE_X8Y35          LUT5 (Prop_lut5_I3_O)        0.306    13.707 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[16]_i_4/O
+                         net (fo=1, routed)           0.670    14.377    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[16]_i_4_n_0
+    SLICE_X8Y35          LUT6 (Prop_lut6_I5_O)        0.124    14.501 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[16]_i_1/O
+                         net (fo=1, routed)           0.000    14.501    RECIPROCAL/next_reciprocal[16]
+    SLICE_X8Y35          FDCE                                         r  RECIPROCAL/reciprocal_reg[16]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock clk rise edge)        8.000     8.000 r  
@@ -490,31 +523,31 @@ Slack (VIOLATED) :        -2.595ns  (required time - arrival time)
     C10                  IBUF (Prop_ibuf_I_O)         0.845     8.845 r  clk_IBUF_inst/O
                          net (fo=1, routed)           2.155    11.000    clk_IBUF
     BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    11.091 r  clk_IBUF_BUFG_inst/O
-                         net (fo=661, routed)         1.520    12.612    recip/clk_IBUF_BUFG
-    SLICE_X7Y44          FDCE                                         r  recip/reciprocal_reg[30]/C
-                         clock pessimism              0.257    12.869    
-                         clock uncertainty           -0.035    12.833    
-    SLICE_X7Y44          FDCE (Setup_fdce_C_D)        0.031    12.864    recip/reciprocal_reg[30]
+                         net (fo=719, routed)         1.448    12.540    RECIPROCAL/clk_IBUF_BUFG
+    SLICE_X8Y35          FDCE                                         r  RECIPROCAL/reciprocal_reg[16]/C
+                         clock pessimism              0.336    12.876    
+                         clock uncertainty           -0.035    12.840    
+    SLICE_X8Y35          FDCE (Setup_fdce_C_D)        0.081    12.921    RECIPROCAL/reciprocal_reg[16]
   -------------------------------------------------------------------
-                         required time                         12.864    
-                         arrival time                         -15.459    
+                         required time                         12.921    
+                         arrival time                         -14.501    
   -------------------------------------------------------------------
-                         slack                                 -2.595    
+                         slack                                 -1.580    
 
-Slack (VIOLATED) :        -2.476ns  (required time - arrival time)
-  Source:                 recip/scale_shift_s7_reg[0]/C
+Slack (VIOLATED) :        -1.579ns  (required time - arrival time)
+  Source:                 RECIPROCAL/SECOND_ITERATION/shift_delay_reg[3][2]/C
                             (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
-  Destination:            recip/reciprocal_reg[26]/D
+  Destination:            RECIPROCAL/reciprocal_reg[28]/D
                             (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
   Path Group:             clk
   Path Type:              Setup (Max at Slow Process Corner)
   Requirement:            8.000ns  (clk rise@8.000ns - clk rise@0.000ns)
-  Data Path Delay:        10.368ns  (logic 3.293ns (31.761%)  route 7.075ns (68.239%))
-  Logic Levels:           13  (CARRY4=7 LUT3=1 LUT4=1 LUT5=1 LUT6=3)
-  Clock Path Skew:        -0.104ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    4.544ns = ( 12.544 - 8.000 ) 
-    Source Clock Delay      (SCD):    4.904ns
-    Clock Pessimism Removal (CPR):    0.257ns
+  Data Path Delay:        9.658ns  (logic 2.735ns (28.319%)  route 6.923ns (71.681%))
+  Logic Levels:           11  (CARRY4=7 LUT5=1 LUT6=3)
+  Clock Path Skew:        0.037ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.607ns = ( 12.607 - 8.000 ) 
+    Source Clock Delay      (SCD):    4.906ns
+    Clock Pessimism Removal (CPR):    0.336ns
   Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
     Total System Jitter     (TSJ):    0.071ns
     Total Input Jitter      (TIJ):    0.000ns
@@ -529,45 +562,41 @@ Slack (VIOLATED) :        -2.476ns  (required time - arrival time)
     C10                  IBUF (Prop_ibuf_I_O)         0.979     0.979 r  clk_IBUF_inst/O
                          net (fo=1, routed)           2.273     3.252    clk_IBUF
     BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.348 r  clk_IBUF_BUFG_inst/O
-                         net (fo=661, routed)         1.556     4.904    recip/clk_IBUF_BUFG
-    SLICE_X9Y50          FDCE                                         r  recip/scale_shift_s7_reg[0]/C
+                         net (fo=719, routed)         1.557     4.906    RECIPROCAL/SECOND_ITERATION/clk_IBUF_BUFG
+    SLICE_X10Y28         FDCE                                         r  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[3][2]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X9Y50          FDCE (Prop_fdce_C_Q)         0.419     5.323 r  recip/scale_shift_s7_reg[0]/Q
-                         net (fo=102, routed)         1.754     7.077    recip/scale_shift_s7[0]
-    SLICE_X9Y47          LUT4 (Prop_lut4_I1_O)        0.325     7.402 r  recip/reciprocal[31]_i_57/O
-                         net (fo=1, routed)           0.801     8.203    recip/reciprocal[31]_i_57_n_0
-    SLICE_X9Y46          LUT6 (Prop_lut6_I5_O)        0.326     8.529 r  recip/reciprocal[31]_i_42/O
-                         net (fo=3, routed)           0.667     9.196    recip/reciprocal[31]_i_42_n_0
-    SLICE_X9Y45          LUT3 (Prop_lut3_I1_O)        0.124     9.320 r  recip/reciprocal[20]_i_18/O
-                         net (fo=3, routed)           1.130    10.450    recip/reciprocal[20]_i_18_n_0
-    SLICE_X11Y42         LUT6 (Prop_lut6_I0_O)        0.124    10.574 r  recip/reciprocal[4]_i_8/O
-                         net (fo=1, routed)           0.913    11.487    recip/reciprocal[4]_i_8_n_0
-    SLICE_X10Y39         CARRY4 (Prop_carry4_S[0]_CO[3])
-                                                      0.637    12.124 r  recip/reciprocal_reg[4]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.124    recip/reciprocal_reg[4]_i_3_n_0
-    SLICE_X10Y40         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    12.241 r  recip/reciprocal_reg[8]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.241    recip/reciprocal_reg[8]_i_3_n_0
-    SLICE_X10Y41         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    12.358 r  recip/reciprocal_reg[12]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.358    recip/reciprocal_reg[12]_i_3_n_0
-    SLICE_X10Y42         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    12.475 r  recip/reciprocal_reg[16]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.475    recip/reciprocal_reg[16]_i_3_n_0
-    SLICE_X10Y43         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    12.592 r  recip/reciprocal_reg[20]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.592    recip/reciprocal_reg[20]_i_3_n_0
-    SLICE_X10Y44         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    12.709 r  recip/reciprocal_reg[24]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.709    recip/reciprocal_reg[24]_i_3_n_0
-    SLICE_X10Y45         CARRY4 (Prop_carry4_CI_O[1])
-                                                      0.323    13.032 r  recip/reciprocal_reg[28]_i_3/O[1]
-                         net (fo=2, routed)           1.155    14.186    recip/reciprocal_reg[28]_i_3_n_6
-    SLICE_X8Y41          LUT5 (Prop_lut5_I3_O)        0.306    14.492 r  recip/reciprocal[26]_i_3/O
-                         net (fo=1, routed)           0.656    15.148    recip/reciprocal[26]_i_3_n_0
-    SLICE_X9Y41          LUT6 (Prop_lut6_I5_O)        0.124    15.272 r  recip/reciprocal[26]_i_1/O
-                         net (fo=1, routed)           0.000    15.272    recip/reciprocal_final[26]
-    SLICE_X9Y41          FDCE                                         r  recip/reciprocal_reg[26]/D
+    SLICE_X10Y28         FDCE (Prop_fdce_C_Q)         0.518     5.424 r  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[3][2]/Q
+                         net (fo=82, routed)          3.766     9.190    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/final_shift[2]
+    SLICE_X6Y33          LUT6 (Prop_lut6_I1_O)        0.124     9.314 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[28]_i_21/O
+                         net (fo=4, routed)           0.820    10.134    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[28]_i_21_n_0
+    SLICE_X6Y30          LUT6 (Prop_lut6_I0_O)        0.124    10.258 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[4]_i_8/O
+                         net (fo=1, routed)           0.701    10.959    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[4]_i_8_n_0
+    SLICE_X7Y30          CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.656    11.615 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[4]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    11.615    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[4]_i_3_n_0
+    SLICE_X7Y31          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.729 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[8]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    11.729    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[8]_i_3_n_0
+    SLICE_X7Y32          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.843 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[12]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    11.843    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[12]_i_3_n_0
+    SLICE_X7Y33          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.957 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[16]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    11.957    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[16]_i_3_n_0
+    SLICE_X7Y34          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.071 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[20]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    12.071    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[20]_i_3_n_0
+    SLICE_X7Y35          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.185 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[24]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    12.185    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[24]_i_3_n_0
+    SLICE_X7Y36          CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313    12.498 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[28]_i_3/O[3]
+                         net (fo=2, routed)           0.956    13.453    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[28]_i_3_n_4
+    SLICE_X6Y35          LUT5 (Prop_lut5_I3_O)        0.306    13.759 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[28]_i_4/O
+                         net (fo=1, routed)           0.680    14.439    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[28]_i_4_n_0
+    SLICE_X6Y35          LUT6 (Prop_lut6_I5_O)        0.124    14.563 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[28]_i_1/O
+                         net (fo=1, routed)           0.000    14.563    RECIPROCAL/next_reciprocal[28]
+    SLICE_X6Y35          FDCE                                         r  RECIPROCAL/reciprocal_reg[28]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock clk rise edge)        8.000     8.000 r  
@@ -576,116 +605,365 @@ Slack (VIOLATED) :        -2.476ns  (required time - arrival time)
     C10                  IBUF (Prop_ibuf_I_O)         0.845     8.845 r  clk_IBUF_inst/O
                          net (fo=1, routed)           2.155    11.000    clk_IBUF
     BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    11.091 r  clk_IBUF_BUFG_inst/O
-                         net (fo=661, routed)         1.452    12.544    recip/clk_IBUF_BUFG
-    SLICE_X9Y41          FDCE                                         r  recip/reciprocal_reg[26]/C
-                         clock pessimism              0.257    12.801    
-                         clock uncertainty           -0.035    12.765    
-    SLICE_X9Y41          FDCE (Setup_fdce_C_D)        0.031    12.796    recip/reciprocal_reg[26]
+                         net (fo=719, routed)         1.515    12.607    RECIPROCAL/clk_IBUF_BUFG
+    SLICE_X6Y35          FDCE                                         r  RECIPROCAL/reciprocal_reg[28]/C
+                         clock pessimism              0.336    12.943    
+                         clock uncertainty           -0.035    12.907    
+    SLICE_X6Y35          FDCE (Setup_fdce_C_D)        0.077    12.984    RECIPROCAL/reciprocal_reg[28]
   -------------------------------------------------------------------
-                         required time                         12.796    
-                         arrival time                         -15.272    
+                         required time                         12.984    
+                         arrival time                         -14.563    
   -------------------------------------------------------------------
-                         slack                                 -2.476    
+                         slack                                 -1.579    
 
-Slack (VIOLATED) :        -2.459ns  (required time - arrival time)
-  Source:                 recip/scale_shift_s7_reg[0]/C
+Slack (VIOLATED) :        -1.482ns  (required time - arrival time)
+  Source:                 RECIPROCAL/reciprocal_reg[12]/C
                             (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
-  Destination:            recip/reciprocal_reg[28]/D
-                            (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
-  Path Group:             clk
-  Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            8.000ns  (clk rise@8.000ns - clk rise@0.000ns)
-  Data Path Delay:        10.351ns  (logic 3.286ns (31.747%)  route 7.065ns (68.253%))
-  Logic Levels:           13  (CARRY4=7 LUT3=1 LUT4=1 LUT5=1 LUT6=3)
-  Clock Path Skew:        -0.104ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    4.544ns = ( 12.544 - 8.000 ) 
-    Source Clock Delay      (SCD):    4.904ns
-    Clock Pessimism Removal (CPR):    0.257ns
-  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter     (TSJ):    0.071ns
-    Total Input Jitter      (TIJ):    0.000ns
-    Discrete Jitter          (DJ):    0.000ns
-    Phase Error              (PE):    0.000ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock clk rise edge)        0.000     0.000 r  
-    C10                                               0.000     0.000 r  clk (IN)
-                         net (fo=0)                   0.000     0.000    clk
-    C10                  IBUF (Prop_ibuf_I_O)         0.979     0.979 r  clk_IBUF_inst/O
-                         net (fo=1, routed)           2.273     3.252    clk_IBUF
-    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.348 r  clk_IBUF_BUFG_inst/O
-                         net (fo=661, routed)         1.556     4.904    recip/clk_IBUF_BUFG
-    SLICE_X9Y50          FDCE                                         r  recip/scale_shift_s7_reg[0]/C
-  -------------------------------------------------------------------    -------------------
-    SLICE_X9Y50          FDCE (Prop_fdce_C_Q)         0.419     5.323 r  recip/scale_shift_s7_reg[0]/Q
-                         net (fo=102, routed)         1.754     7.077    recip/scale_shift_s7[0]
-    SLICE_X9Y47          LUT4 (Prop_lut4_I1_O)        0.325     7.402 r  recip/reciprocal[31]_i_57/O
-                         net (fo=1, routed)           0.801     8.203    recip/reciprocal[31]_i_57_n_0
-    SLICE_X9Y46          LUT6 (Prop_lut6_I5_O)        0.326     8.529 r  recip/reciprocal[31]_i_42/O
-                         net (fo=3, routed)           0.667     9.196    recip/reciprocal[31]_i_42_n_0
-    SLICE_X9Y45          LUT3 (Prop_lut3_I1_O)        0.124     9.320 r  recip/reciprocal[20]_i_18/O
-                         net (fo=3, routed)           1.130    10.450    recip/reciprocal[20]_i_18_n_0
-    SLICE_X11Y42         LUT6 (Prop_lut6_I0_O)        0.124    10.574 r  recip/reciprocal[4]_i_8/O
-                         net (fo=1, routed)           0.913    11.487    recip/reciprocal[4]_i_8_n_0
-    SLICE_X10Y39         CARRY4 (Prop_carry4_S[0]_CO[3])
-                                                      0.637    12.124 r  recip/reciprocal_reg[4]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.124    recip/reciprocal_reg[4]_i_3_n_0
-    SLICE_X10Y40         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    12.241 r  recip/reciprocal_reg[8]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.241    recip/reciprocal_reg[8]_i_3_n_0
-    SLICE_X10Y41         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    12.358 r  recip/reciprocal_reg[12]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.358    recip/reciprocal_reg[12]_i_3_n_0
-    SLICE_X10Y42         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    12.475 r  recip/reciprocal_reg[16]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.475    recip/reciprocal_reg[16]_i_3_n_0
-    SLICE_X10Y43         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    12.592 r  recip/reciprocal_reg[20]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.592    recip/reciprocal_reg[20]_i_3_n_0
-    SLICE_X10Y44         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    12.709 r  recip/reciprocal_reg[24]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.709    recip/reciprocal_reg[24]_i_3_n_0
-    SLICE_X10Y45         CARRY4 (Prop_carry4_CI_O[3])
-                                                      0.315    13.024 r  recip/reciprocal_reg[28]_i_3/O[3]
-                         net (fo=2, routed)           1.133    14.157    recip/reciprocal_reg[28]_i_3_n_4
-    SLICE_X13Y42         LUT5 (Prop_lut5_I3_O)        0.307    14.464 r  recip/reciprocal[28]_i_4/O
-                         net (fo=1, routed)           0.667    15.131    recip/reciprocal[28]_i_4_n_0
-    SLICE_X13Y42         LUT6 (Prop_lut6_I5_O)        0.124    15.255 r  recip/reciprocal[28]_i_1/O
-                         net (fo=1, routed)           0.000    15.255    recip/reciprocal_final[28]
-    SLICE_X13Y42         FDCE                                         r  recip/reciprocal_reg[28]/D
-  -------------------------------------------------------------------    -------------------
-
-                         (clock clk rise edge)        8.000     8.000 r  
-    C10                                               0.000     8.000 r  clk (IN)
-                         net (fo=0)                   0.000     8.000    clk
-    C10                  IBUF (Prop_ibuf_I_O)         0.845     8.845 r  clk_IBUF_inst/O
-                         net (fo=1, routed)           2.155    11.000    clk_IBUF
-    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    11.091 r  clk_IBUF_BUFG_inst/O
-                         net (fo=661, routed)         1.452    12.544    recip/clk_IBUF_BUFG
-    SLICE_X13Y42         FDCE                                         r  recip/reciprocal_reg[28]/C
-                         clock pessimism              0.257    12.801    
-                         clock uncertainty           -0.035    12.765    
-    SLICE_X13Y42         FDCE (Setup_fdce_C_D)        0.031    12.796    recip/reciprocal_reg[28]
-  -------------------------------------------------------------------
-                         required time                         12.796    
-                         arrival time                         -15.255    
-  -------------------------------------------------------------------
-                         slack                                 -2.459    
-
-Slack (VIOLATED) :        -2.436ns  (required time - arrival time)
-  Source:                 recip/r1_prod_comb__0/CLK
-                            (rising edge-triggered cell DSP48E1 clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
-  Destination:            recip/mr1_prod_s50__0/C[42]
+  Destination:            MULTIPLY/x_product0__0/C[37]
                             (rising edge-triggered cell DSP48E1 clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
   Path Group:             clk
   Path Type:              Setup (Max at Slow Process Corner)
   Requirement:            8.000ns  (clk rise@8.000ns - clk rise@0.000ns)
-  Data Path Delay:        8.693ns  (logic 4.399ns (50.603%)  route 4.294ns (49.397%))
-  Logic Levels:           2  (DSP48E1=1 LUT2=1)
-  Clock Path Skew:        -0.007ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    4.619ns = ( 12.619 - 8.000 ) 
-    Source Clock Delay      (SCD):    4.975ns
+  Data Path Delay:        7.638ns  (logic 4.174ns (54.648%)  route 3.464ns (45.352%))
+  Logic Levels:           1  (DSP48E1=1)
+  Clock Path Skew:        -0.107ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.618ns = ( 12.618 - 8.000 ) 
+    Source Clock Delay      (SCD):    4.982ns
+    Clock Pessimism Removal (CPR):    0.257ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+    C10                                               0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.000     0.000    clk
+    C10                  IBUF (Prop_ibuf_I_O)         0.979     0.979 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           2.273     3.252    clk_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.348 r  clk_IBUF_BUFG_inst/O
+                         net (fo=719, routed)         1.633     4.982    RECIPROCAL/clk_IBUF_BUFG
+    SLICE_X6Y37          FDCE                                         r  RECIPROCAL/reciprocal_reg[12]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X6Y37          FDCE (Prop_fdce_C_Q)         0.518     5.500 r  RECIPROCAL/reciprocal_reg[12]/Q
+                         net (fo=3, routed)           2.081     7.581    MULTIPLY/reciprocal[12]
+    DSP48_X0Y22          DSP48E1 (Prop_dsp48e1_B[12]_P[47])
+                                                      3.656    11.237 r  MULTIPLY/x_product0/P[47]
+                         net (fo=18, routed)          1.383    12.620    MULTIPLY/x_product0_n_58
+    DSP48_X0Y23          DSP48E1                                      r  MULTIPLY/x_product0__0/C[37]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        8.000     8.000 r  
+    C10                                               0.000     8.000 r  clk (IN)
+                         net (fo=0)                   0.000     8.000    clk
+    C10                  IBUF (Prop_ibuf_I_O)         0.845     8.845 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           2.155    11.000    clk_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    11.091 r  clk_IBUF_BUFG_inst/O
+                         net (fo=719, routed)         1.526    12.618    MULTIPLY/clk_IBUF_BUFG
+    DSP48_X0Y23          DSP48E1                                      r  MULTIPLY/x_product0__0/CLK
+                         clock pessimism              0.257    12.874    
+                         clock uncertainty           -0.035    12.839    
+    DSP48_X0Y23          DSP48E1 (Setup_dsp48e1_CLK_C[37])
+                                                     -1.701    11.138    MULTIPLY/x_product0__0
+  -------------------------------------------------------------------
+                         required time                         11.138    
+                         arrival time                         -12.620    
+  -------------------------------------------------------------------
+                         slack                                 -1.482    
+
+Slack (VIOLATED) :        -1.369ns  (required time - arrival time)
+  Source:                 RECIPROCAL/SECOND_ITERATION/shift_delay_reg[3][2]/C
+                            (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
+  Destination:            RECIPROCAL/reciprocal_reg[27]/D
+                            (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            8.000ns  (clk rise@8.000ns - clk rise@0.000ns)
+  Data Path Delay:        9.332ns  (logic 2.657ns (28.471%)  route 6.675ns (71.529%))
+  Logic Levels:           11  (CARRY4=7 LUT5=1 LUT6=3)
+  Clock Path Skew:        -0.030ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.540ns = ( 12.540 - 8.000 ) 
+    Source Clock Delay      (SCD):    4.906ns
+    Clock Pessimism Removal (CPR):    0.336ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+    C10                                               0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.000     0.000    clk
+    C10                  IBUF (Prop_ibuf_I_O)         0.979     0.979 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           2.273     3.252    clk_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.348 r  clk_IBUF_BUFG_inst/O
+                         net (fo=719, routed)         1.557     4.906    RECIPROCAL/SECOND_ITERATION/clk_IBUF_BUFG
+    SLICE_X10Y28         FDCE                                         r  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[3][2]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X10Y28         FDCE (Prop_fdce_C_Q)         0.518     5.424 r  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[3][2]/Q
+                         net (fo=82, routed)          3.766     9.190    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/final_shift[2]
+    SLICE_X6Y33          LUT6 (Prop_lut6_I1_O)        0.124     9.314 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[28]_i_21/O
+                         net (fo=4, routed)           0.820    10.134    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[28]_i_21_n_0
+    SLICE_X6Y30          LUT6 (Prop_lut6_I0_O)        0.124    10.258 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[4]_i_8/O
+                         net (fo=1, routed)           0.701    10.959    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[4]_i_8_n_0
+    SLICE_X7Y30          CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.656    11.615 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[4]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    11.615    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[4]_i_3_n_0
+    SLICE_X7Y31          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.729 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[8]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    11.729    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[8]_i_3_n_0
+    SLICE_X7Y32          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.843 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[12]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    11.843    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[12]_i_3_n_0
+    SLICE_X7Y33          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.957 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[16]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    11.957    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[16]_i_3_n_0
+    SLICE_X7Y34          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.071 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[20]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    12.071    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[20]_i_3_n_0
+    SLICE_X7Y35          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.185 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[24]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    12.185    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[24]_i_3_n_0
+    SLICE_X7Y36          CARRY4 (Prop_carry4_CI_O[2])
+                                                      0.239    12.424 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[28]_i_3/O[2]
+                         net (fo=2, routed)           0.512    12.935    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[28]_i_3_n_5
+    SLICE_X9Y36          LUT5 (Prop_lut5_I3_O)        0.302    13.237 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[27]_i_3/O
+                         net (fo=1, routed)           0.877    14.114    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[27]_i_3_n_0
+    SLICE_X9Y36          LUT6 (Prop_lut6_I5_O)        0.124    14.238 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[27]_i_1/O
+                         net (fo=1, routed)           0.000    14.238    RECIPROCAL/next_reciprocal[27]
+    SLICE_X9Y36          FDCE                                         r  RECIPROCAL/reciprocal_reg[27]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        8.000     8.000 r  
+    C10                                               0.000     8.000 r  clk (IN)
+                         net (fo=0)                   0.000     8.000    clk
+    C10                  IBUF (Prop_ibuf_I_O)         0.845     8.845 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           2.155    11.000    clk_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    11.091 r  clk_IBUF_BUFG_inst/O
+                         net (fo=719, routed)         1.448    12.540    RECIPROCAL/clk_IBUF_BUFG
+    SLICE_X9Y36          FDCE                                         r  RECIPROCAL/reciprocal_reg[27]/C
+                         clock pessimism              0.336    12.876    
+                         clock uncertainty           -0.035    12.840    
+    SLICE_X9Y36          FDCE (Setup_fdce_C_D)        0.029    12.869    RECIPROCAL/reciprocal_reg[27]
+  -------------------------------------------------------------------
+                         required time                         12.869    
+                         arrival time                         -14.238    
+  -------------------------------------------------------------------
+                         slack                                 -1.369    
+
+Slack (VIOLATED) :        -1.292ns  (required time - arrival time)
+  Source:                 RECIPROCAL/reciprocal_reg[12]/C
+                            (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
+  Destination:            MULTIPLY/x_product0__0/C[46]
+                            (rising edge-triggered cell DSP48E1 clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            8.000ns  (clk rise@8.000ns - clk rise@0.000ns)
+  Data Path Delay:        7.448ns  (logic 4.174ns (56.038%)  route 3.274ns (43.962%))
+  Logic Levels:           1  (DSP48E1=1)
+  Clock Path Skew:        -0.107ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.618ns = ( 12.618 - 8.000 ) 
+    Source Clock Delay      (SCD):    4.982ns
+    Clock Pessimism Removal (CPR):    0.257ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+    C10                                               0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.000     0.000    clk
+    C10                  IBUF (Prop_ibuf_I_O)         0.979     0.979 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           2.273     3.252    clk_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.348 r  clk_IBUF_BUFG_inst/O
+                         net (fo=719, routed)         1.633     4.982    RECIPROCAL/clk_IBUF_BUFG
+    SLICE_X6Y37          FDCE                                         r  RECIPROCAL/reciprocal_reg[12]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X6Y37          FDCE (Prop_fdce_C_Q)         0.518     5.500 r  RECIPROCAL/reciprocal_reg[12]/Q
+                         net (fo=3, routed)           2.081     7.581    MULTIPLY/reciprocal[12]
+    DSP48_X0Y22          DSP48E1 (Prop_dsp48e1_B[12]_P[47])
+                                                      3.656    11.237 r  MULTIPLY/x_product0/P[47]
+                         net (fo=18, routed)          1.193    12.430    MULTIPLY/x_product0_n_58
+    DSP48_X0Y23          DSP48E1                                      r  MULTIPLY/x_product0__0/C[46]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        8.000     8.000 r  
+    C10                                               0.000     8.000 r  clk (IN)
+                         net (fo=0)                   0.000     8.000    clk
+    C10                  IBUF (Prop_ibuf_I_O)         0.845     8.845 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           2.155    11.000    clk_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    11.091 r  clk_IBUF_BUFG_inst/O
+                         net (fo=719, routed)         1.526    12.618    MULTIPLY/clk_IBUF_BUFG
+    DSP48_X0Y23          DSP48E1                                      r  MULTIPLY/x_product0__0/CLK
+                         clock pessimism              0.257    12.874    
+                         clock uncertainty           -0.035    12.839    
+    DSP48_X0Y23          DSP48E1 (Setup_dsp48e1_CLK_C[46])
+                                                     -1.701    11.138    MULTIPLY/x_product0__0
+  -------------------------------------------------------------------
+                         required time                         11.138    
+                         arrival time                         -12.430    
+  -------------------------------------------------------------------
+                         slack                                 -1.292    
+
+Slack (VIOLATED) :        -1.223ns  (required time - arrival time)
+  Source:                 RECIPROCAL/reciprocal_reg[12]/C
+                            (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
+  Destination:            MULTIPLY/x_product0__0/C[41]
+                            (rising edge-triggered cell DSP48E1 clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            8.000ns  (clk rise@8.000ns - clk rise@0.000ns)
+  Data Path Delay:        7.380ns  (logic 4.174ns (56.562%)  route 3.206ns (43.438%))
+  Logic Levels:           1  (DSP48E1=1)
+  Clock Path Skew:        -0.107ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.618ns = ( 12.618 - 8.000 ) 
+    Source Clock Delay      (SCD):    4.982ns
+    Clock Pessimism Removal (CPR):    0.257ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+    C10                                               0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.000     0.000    clk
+    C10                  IBUF (Prop_ibuf_I_O)         0.979     0.979 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           2.273     3.252    clk_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.348 r  clk_IBUF_BUFG_inst/O
+                         net (fo=719, routed)         1.633     4.982    RECIPROCAL/clk_IBUF_BUFG
+    SLICE_X6Y37          FDCE                                         r  RECIPROCAL/reciprocal_reg[12]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X6Y37          FDCE (Prop_fdce_C_Q)         0.518     5.500 r  RECIPROCAL/reciprocal_reg[12]/Q
+                         net (fo=3, routed)           2.081     7.581    MULTIPLY/reciprocal[12]
+    DSP48_X0Y22          DSP48E1 (Prop_dsp48e1_B[12]_P[47])
+                                                      3.656    11.237 r  MULTIPLY/x_product0/P[47]
+                         net (fo=18, routed)          1.124    12.361    MULTIPLY/x_product0_n_58
+    DSP48_X0Y23          DSP48E1                                      r  MULTIPLY/x_product0__0/C[41]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        8.000     8.000 r  
+    C10                                               0.000     8.000 r  clk (IN)
+                         net (fo=0)                   0.000     8.000    clk
+    C10                  IBUF (Prop_ibuf_I_O)         0.845     8.845 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           2.155    11.000    clk_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    11.091 r  clk_IBUF_BUFG_inst/O
+                         net (fo=719, routed)         1.526    12.618    MULTIPLY/clk_IBUF_BUFG
+    DSP48_X0Y23          DSP48E1                                      r  MULTIPLY/x_product0__0/CLK
+                         clock pessimism              0.257    12.874    
+                         clock uncertainty           -0.035    12.839    
+    DSP48_X0Y23          DSP48E1 (Setup_dsp48e1_CLK_C[41])
+                                                     -1.701    11.138    MULTIPLY/x_product0__0
+  -------------------------------------------------------------------
+                         required time                         11.138    
+                         arrival time                         -12.361    
+  -------------------------------------------------------------------
+                         slack                                 -1.223    
+
+Slack (VIOLATED) :        -1.222ns  (required time - arrival time)
+  Source:                 RECIPROCAL/SECOND_ITERATION/shift_delay_reg[3][2]/C
+                            (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
+  Destination:            RECIPROCAL/reciprocal_reg[26]/D
+                            (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            8.000ns  (clk rise@8.000ns - clk rise@0.000ns)
+  Data Path Delay:        9.238ns  (logic 2.753ns (29.801%)  route 6.485ns (70.199%))
+  Logic Levels:           11  (CARRY4=7 LUT5=1 LUT6=3)
+  Clock Path Skew:        -0.030ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.540ns = ( 12.540 - 8.000 ) 
+    Source Clock Delay      (SCD):    4.906ns
+    Clock Pessimism Removal (CPR):    0.336ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+    C10                                               0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.000     0.000    clk
+    C10                  IBUF (Prop_ibuf_I_O)         0.979     0.979 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           2.273     3.252    clk_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.348 r  clk_IBUF_BUFG_inst/O
+                         net (fo=719, routed)         1.557     4.906    RECIPROCAL/SECOND_ITERATION/clk_IBUF_BUFG
+    SLICE_X10Y28         FDCE                                         r  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[3][2]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X10Y28         FDCE (Prop_fdce_C_Q)         0.518     5.424 r  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[3][2]/Q
+                         net (fo=82, routed)          3.766     9.190    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/final_shift[2]
+    SLICE_X6Y33          LUT6 (Prop_lut6_I1_O)        0.124     9.314 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[28]_i_21/O
+                         net (fo=4, routed)           0.820    10.134    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[28]_i_21_n_0
+    SLICE_X6Y30          LUT6 (Prop_lut6_I0_O)        0.124    10.258 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[4]_i_8/O
+                         net (fo=1, routed)           0.701    10.959    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[4]_i_8_n_0
+    SLICE_X7Y30          CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.656    11.615 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[4]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    11.615    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[4]_i_3_n_0
+    SLICE_X7Y31          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.729 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[8]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    11.729    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[8]_i_3_n_0
+    SLICE_X7Y32          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.843 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[12]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    11.843    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[12]_i_3_n_0
+    SLICE_X7Y33          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.957 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[16]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    11.957    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[16]_i_3_n_0
+    SLICE_X7Y34          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.071 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[20]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    12.071    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[20]_i_3_n_0
+    SLICE_X7Y35          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.185 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[24]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    12.185    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[24]_i_3_n_0
+    SLICE_X7Y36          CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.334    12.519 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[28]_i_3/O[1]
+                         net (fo=2, routed)           0.528    13.047    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[28]_i_3_n_6
+    SLICE_X8Y36          LUT5 (Prop_lut5_I3_O)        0.303    13.350 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[26]_i_3/O
+                         net (fo=1, routed)           0.670    14.020    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[26]_i_3_n_0
+    SLICE_X8Y36          LUT6 (Prop_lut6_I5_O)        0.124    14.144 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[26]_i_1/O
+                         net (fo=1, routed)           0.000    14.144    RECIPROCAL/next_reciprocal[26]
+    SLICE_X8Y36          FDCE                                         r  RECIPROCAL/reciprocal_reg[26]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        8.000     8.000 r  
+    C10                                               0.000     8.000 r  clk (IN)
+                         net (fo=0)                   0.000     8.000    clk
+    C10                  IBUF (Prop_ibuf_I_O)         0.845     8.845 r  clk_IBUF_inst/O
+                         net (fo=1, routed)           2.155    11.000    clk_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    11.091 r  clk_IBUF_BUFG_inst/O
+                         net (fo=719, routed)         1.448    12.540    RECIPROCAL/clk_IBUF_BUFG
+    SLICE_X8Y36          FDCE                                         r  RECIPROCAL/reciprocal_reg[26]/C
+                         clock pessimism              0.336    12.876    
+                         clock uncertainty           -0.035    12.840    
+    SLICE_X8Y36          FDCE (Setup_fdce_C_D)        0.081    12.921    RECIPROCAL/reciprocal_reg[26]
+  -------------------------------------------------------------------
+                         required time                         12.921    
+                         arrival time                         -14.144    
+  -------------------------------------------------------------------
+                         slack                                 -1.222    
+
+Slack (VIOLATED) :        -1.206ns  (required time - arrival time)
+  Source:                 RECIPROCAL/SECOND_ITERATION/shift_delay_reg[3][2]/C
+                            (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
+  Destination:            RECIPROCAL/reciprocal_reg[7]/D
+                            (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            8.000ns  (clk rise@8.000ns - clk rise@0.000ns)
+  Data Path Delay:        9.181ns  (logic 2.087ns (22.731%)  route 7.094ns (77.269%))
+  Logic Levels:           6  (CARRY4=2 LUT5=1 LUT6=3)
+  Clock Path Skew:        -0.018ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.539ns = ( 12.539 - 8.000 ) 
+    Source Clock Delay      (SCD):    4.906ns
     Clock Pessimism Removal (CPR):    0.349ns
   Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
     Total System Jitter     (TSJ):    0.071ns
@@ -701,78 +979,26 @@ Slack (VIOLATED) :        -2.436ns  (required time - arrival time)
     C10                  IBUF (Prop_ibuf_I_O)         0.979     0.979 r  clk_IBUF_inst/O
                          net (fo=1, routed)           2.273     3.252    clk_IBUF
     BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.348 r  clk_IBUF_BUFG_inst/O
-                         net (fo=661, routed)         1.627     4.975    recip/clk_IBUF_BUFG
-    DSP48_X0Y29          DSP48E1                                      r  recip/r1_prod_comb__0/CLK
+                         net (fo=719, routed)         1.557     4.906    RECIPROCAL/SECOND_ITERATION/clk_IBUF_BUFG
+    SLICE_X10Y28         FDCE                                         r  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[3][2]/C
   -------------------------------------------------------------------    -------------------
-    DSP48_X0Y29          DSP48E1 (Prop_dsp48e1_CLK_P[8])
-                                                      0.434     5.409 r  recip/r1_prod_comb__0/P[8]
-                         net (fo=1, routed)           1.581     6.990    recip/r1_prod_comb__1[25]
-    SLICE_X13Y57         LUT2 (Prop_lut2_I0_O)        0.124     7.114 r  recip/r1_s5[2]_i_1/O
-                         net (fo=3, routed)           1.010     8.124    recip/r1_s4[2]
-    DSP48_X0Y23          DSP48E1 (Prop_dsp48e1_A[2]_P[47])
-                                                      3.841    11.965 r  recip/mr1_prod_s50/P[47]
-                         net (fo=18, routed)          1.703    13.668    recip/mr1_prod_s50_n_58
-    DSP48_X0Y22          DSP48E1                                      r  recip/mr1_prod_s50__0/C[42]
-  -------------------------------------------------------------------    -------------------
-
-                         (clock clk rise edge)        8.000     8.000 r  
-    C10                                               0.000     8.000 r  clk (IN)
-                         net (fo=0)                   0.000     8.000    clk
-    C10                  IBUF (Prop_ibuf_I_O)         0.845     8.845 r  clk_IBUF_inst/O
-                         net (fo=1, routed)           2.155    11.000    clk_IBUF
-    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    11.091 r  clk_IBUF_BUFG_inst/O
-                         net (fo=661, routed)         1.527    12.619    recip/clk_IBUF_BUFG
-    DSP48_X0Y22          DSP48E1                                      r  recip/mr1_prod_s50__0/CLK
-                         clock pessimism              0.349    12.968    
-                         clock uncertainty           -0.035    12.932    
-    DSP48_X0Y22          DSP48E1 (Setup_dsp48e1_CLK_C[42])
-                                                     -1.701    11.231    recip/mr1_prod_s50__0
-  -------------------------------------------------------------------
-                         required time                         11.231    
-                         arrival time                         -13.668    
-  -------------------------------------------------------------------
-                         slack                                 -2.436    
-
-Slack (VIOLATED) :        -2.425ns  (required time - arrival time)
-  Source:                 recip/r1_prod_comb__0/CLK
-                            (rising edge-triggered cell DSP48E1 clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
-  Destination:            recip/mr1_prod_s50__0/C[40]
-                            (rising edge-triggered cell DSP48E1 clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
-  Path Group:             clk
-  Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            8.000ns  (clk rise@8.000ns - clk rise@0.000ns)
-  Data Path Delay:        8.682ns  (logic 4.399ns (50.669%)  route 4.283ns (49.331%))
-  Logic Levels:           2  (DSP48E1=1 LUT2=1)
-  Clock Path Skew:        -0.007ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    4.619ns = ( 12.619 - 8.000 ) 
-    Source Clock Delay      (SCD):    4.975ns
-    Clock Pessimism Removal (CPR):    0.349ns
-  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter     (TSJ):    0.071ns
-    Total Input Jitter      (TIJ):    0.000ns
-    Discrete Jitter          (DJ):    0.000ns
-    Phase Error              (PE):    0.000ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock clk rise edge)        0.000     0.000 r  
-    C10                                               0.000     0.000 r  clk (IN)
-                         net (fo=0)                   0.000     0.000    clk
-    C10                  IBUF (Prop_ibuf_I_O)         0.979     0.979 r  clk_IBUF_inst/O
-                         net (fo=1, routed)           2.273     3.252    clk_IBUF
-    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.348 r  clk_IBUF_BUFG_inst/O
-                         net (fo=661, routed)         1.627     4.975    recip/clk_IBUF_BUFG
-    DSP48_X0Y29          DSP48E1                                      r  recip/r1_prod_comb__0/CLK
-  -------------------------------------------------------------------    -------------------
-    DSP48_X0Y29          DSP48E1 (Prop_dsp48e1_CLK_P[8])
-                                                      0.434     5.409 r  recip/r1_prod_comb__0/P[8]
-                         net (fo=1, routed)           1.581     6.990    recip/r1_prod_comb__1[25]
-    SLICE_X13Y57         LUT2 (Prop_lut2_I0_O)        0.124     7.114 r  recip/r1_s5[2]_i_1/O
-                         net (fo=3, routed)           1.010     8.124    recip/r1_s4[2]
-    DSP48_X0Y23          DSP48E1 (Prop_dsp48e1_A[2]_P[47])
-                                                      3.841    11.965 r  recip/mr1_prod_s50/P[47]
-                         net (fo=18, routed)          1.692    13.657    recip/mr1_prod_s50_n_58
-    DSP48_X0Y22          DSP48E1                                      r  recip/mr1_prod_s50__0/C[40]
+    SLICE_X10Y28         FDCE (Prop_fdce_C_Q)         0.518     5.424 r  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[3][2]/Q
+                         net (fo=82, routed)          3.766     9.190    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/final_shift[2]
+    SLICE_X6Y33          LUT6 (Prop_lut6_I1_O)        0.124     9.314 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[28]_i_21/O
+                         net (fo=4, routed)           0.820    10.134    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[28]_i_21_n_0
+    SLICE_X6Y30          LUT6 (Prop_lut6_I0_O)        0.124    10.258 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[4]_i_8/O
+                         net (fo=1, routed)           0.701    10.959    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[4]_i_8_n_0
+    SLICE_X7Y30          CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.656    11.615 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[4]_i_3/CO[3]
+                         net (fo=1, routed)           0.000    11.615    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[4]_i_3_n_0
+    SLICE_X7Y31          CARRY4 (Prop_carry4_CI_O[2])
+                                                      0.239    11.854 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[8]_i_3/O[2]
+                         net (fo=2, routed)           1.232    13.086    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal_reg[8]_i_3_n_5
+    SLICE_X10Y33         LUT5 (Prop_lut5_I3_O)        0.302    13.388 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[7]_i_2/O
+                         net (fo=1, routed)           0.575    13.963    RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[7]_i_2_n_0
+    SLICE_X11Y33         LUT6 (Prop_lut6_I0_O)        0.124    14.087 r  RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/reciprocal[7]_i_1/O
+                         net (fo=1, routed)           0.000    14.087    RECIPROCAL/next_reciprocal[7]
+    SLICE_X11Y33         FDCE                                         r  RECIPROCAL/reciprocal_reg[7]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock clk rise edge)        8.000     8.000 r  
@@ -781,32 +1007,31 @@ Slack (VIOLATED) :        -2.425ns  (required time - arrival time)
     C10                  IBUF (Prop_ibuf_I_O)         0.845     8.845 r  clk_IBUF_inst/O
                          net (fo=1, routed)           2.155    11.000    clk_IBUF
     BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    11.091 r  clk_IBUF_BUFG_inst/O
-                         net (fo=661, routed)         1.527    12.619    recip/clk_IBUF_BUFG
-    DSP48_X0Y22          DSP48E1                                      r  recip/mr1_prod_s50__0/CLK
-                         clock pessimism              0.349    12.968    
-                         clock uncertainty           -0.035    12.932    
-    DSP48_X0Y22          DSP48E1 (Setup_dsp48e1_CLK_C[40])
-                                                     -1.701    11.231    recip/mr1_prod_s50__0
+                         net (fo=719, routed)         1.447    12.539    RECIPROCAL/clk_IBUF_BUFG
+    SLICE_X11Y33         FDCE                                         r  RECIPROCAL/reciprocal_reg[7]/C
+                         clock pessimism              0.349    12.888    
+                         clock uncertainty           -0.035    12.852    
+    SLICE_X11Y33         FDCE (Setup_fdce_C_D)        0.029    12.881    RECIPROCAL/reciprocal_reg[7]
   -------------------------------------------------------------------
-                         required time                         11.231    
-                         arrival time                         -13.657    
+                         required time                         12.881    
+                         arrival time                         -14.087    
   -------------------------------------------------------------------
-                         slack                                 -2.425    
+                         slack                                 -1.206    
 
-Slack (VIOLATED) :        -2.336ns  (required time - arrival time)
-  Source:                 recip/scale_shift_s7_reg[0]/C
+Slack (VIOLATED) :        -1.199ns  (required time - arrival time)
+  Source:                 VECTOR_DELAY/z_pipe_reg[10][23]/C
                             (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
-  Destination:            recip/reciprocal_reg[20]/D
-                            (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
+  Destination:            MULTIPLY/z_product0__0/C[36]
+                            (rising edge-triggered cell DSP48E1 clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
   Path Group:             clk
   Path Type:              Setup (Max at Slow Process Corner)
   Requirement:            8.000ns  (clk rise@8.000ns - clk rise@0.000ns)
-  Data Path Delay:        10.226ns  (logic 3.052ns (29.847%)  route 7.174ns (70.153%))
-  Logic Levels:           11  (CARRY4=5 LUT3=1 LUT4=1 LUT5=1 LUT6=3)
-  Clock Path Skew:        -0.104ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    4.544ns = ( 12.544 - 8.000 ) 
-    Source Clock Delay      (SCD):    4.904ns
-    Clock Pessimism Removal (CPR):    0.257ns
+  Data Path Delay:        7.448ns  (logic 4.359ns (58.522%)  route 3.089ns (41.478%))
+  Logic Levels:           1  (DSP48E1=1)
+  Clock Path Skew:        -0.014ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.635ns = ( 12.635 - 8.000 ) 
+    Source Clock Delay      (SCD):    4.986ns
+    Clock Pessimism Removal (CPR):    0.336ns
   Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
     Total System Jitter     (TSJ):    0.071ns
     Total Input Jitter      (TIJ):    0.000ns
@@ -821,39 +1046,15 @@ Slack (VIOLATED) :        -2.336ns  (required time - arrival time)
     C10                  IBUF (Prop_ibuf_I_O)         0.979     0.979 r  clk_IBUF_inst/O
                          net (fo=1, routed)           2.273     3.252    clk_IBUF
     BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.348 r  clk_IBUF_BUFG_inst/O
-                         net (fo=661, routed)         1.556     4.904    recip/clk_IBUF_BUFG
-    SLICE_X9Y50          FDCE                                         r  recip/scale_shift_s7_reg[0]/C
+                         net (fo=719, routed)         1.637     4.986    VECTOR_DELAY/clk_IBUF_BUFG
+    SLICE_X6Y45          FDCE                                         r  VECTOR_DELAY/z_pipe_reg[10][23]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X9Y50          FDCE (Prop_fdce_C_Q)         0.419     5.323 r  recip/scale_shift_s7_reg[0]/Q
-                         net (fo=102, routed)         1.754     7.077    recip/scale_shift_s7[0]
-    SLICE_X9Y47          LUT4 (Prop_lut4_I1_O)        0.325     7.402 r  recip/reciprocal[31]_i_57/O
-                         net (fo=1, routed)           0.801     8.203    recip/reciprocal[31]_i_57_n_0
-    SLICE_X9Y46          LUT6 (Prop_lut6_I5_O)        0.326     8.529 r  recip/reciprocal[31]_i_42/O
-                         net (fo=3, routed)           0.667     9.196    recip/reciprocal[31]_i_42_n_0
-    SLICE_X9Y45          LUT3 (Prop_lut3_I1_O)        0.124     9.320 r  recip/reciprocal[20]_i_18/O
-                         net (fo=3, routed)           1.130    10.450    recip/reciprocal[20]_i_18_n_0
-    SLICE_X11Y42         LUT6 (Prop_lut6_I0_O)        0.124    10.574 r  recip/reciprocal[4]_i_8/O
-                         net (fo=1, routed)           0.913    11.487    recip/reciprocal[4]_i_8_n_0
-    SLICE_X10Y39         CARRY4 (Prop_carry4_S[0]_CO[3])
-                                                      0.637    12.124 r  recip/reciprocal_reg[4]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.124    recip/reciprocal_reg[4]_i_3_n_0
-    SLICE_X10Y40         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    12.241 r  recip/reciprocal_reg[8]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.241    recip/reciprocal_reg[8]_i_3_n_0
-    SLICE_X10Y41         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    12.358 r  recip/reciprocal_reg[12]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.358    recip/reciprocal_reg[12]_i_3_n_0
-    SLICE_X10Y42         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    12.475 r  recip/reciprocal_reg[16]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.475    recip/reciprocal_reg[16]_i_3_n_0
-    SLICE_X10Y43         CARRY4 (Prop_carry4_CI_O[3])
-                                                      0.315    12.790 r  recip/reciprocal_reg[20]_i_3/O[3]
-                         net (fo=2, routed)           1.120    13.910    recip/reciprocal_reg[20]_i_3_n_4
-    SLICE_X14Y41         LUT5 (Prop_lut5_I3_O)        0.307    14.217 r  recip/reciprocal[20]_i_4/O
-                         net (fo=1, routed)           0.789    15.006    recip/reciprocal[20]_i_4_n_0
-    SLICE_X13Y41         LUT6 (Prop_lut6_I5_O)        0.124    15.130 r  recip/reciprocal[20]_i_1/O
-                         net (fo=1, routed)           0.000    15.130    recip/reciprocal_final[20]
-    SLICE_X13Y41         FDCE                                         r  recip/reciprocal_reg[20]/D
+    SLICE_X6Y45          FDCE (Prop_fdce_C_Q)         0.518     5.504 r  VECTOR_DELAY/z_pipe_reg[10][23]/Q
+                         net (fo=14, routed)          1.586     7.089    MULTIPLY/z_product0_0[23]
+    DSP48_X0Y16          DSP48E1 (Prop_dsp48e1_A[25]_P[47])
+                                                      3.841    10.930 r  MULTIPLY/z_product0/P[47]
+                         net (fo=18, routed)          1.504    12.434    MULTIPLY/z_product0_n_58
+    DSP48_X0Y17          DSP48E1                                      r  MULTIPLY/z_product0__0/C[36]
   -------------------------------------------------------------------    -------------------
 
                          (clock clk rise edge)        8.000     8.000 r  
@@ -862,219 +1063,17 @@ Slack (VIOLATED) :        -2.336ns  (required time - arrival time)
     C10                  IBUF (Prop_ibuf_I_O)         0.845     8.845 r  clk_IBUF_inst/O
                          net (fo=1, routed)           2.155    11.000    clk_IBUF
     BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    11.091 r  clk_IBUF_BUFG_inst/O
-                         net (fo=661, routed)         1.452    12.544    recip/clk_IBUF_BUFG
-    SLICE_X13Y41         FDCE                                         r  recip/reciprocal_reg[20]/C
-                         clock pessimism              0.257    12.801    
-                         clock uncertainty           -0.035    12.765    
-    SLICE_X13Y41         FDCE (Setup_fdce_C_D)        0.029    12.794    recip/reciprocal_reg[20]
+                         net (fo=719, routed)         1.544    12.635    MULTIPLY/clk_IBUF_BUFG
+    DSP48_X0Y17          DSP48E1                                      r  MULTIPLY/z_product0__0/CLK
+                         clock pessimism              0.336    12.971    
+                         clock uncertainty           -0.035    12.936    
+    DSP48_X0Y17          DSP48E1 (Setup_dsp48e1_CLK_C[36])
+                                                     -1.701    11.235    MULTIPLY/z_product0__0
   -------------------------------------------------------------------
-                         required time                         12.794    
-                         arrival time                         -15.130    
+                         required time                         11.235    
+                         arrival time                         -12.434    
   -------------------------------------------------------------------
-                         slack                                 -2.336    
-
-Slack (VIOLATED) :        -2.236ns  (required time - arrival time)
-  Source:                 recip/r1_prod_comb__0/CLK
-                            (rising edge-triggered cell DSP48E1 clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
-  Destination:            recip/mr1_prod_s50__0/C[43]
-                            (rising edge-triggered cell DSP48E1 clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
-  Path Group:             clk
-  Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            8.000ns  (clk rise@8.000ns - clk rise@0.000ns)
-  Data Path Delay:        8.492ns  (logic 4.399ns (51.800%)  route 4.093ns (48.200%))
-  Logic Levels:           2  (DSP48E1=1 LUT2=1)
-  Clock Path Skew:        -0.007ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    4.619ns = ( 12.619 - 8.000 ) 
-    Source Clock Delay      (SCD):    4.975ns
-    Clock Pessimism Removal (CPR):    0.349ns
-  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter     (TSJ):    0.071ns
-    Total Input Jitter      (TIJ):    0.000ns
-    Discrete Jitter          (DJ):    0.000ns
-    Phase Error              (PE):    0.000ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock clk rise edge)        0.000     0.000 r  
-    C10                                               0.000     0.000 r  clk (IN)
-                         net (fo=0)                   0.000     0.000    clk
-    C10                  IBUF (Prop_ibuf_I_O)         0.979     0.979 r  clk_IBUF_inst/O
-                         net (fo=1, routed)           2.273     3.252    clk_IBUF
-    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.348 r  clk_IBUF_BUFG_inst/O
-                         net (fo=661, routed)         1.627     4.975    recip/clk_IBUF_BUFG
-    DSP48_X0Y29          DSP48E1                                      r  recip/r1_prod_comb__0/CLK
-  -------------------------------------------------------------------    -------------------
-    DSP48_X0Y29          DSP48E1 (Prop_dsp48e1_CLK_P[8])
-                                                      0.434     5.409 r  recip/r1_prod_comb__0/P[8]
-                         net (fo=1, routed)           1.581     6.990    recip/r1_prod_comb__1[25]
-    SLICE_X13Y57         LUT2 (Prop_lut2_I0_O)        0.124     7.114 r  recip/r1_s5[2]_i_1/O
-                         net (fo=3, routed)           1.010     8.124    recip/r1_s4[2]
-    DSP48_X0Y23          DSP48E1 (Prop_dsp48e1_A[2]_P[47])
-                                                      3.841    11.965 r  recip/mr1_prod_s50/P[47]
-                         net (fo=18, routed)          1.502    13.467    recip/mr1_prod_s50_n_58
-    DSP48_X0Y22          DSP48E1                                      r  recip/mr1_prod_s50__0/C[43]
-  -------------------------------------------------------------------    -------------------
-
-                         (clock clk rise edge)        8.000     8.000 r  
-    C10                                               0.000     8.000 r  clk (IN)
-                         net (fo=0)                   0.000     8.000    clk
-    C10                  IBUF (Prop_ibuf_I_O)         0.845     8.845 r  clk_IBUF_inst/O
-                         net (fo=1, routed)           2.155    11.000    clk_IBUF
-    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    11.091 r  clk_IBUF_BUFG_inst/O
-                         net (fo=661, routed)         1.527    12.619    recip/clk_IBUF_BUFG
-    DSP48_X0Y22          DSP48E1                                      r  recip/mr1_prod_s50__0/CLK
-                         clock pessimism              0.349    12.968    
-                         clock uncertainty           -0.035    12.932    
-    DSP48_X0Y22          DSP48E1 (Setup_dsp48e1_CLK_C[43])
-                                                     -1.701    11.231    recip/mr1_prod_s50__0
-  -------------------------------------------------------------------
-                         required time                         11.231    
-                         arrival time                         -13.467    
-  -------------------------------------------------------------------
-                         slack                                 -2.236    
-
-Slack (VIOLATED) :        -2.114ns  (required time - arrival time)
-  Source:                 recip/scale_shift_s7_reg[0]/C
-                            (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
-  Destination:            recip/reciprocal_reg[23]/D
-                            (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
-  Path Group:             clk
-  Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            8.000ns  (clk rise@8.000ns - clk rise@0.000ns)
-  Data Path Delay:        10.006ns  (logic 3.087ns (30.850%)  route 6.919ns (69.150%))
-  Logic Levels:           12  (CARRY4=6 LUT3=1 LUT4=1 LUT5=1 LUT6=3)
-  Clock Path Skew:        -0.104ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    4.544ns = ( 12.544 - 8.000 ) 
-    Source Clock Delay      (SCD):    4.904ns
-    Clock Pessimism Removal (CPR):    0.257ns
-  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter     (TSJ):    0.071ns
-    Total Input Jitter      (TIJ):    0.000ns
-    Discrete Jitter          (DJ):    0.000ns
-    Phase Error              (PE):    0.000ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock clk rise edge)        0.000     0.000 r  
-    C10                                               0.000     0.000 r  clk (IN)
-                         net (fo=0)                   0.000     0.000    clk
-    C10                  IBUF (Prop_ibuf_I_O)         0.979     0.979 r  clk_IBUF_inst/O
-                         net (fo=1, routed)           2.273     3.252    clk_IBUF
-    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.348 r  clk_IBUF_BUFG_inst/O
-                         net (fo=661, routed)         1.556     4.904    recip/clk_IBUF_BUFG
-    SLICE_X9Y50          FDCE                                         r  recip/scale_shift_s7_reg[0]/C
-  -------------------------------------------------------------------    -------------------
-    SLICE_X9Y50          FDCE (Prop_fdce_C_Q)         0.419     5.323 r  recip/scale_shift_s7_reg[0]/Q
-                         net (fo=102, routed)         1.754     7.077    recip/scale_shift_s7[0]
-    SLICE_X9Y47          LUT4 (Prop_lut4_I1_O)        0.325     7.402 r  recip/reciprocal[31]_i_57/O
-                         net (fo=1, routed)           0.801     8.203    recip/reciprocal[31]_i_57_n_0
-    SLICE_X9Y46          LUT6 (Prop_lut6_I5_O)        0.326     8.529 r  recip/reciprocal[31]_i_42/O
-                         net (fo=3, routed)           0.667     9.196    recip/reciprocal[31]_i_42_n_0
-    SLICE_X9Y45          LUT3 (Prop_lut3_I1_O)        0.124     9.320 r  recip/reciprocal[20]_i_18/O
-                         net (fo=3, routed)           1.130    10.450    recip/reciprocal[20]_i_18_n_0
-    SLICE_X11Y42         LUT6 (Prop_lut6_I0_O)        0.124    10.574 r  recip/reciprocal[4]_i_8/O
-                         net (fo=1, routed)           0.913    11.487    recip/reciprocal[4]_i_8_n_0
-    SLICE_X10Y39         CARRY4 (Prop_carry4_S[0]_CO[3])
-                                                      0.637    12.124 r  recip/reciprocal_reg[4]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.124    recip/reciprocal_reg[4]_i_3_n_0
-    SLICE_X10Y40         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    12.241 r  recip/reciprocal_reg[8]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.241    recip/reciprocal_reg[8]_i_3_n_0
-    SLICE_X10Y41         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    12.358 r  recip/reciprocal_reg[12]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.358    recip/reciprocal_reg[12]_i_3_n_0
-    SLICE_X10Y42         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    12.475 r  recip/reciprocal_reg[16]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.475    recip/reciprocal_reg[16]_i_3_n_0
-    SLICE_X10Y43         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    12.592 r  recip/reciprocal_reg[20]_i_3/CO[3]
-                         net (fo=1, routed)           0.000    12.592    recip/reciprocal_reg[20]_i_3_n_0
-    SLICE_X10Y44         CARRY4 (Prop_carry4_CI_O[2])
-                                                      0.239    12.831 r  recip/reciprocal_reg[24]_i_3/O[2]
-                         net (fo=2, routed)           0.988    13.819    recip/reciprocal_reg[24]_i_3_n_5
-    SLICE_X9Y42          LUT5 (Prop_lut5_I3_O)        0.301    14.120 r  recip/reciprocal[23]_i_3/O
-                         net (fo=1, routed)           0.667    14.787    recip/reciprocal[23]_i_3_n_0
-    SLICE_X9Y42          LUT6 (Prop_lut6_I5_O)        0.124    14.911 r  recip/reciprocal[23]_i_1/O
-                         net (fo=1, routed)           0.000    14.911    recip/reciprocal_final[23]
-    SLICE_X9Y42          FDCE                                         r  recip/reciprocal_reg[23]/D
-  -------------------------------------------------------------------    -------------------
-
-                         (clock clk rise edge)        8.000     8.000 r  
-    C10                                               0.000     8.000 r  clk (IN)
-                         net (fo=0)                   0.000     8.000    clk
-    C10                  IBUF (Prop_ibuf_I_O)         0.845     8.845 r  clk_IBUF_inst/O
-                         net (fo=1, routed)           2.155    11.000    clk_IBUF
-    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    11.091 r  clk_IBUF_BUFG_inst/O
-                         net (fo=661, routed)         1.452    12.544    recip/clk_IBUF_BUFG
-    SLICE_X9Y42          FDCE                                         r  recip/reciprocal_reg[23]/C
-                         clock pessimism              0.257    12.801    
-                         clock uncertainty           -0.035    12.765    
-    SLICE_X9Y42          FDCE (Setup_fdce_C_D)        0.031    12.796    recip/reciprocal_reg[23]
-  -------------------------------------------------------------------
-                         required time                         12.796    
-                         arrival time                         -14.911    
-  -------------------------------------------------------------------
-                         slack                                 -2.114    
-
-Slack (VIOLATED) :        -2.074ns  (required time - arrival time)
-  Source:                 recip/r1_prod_comb__0/CLK
-                            (rising edge-triggered cell DSP48E1 clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
-  Destination:            recip/mr1_prod_s50__0/C[31]
-                            (rising edge-triggered cell DSP48E1 clocked by clk  {rise@0.000ns fall@4.000ns period=8.000ns})
-  Path Group:             clk
-  Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            8.000ns  (clk rise@8.000ns - clk rise@0.000ns)
-  Data Path Delay:        8.331ns  (logic 4.399ns (52.803%)  route 3.932ns (47.197%))
-  Logic Levels:           2  (DSP48E1=1 LUT2=1)
-  Clock Path Skew:        -0.007ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    4.619ns = ( 12.619 - 8.000 ) 
-    Source Clock Delay      (SCD):    4.975ns
-    Clock Pessimism Removal (CPR):    0.349ns
-  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter     (TSJ):    0.071ns
-    Total Input Jitter      (TIJ):    0.000ns
-    Discrete Jitter          (DJ):    0.000ns
-    Phase Error              (PE):    0.000ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock clk rise edge)        0.000     0.000 r  
-    C10                                               0.000     0.000 r  clk (IN)
-                         net (fo=0)                   0.000     0.000    clk
-    C10                  IBUF (Prop_ibuf_I_O)         0.979     0.979 r  clk_IBUF_inst/O
-                         net (fo=1, routed)           2.273     3.252    clk_IBUF
-    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.348 r  clk_IBUF_BUFG_inst/O
-                         net (fo=661, routed)         1.627     4.975    recip/clk_IBUF_BUFG
-    DSP48_X0Y29          DSP48E1                                      r  recip/r1_prod_comb__0/CLK
-  -------------------------------------------------------------------    -------------------
-    DSP48_X0Y29          DSP48E1 (Prop_dsp48e1_CLK_P[8])
-                                                      0.434     5.409 r  recip/r1_prod_comb__0/P[8]
-                         net (fo=1, routed)           1.581     6.990    recip/r1_prod_comb__1[25]
-    SLICE_X13Y57         LUT2 (Prop_lut2_I0_O)        0.124     7.114 r  recip/r1_s5[2]_i_1/O
-                         net (fo=3, routed)           1.010     8.124    recip/r1_s4[2]
-    DSP48_X0Y23          DSP48E1 (Prop_dsp48e1_A[2]_P[47])
-                                                      3.841    11.965 r  recip/mr1_prod_s50/P[47]
-                         net (fo=18, routed)          1.341    13.306    recip/mr1_prod_s50_n_58
-    DSP48_X0Y22          DSP48E1                                      r  recip/mr1_prod_s50__0/C[31]
-  -------------------------------------------------------------------    -------------------
-
-                         (clock clk rise edge)        8.000     8.000 r  
-    C10                                               0.000     8.000 r  clk (IN)
-                         net (fo=0)                   0.000     8.000    clk
-    C10                  IBUF (Prop_ibuf_I_O)         0.845     8.845 r  clk_IBUF_inst/O
-                         net (fo=1, routed)           2.155    11.000    clk_IBUF
-    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    11.091 r  clk_IBUF_BUFG_inst/O
-                         net (fo=661, routed)         1.527    12.619    recip/clk_IBUF_BUFG
-    DSP48_X0Y22          DSP48E1                                      r  recip/mr1_prod_s50__0/CLK
-                         clock pessimism              0.349    12.968    
-                         clock uncertainty           -0.035    12.932    
-    DSP48_X0Y22          DSP48E1 (Setup_dsp48e1_CLK_C[31])
-                                                     -1.701    11.231    recip/mr1_prod_s50__0
-  -------------------------------------------------------------------
-                         required time                         11.231    
-                         arrival time                         -13.306    
-  -------------------------------------------------------------------
-                         slack                                 -2.074    
+                         slack                                 -1.199    
 
 
 

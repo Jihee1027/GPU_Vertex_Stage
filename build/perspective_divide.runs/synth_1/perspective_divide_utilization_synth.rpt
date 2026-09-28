@@ -1,8 +1,8 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-| Date         : Wed Sep 23 21:03:16 2026
-| Host         : ececomp4.ecn.purdue.edu running 64-bit Oracle Linux Server release 8.10
+| Date         : Sun Sep 27 19:59:53 2026
+| Host         : ececomp1.ecn.purdue.edu running 64-bit Oracle Linux Server release 8.10
 | Command      : report_utilization -file perspective_divide_utilization_synth.rpt -pb perspective_divide_utilization_synth.pb
 | Design       : perspective_divide
 | Device       : xc7s50csga324-1
@@ -31,13 +31,13 @@ Table of Contents
 +----------------------------+------+-------+------------+-----------+-------+
 |          Site Type         | Used | Fixed | Prohibited | Available | Util% |
 +----------------------------+------+-------+------------+-----------+-------+
-| Slice LUTs*                |  812 |     0 |          0 |     32600 |  2.49 |
-|   LUT as Logic             |  731 |     0 |          0 |     32600 |  2.24 |
-|   LUT as Memory            |   81 |     0 |          0 |      9600 |  0.84 |
+| Slice LUTs*                |  954 |     0 |          0 |     32600 |  2.93 |
+|   LUT as Logic             |  849 |     0 |          0 |     32600 |  2.60 |
+|   LUT as Memory            |  105 |     0 |          0 |      9600 |  1.09 |
 |     LUT as Distributed RAM |    0 |     0 |            |           |       |
-|     LUT as Shift Register  |   81 |     0 |            |           |       |
-| Slice Registers            |  573 |     0 |          0 |     65200 |  0.88 |
-|   Register as Flip Flop    |  573 |     0 |          0 |     65200 |  0.88 |
+|     LUT as Shift Register  |  105 |     0 |            |           |       |
+| Slice Registers            |  603 |     0 |          0 |     65200 |  0.92 |
+|   Register as Flip Flop    |  603 |     0 |          0 |     65200 |  0.92 |
 |   Register as Latch        |    0 |     0 |          0 |     65200 |  0.00 |
 | F7 Muxes                   |    0 |     0 |          0 |     16300 |  0.00 |
 | F8 Muxes                   |    0 |     0 |          0 |      8150 |  0.00 |
@@ -59,9 +59,9 @@ Warning! LUT value is adjusted to account for LUT combining.
 | 0     |            _ |       Reset |            - |
 | 0     |          Yes |           - |            - |
 | 0     |          Yes |           - |          Set |
-| 492   |          Yes |           - |        Reset |
+| 498   |          Yes |           - |        Reset |
 | 0     |          Yes |         Set |            - |
-| 81    |          Yes |       Reset |            - |
+| 105   |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -150,18 +150,18 @@ Warning! LUT value is adjusted to account for LUT combining.
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| FDCE     |  492 |        Flop & Latch |
-| LUT2     |  289 |                 LUT |
-| LUT6     |  231 |                 LUT |
-| LUT5     |  144 |                 LUT |
-| LUT3     |  129 |                 LUT |
+| FDCE     |  498 |        Flop & Latch |
+| LUT2     |  357 |                 LUT |
+| LUT6     |  238 |                 LUT |
+| LUT5     |  148 |                 LUT |
+| LUT4     |  144 |                 LUT |
+| LUT3     |  119 |                 LUT |
+| SRL16E   |  105 |  Distributed Memory |
+| FDRE     |  105 |        Flop & Latch |
 | IBUF     |   99 |                  IO |
-| SRL16E   |   81 |  Distributed Memory |
-| FDRE     |   81 |        Flop & Latch |
-| LUT4     |   78 |                 LUT |
+| CARRY4   |   88 |          CarryLogic |
 | OBUF     |   74 |                  IO |
-| CARRY4   |   56 |          CarryLogic |
-| LUT1     |   26 |                 LUT |
+| LUT1     |   74 |                 LUT |
 | DSP48E1  |   14 |    Block Arithmetic |
 | BUFG     |    1 |               Clock |
 +----------+------+---------------------+

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7s50csga324-1" LaunchTime="1790211761">
+<GenRun Id="synth_1" LaunchPart="xc7s50csga324-1" LaunchTime="1790553559">
   <File Type="VDS-TIMINGSUMMARY" Name="perspective_divide_timing_summary_synth.rpt"/>
   <File Type="RDS-DCP" Name="perspective_divide.dcp"/>
   <File Type="RDS-UTIL-PB" Name="perspective_divide_utilization_synth.pb"/>
@@ -11,34 +11,6 @@
   <File Type="RDS-PROPCONSTRS" Name="perspective_divide_drc_synth.rpt"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
-    <File Path="$PPRDIR/../source/ndc_output.sv">
-      <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PPRDIR/../source/perspective_multiply.sv">
-      <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PPRDIR/../source/reciprocal_nr.sv">
-      <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PPRDIR/../source/vector_delay.sv">
-      <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
     <File Path="$PPRDIR/../source/perspective_divide.sv">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>

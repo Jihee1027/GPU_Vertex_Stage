@@ -85,13 +85,7 @@ set_property include_dirs /home/ecegridfs/a/437mg065/GPU/vertex_stage/include [c
 set_property verilog_define USE_VIVADO [current_fileset]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
-read_verilog -library xil_defaultlib -sv {
-  /home/ecegridfs/a/437mg065/GPU/vertex_stage/source/ndc_output.sv
-  /home/ecegridfs/a/437mg065/GPU/vertex_stage/source/perspective_multiply.sv
-  /home/ecegridfs/a/437mg065/GPU/vertex_stage/source/reciprocal_nr.sv
-  /home/ecegridfs/a/437mg065/GPU/vertex_stage/source/vector_delay.sv
-  /home/ecegridfs/a/437mg065/GPU/vertex_stage/source/perspective_divide.sv
-}
+read_verilog -library xil_defaultlib -sv /home/ecegridfs/a/437mg065/GPU/vertex_stage/source/perspective_divide.sv
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the

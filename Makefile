@@ -147,7 +147,6 @@ DEPS             = $(addsuffix .d,$(VLSTEM) $(SVSTEM) $(VHSTEM) $(HDSTEM))
 
 # Simulation dependencies
 PKG_SV = $(wildcard $(SRCDIR)/*_pkg.sv)
-SIM_DEPS_perspective_divide = reciprocal_nr vector_delay perspective_multiply ndc_output
 
 # Targets that should not trigger dependency generation
 NODEPS           = help clean clean_sim clean_map clean_deps clean_fpga \
@@ -337,7 +336,7 @@ $(LIBDIR):
 	@mkdir -p $(MAPDIR) $(FPGADIR)
 	@echo "--- Running Xilinx project-mode timing synthesis for '$*' ($(TARGET_FREQ) MHz) ---"
 
-	-@$(SYNX) -p -t -c -f $(TARGET_FREQ) $*
+	@$(SYNX) -p -t -c -f $(TARGET_FREQ) $*
 
 	@echo "--- Generating timing report for '$*' ($(TARGET_FREQ) MHz) ---"
 	@vivado -mode batch \

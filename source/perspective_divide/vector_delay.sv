@@ -1,14 +1,14 @@
+// Wait for same cycle (x,y,z) while reiprocal calcuation
+
 module vector_delay #(
 	parameter DATA_W = 24,
 	parameter LATENCY = 9
 )(
 	input logic clk,
 	input logic n_rst,
-
 	input logic signed [DATA_W-1:0] x_in,
 	input logic signed [DATA_W-1:0] y_in,
 	input logic signed [DATA_W-1:0] z_in,
-
 	output logic signed [DATA_W-1:0] x_out,
 	output logic signed [DATA_W-1:0] y_out,
 	output logic signed [DATA_W-1:0] z_out
@@ -17,7 +17,6 @@ module vector_delay #(
 	logic signed [DATA_W-1:0] x_pipe [0:LATENCY-1];
 	logic signed [DATA_W-1:0] y_pipe [0:LATENCY-1];
 	logic signed [DATA_W-1:0] z_pipe [0:LATENCY-1];
-
 	logic signed [DATA_W-1:0] n_x_pipe [0:LATENCY-1];
 	logic signed [DATA_W-1:0] n_y_pipe [0:LATENCY-1];
 	logic signed [DATA_W-1:0] n_z_pipe [0:LATENCY-1];

@@ -1,8 +1,8 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-| Date         : Wed Sep 23 21:03:49 2026
-| Host         : ececomp4.ecn.purdue.edu running 64-bit Oracle Linux Server release 8.10
+| Date         : Sun Sep 27 20:00:25 2026
+| Host         : ececomp1.ecn.purdue.edu running 64-bit Oracle Linux Server release 8.10
 | Command      : report_drc -file perspective_divide_drc_opted.rpt -pb perspective_divide_drc_opted.pb -rpx perspective_divide_drc_opted.rpx
 | Design       : perspective_divide
 | Device       : xc7s50csga324-1
@@ -49,177 +49,177 @@ Related violations: <none>
 
 DPIP-1#1 Warning
 Input pipelining  
-DSP mult/x_product0 input mult/x_product0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP MULTIPLY/x_product0 input MULTIPLY/x_product0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#2 Warning
 Input pipelining  
-DSP mult/x_product0 input mult/x_product0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP MULTIPLY/x_product0 input MULTIPLY/x_product0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#3 Warning
 Input pipelining  
-DSP mult/x_product0__0 input mult/x_product0__0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP MULTIPLY/x_product0__0 input MULTIPLY/x_product0__0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#4 Warning
 Input pipelining  
-DSP mult/x_product0__0 input mult/x_product0__0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP MULTIPLY/x_product0__0 input MULTIPLY/x_product0__0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#5 Warning
 Input pipelining  
-DSP mult/x_product0__0 input mult/x_product0__0/C[47:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP MULTIPLY/x_product0__0 input MULTIPLY/x_product0__0/C[47:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#6 Warning
 Input pipelining  
-DSP mult/y_product0 input mult/y_product0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP MULTIPLY/y_product0 input MULTIPLY/y_product0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#7 Warning
 Input pipelining  
-DSP mult/y_product0 input mult/y_product0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP MULTIPLY/y_product0 input MULTIPLY/y_product0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#8 Warning
 Input pipelining  
-DSP mult/y_product0__0 input mult/y_product0__0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP MULTIPLY/y_product0__0 input MULTIPLY/y_product0__0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#9 Warning
 Input pipelining  
-DSP mult/y_product0__0 input mult/y_product0__0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP MULTIPLY/y_product0__0 input MULTIPLY/y_product0__0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#10 Warning
 Input pipelining  
-DSP mult/y_product0__0 input mult/y_product0__0/C[47:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP MULTIPLY/y_product0__0 input MULTIPLY/y_product0__0/C[47:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#11 Warning
 Input pipelining  
-DSP mult/z_product0 input mult/z_product0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP MULTIPLY/z_product0 input MULTIPLY/z_product0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#12 Warning
 Input pipelining  
-DSP mult/z_product0 input mult/z_product0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP MULTIPLY/z_product0 input MULTIPLY/z_product0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#13 Warning
 Input pipelining  
-DSP mult/z_product0__0 input mult/z_product0__0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP MULTIPLY/z_product0__0 input MULTIPLY/z_product0__0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#14 Warning
 Input pipelining  
-DSP mult/z_product0__0 input mult/z_product0__0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP MULTIPLY/z_product0__0 input MULTIPLY/z_product0__0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#15 Warning
 Input pipelining  
-DSP mult/z_product0__0 input mult/z_product0__0/C[47:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP MULTIPLY/z_product0__0 input MULTIPLY/z_product0__0/C[47:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#16 Warning
 Input pipelining  
-DSP recip/mr0_prod_s20 input recip/mr0_prod_s20/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP RECIPROCAL/FIRST_ITERATION/FIRST_MULTIPLY/high_product0 input RECIPROCAL/FIRST_ITERATION/FIRST_MULTIPLY/high_product0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#17 Warning
 Input pipelining  
-DSP recip/mr0_prod_s20 input recip/mr0_prod_s20/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP RECIPROCAL/FIRST_ITERATION/FIRST_MULTIPLY/high_product0 input RECIPROCAL/FIRST_ITERATION/FIRST_MULTIPLY/high_product0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#18 Warning
 Input pipelining  
-DSP recip/mr0_prod_s20__0 input recip/mr0_prod_s20__0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP RECIPROCAL/FIRST_ITERATION/FIRST_MULTIPLY/low_product0 input RECIPROCAL/FIRST_ITERATION/FIRST_MULTIPLY/low_product0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#19 Warning
 Input pipelining  
-DSP recip/mr0_prod_s20__0 input recip/mr0_prod_s20__0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP RECIPROCAL/FIRST_ITERATION/FIRST_MULTIPLY/low_product0 input RECIPROCAL/FIRST_ITERATION/FIRST_MULTIPLY/low_product0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#20 Warning
 Input pipelining  
-DSP recip/mr0_prod_s20__0 input recip/mr0_prod_s20__0/C[47:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP RECIPROCAL/FIRST_ITERATION/FIRST_MULTIPLY/low_product0 input RECIPROCAL/FIRST_ITERATION/FIRST_MULTIPLY/low_product0/C[47:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#21 Warning
 Input pipelining  
-DSP recip/mr1_prod_s50 input recip/mr1_prod_s50/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP RECIPROCAL/FIRST_ITERATION/SECOND_MULTIPLY/high_product0 input RECIPROCAL/FIRST_ITERATION/SECOND_MULTIPLY/high_product0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#22 Warning
 Input pipelining  
-DSP recip/mr1_prod_s50 input recip/mr1_prod_s50/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP RECIPROCAL/FIRST_ITERATION/SECOND_MULTIPLY/high_product0 input RECIPROCAL/FIRST_ITERATION/SECOND_MULTIPLY/high_product0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#23 Warning
 Input pipelining  
-DSP recip/mr1_prod_s50__0 input recip/mr1_prod_s50__0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP RECIPROCAL/FIRST_ITERATION/SECOND_MULTIPLY/low_product0 input RECIPROCAL/FIRST_ITERATION/SECOND_MULTIPLY/low_product0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#24 Warning
 Input pipelining  
-DSP recip/mr1_prod_s50__0 input recip/mr1_prod_s50__0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP RECIPROCAL/FIRST_ITERATION/SECOND_MULTIPLY/low_product0 input RECIPROCAL/FIRST_ITERATION/SECOND_MULTIPLY/low_product0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#25 Warning
 Input pipelining  
-DSP recip/mr1_prod_s50__0 input recip/mr1_prod_s50__0/C[47:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP RECIPROCAL/FIRST_ITERATION/SECOND_MULTIPLY/low_product0 input RECIPROCAL/FIRST_ITERATION/SECOND_MULTIPLY/low_product0/C[47:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#26 Warning
 Input pipelining  
-DSP recip/r1_prod_comb input recip/r1_prod_comb/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP RECIPROCAL/SECOND_ITERATION/FIRST_MULTIPLY/high_product0 input RECIPROCAL/SECOND_ITERATION/FIRST_MULTIPLY/high_product0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#27 Warning
 Input pipelining  
-DSP recip/r1_prod_comb input recip/r1_prod_comb/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP RECIPROCAL/SECOND_ITERATION/FIRST_MULTIPLY/high_product0 input RECIPROCAL/SECOND_ITERATION/FIRST_MULTIPLY/high_product0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#28 Warning
 Input pipelining  
-DSP recip/r1_prod_comb__0 input recip/r1_prod_comb__0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP RECIPROCAL/SECOND_ITERATION/FIRST_MULTIPLY/low_product0 input RECIPROCAL/SECOND_ITERATION/FIRST_MULTIPLY/low_product0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#29 Warning
 Input pipelining  
-DSP recip/r1_prod_comb__0 input recip/r1_prod_comb__0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP RECIPROCAL/SECOND_ITERATION/FIRST_MULTIPLY/low_product0 input RECIPROCAL/SECOND_ITERATION/FIRST_MULTIPLY/low_product0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#30 Warning
 Input pipelining  
-DSP recip/r1_prod_comb__0 input recip/r1_prod_comb__0/C[47:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP RECIPROCAL/SECOND_ITERATION/FIRST_MULTIPLY/low_product0 input RECIPROCAL/SECOND_ITERATION/FIRST_MULTIPLY/low_product0/C[47:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#31 Warning
 Input pipelining  
-DSP recip/r2_prod_comb input recip/r2_prod_comb/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/high_product0 input RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/high_product0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#32 Warning
 Input pipelining  
-DSP recip/r2_prod_comb input recip/r2_prod_comb/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/high_product0 input RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/high_product0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#33 Warning
 Input pipelining  
-DSP recip/r2_prod_comb__0 input recip/r2_prod_comb__0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/low_product0 input RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/low_product0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#34 Warning
 Input pipelining  
-DSP recip/r2_prod_comb__0 input recip/r2_prod_comb__0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/low_product0 input RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/low_product0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 DPIP-1#35 Warning
 Input pipelining  
-DSP recip/r2_prod_comb__0 input recip/r2_prod_comb__0/C[47:0] is not pipelined. Pipelining DSP48 input will improve performance.
+DSP RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/low_product0 input RECIPROCAL/SECOND_ITERATION/SECOND_MULTIPLY/low_product0/C[47:0] is not pipelined. Pipelining DSP48 input will improve performance.
 Related violations: <none>
 
 

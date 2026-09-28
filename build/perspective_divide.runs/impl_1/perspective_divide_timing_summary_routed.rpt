@@ -1,8 +1,8 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-| Date         : Wed Sep 23 21:04:07 2026
-| Host         : ececomp4.ecn.purdue.edu running 64-bit Oracle Linux Server release 8.10
+| Date         : Sun Sep 27 20:00:42 2026
+| Host         : ececomp1.ecn.purdue.edu running 64-bit Oracle Linux Server release 8.10
 | Command      : report_timing_summary -max_paths 10 -report_unconstrained -file perspective_divide_timing_summary_routed.rpt -pb perspective_divide_timing_summary_routed.pb -rpx perspective_divide_timing_summary_routed.rpx -warn_on_violation
 | Design       : perspective_divide
 | Device       : 7s50-csga324
@@ -43,8 +43,8 @@ Timing Summary Report
 
 Rule       Severity          Description                  Violations  
 ---------  ----------------  ---------------------------  ----------  
-TIMING-17  Critical Warning  Non-clocked sequential cell  661         
-DPIR-1     Warning           Asynchronous driver check    523         
+TIMING-17  Critical Warning  Non-clocked sequential cell  719         
+DPIR-1     Warning           Asynchronous driver check    617         
 
 Note: This report is based on the most recent report_methodology run and may not be up-to-date. Run report_methodology on the current design for the latest report.
 
@@ -54,10 +54,10 @@ check_timing report
 
 Table of Contents
 -----------------
-1. checking no_clock (661)
+1. checking no_clock (719)
 2. checking constant_clock (0)
 3. checking pulse_width_clock (0)
-4. checking unconstrained_internal_endpoints (1819)
+4. checking unconstrained_internal_endpoints (1873)
 5. checking no_input_delay (98)
 6. checking no_output_delay (74)
 7. checking multiple_clock (0)
@@ -67,9 +67,9 @@ Table of Contents
 11. checking partial_output_delay (0)
 12. checking latch_loops (0)
 
-1. checking no_clock (661)
+1. checking no_clock (719)
 --------------------------
- There are 661 register/latch pins with no clock driven by root clock pin: clk (HIGH)
+ There are 719 register/latch pins with no clock driven by root clock pin: clk (HIGH)
 
 
 2. checking constant_clock (0)
@@ -82,9 +82,9 @@ Table of Contents
  There are 0 register/latch pins which need pulse_width check
 
 
-4. checking unconstrained_internal_endpoints (1819)
+4. checking unconstrained_internal_endpoints (1873)
 ---------------------------------------------------
- There are 1819 pins that are not constrained for maximum delay. (HIGH)
+ There are 1873 pins that are not constrained for maximum delay. (HIGH)
 
  There are 0 pins that are not constrained for maximum delay due to constant clock.
 
@@ -143,7 +143,7 @@ Table of Contents
 
     WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
     -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
-        inf        0.000                      0                 1893          inf        0.000                      0                 1893           NA           NA                      NA                    NA  
+        inf        0.000                      0                 1947          inf        0.000                      0                 1947           NA           NA                      NA                    NA  
 
 
 There are no user specified timing constraints.
@@ -212,8 +212,8 @@ Path Group:  (none)
 From Clock:  
   To Clock:  
 
-Max Delay          1893 Endpoints
-Min Delay          1893 Endpoints
+Max Delay          1947 Endpoints
+Min Delay          1947 Endpoints
 --------------------------------------------------------------------------------------
 
 
@@ -222,495 +222,499 @@ Max Delay Paths
 Slack:                    inf
   Source:                 w_clip[0]
                             (input port)
-  Destination:            recip/scale_shift_s5_reg[7]_srl6_recip_valid_pipe_reg_c_4/D
+  Destination:            RECIPROCAL/normalized_reg[17]/D
   Path Group:             (none)
   Path Type:              Max at Slow Process Corner
-  Data Path Delay:        14.336ns  (logic 3.856ns (26.896%)  route 10.480ns (73.104%))
-  Logic Levels:           14  (CARRY4=6 IBUF=1 LUT1=1 LUT2=3 LUT4=1 LUT6=2)
+  Data Path Delay:        12.749ns  (logic 3.252ns (25.507%)  route 9.497ns (74.493%))
+  Logic Levels:           14  (CARRY4=6 IBUF=1 LUT1=1 LUT3=1 LUT5=2 LUT6=3)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    J5                                                0.000     0.000 f  w_clip[0] (IN)
+    U11                                               0.000     0.000 f  w_clip[0] (IN)
                          net (fo=0)                   0.000     0.000    w_clip[0]
-    J5                   IBUF (Prop_ibuf_I_O)         0.928     0.928 f  w_clip_IBUF[0]_inst/O
-                         net (fo=17, routed)          3.046     3.974    recip/w_clip_IBUF[0]
-    SLICE_X15Y58         LUT1 (Prop_lut1_I0_O)        0.124     4.098 r  recip/normalized_s0[1]_i_4/O
-                         net (fo=1, routed)           0.189     4.287    recip/normalized_s0[1]_i_4_n_0
-    SLICE_X14Y58         CARRY4 (Prop_carry4_CYINIT_CO[3])
-                                                      0.595     4.882 r  recip/normalized_s0_reg[1]_i_2/CO[3]
-                         net (fo=1, routed)           0.000     4.882    recip/normalized_s0_reg[1]_i_2_n_0
-    SLICE_X14Y59         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     4.999 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_13/CO[3]
-                         net (fo=1, routed)           0.000     4.999    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_13_n_0
-    SLICE_X14Y60         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.116 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_12/CO[3]
-                         net (fo=1, routed)           0.000     5.116    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_12_n_0
-    SLICE_X14Y61         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.233 r  recip/normalized_s0_reg[23]_i_19/CO[3]
-                         net (fo=1, routed)           0.000     5.233    recip/normalized_s0_reg[23]_i_19_n_0
-    SLICE_X14Y62         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.350 r  recip/normalized_s0_reg[0]_i_3/CO[3]
-                         net (fo=1, routed)           0.000     5.350    recip/normalized_s0_reg[0]_i_3_n_0
-    SLICE_X14Y63         CARRY4 (Prop_carry4_CI_O[1])
-                                                      0.323     5.673 f  recip/normalized_s0_reg[0]_i_2/O[1]
-                         net (fo=4, routed)           0.864     6.537    recip/normalized_s0_reg[0]_i_2_n_6
-    SLICE_X15Y63         LUT4 (Prop_lut4_I3_O)        0.334     6.871 f  recip/normalized_s0[1]_i_3/O
-                         net (fo=5, routed)           0.984     7.855    recip/normalized_s0[1]_i_3_n_0
-    SLICE_X13Y64         LUT6 (Prop_lut6_I0_O)        0.332     8.187 f  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_3/O
-                         net (fo=19, routed)          0.895     9.082    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_3_n_0
-    SLICE_X12Y64         LUT2 (Prop_lut2_I0_O)        0.124     9.206 f  recip/normalized_s0[15]_i_2/O
-                         net (fo=17, routed)          1.171    10.376    recip/normalized_s0[15]_i_2_n_0
-    SLICE_X12Y61         LUT6 (Prop_lut6_I4_O)        0.124    10.500 f  recip/normalized_s0[23]_i_5/O
-                         net (fo=41, routed)          1.358    11.859    recip/normalized_s0[23]_i_5_n_0
-    SLICE_X10Y61         LUT2 (Prop_lut2_I0_O)        0.148    12.007 r  recip/scale_shift_s5_reg[7]_srl6_recip_valid_pipe_reg_c_4_i_2/O
-                         net (fo=3, routed)           1.143    13.150    recip/scale_shift_s5_reg[7]_srl6_recip_valid_pipe_reg_c_4_i_2_n_0
-    SLICE_X11Y60         LUT2 (Prop_lut2_I1_O)        0.356    13.506 r  recip/scale_shift_s5_reg[7]_srl6_recip_valid_pipe_reg_c_4_i_1/O
-                         net (fo=1, routed)           0.830    14.336    recip/scale_shift_s5_reg[7]_srl6_recip_valid_pipe_reg_c_4_i_1_n_0
-    SLICE_X10Y50         SRL16E                                       r  recip/scale_shift_s5_reg[7]_srl6_recip_valid_pipe_reg_c_4/D
+    U11                  IBUF (Prop_ibuf_I_O)         0.931     0.931 f  w_clip_IBUF[0]_inst/O
+                         net (fo=12, routed)          2.129     3.060    RECIPROCAL/SECOND_ITERATION/w_clip_IBUF[0]
+    SLICE_X4Y14          LUT1 (Prop_lut1_I0_O)        0.124     3.184 r  RECIPROCAL/SECOND_ITERATION/normalized[5]_i_4/O
+                         net (fo=1, routed)           0.338     3.522    RECIPROCAL/SECOND_ITERATION/normalized[5]_i_4_n_0
+    SLICE_X2Y14          CARRY4 (Prop_carry4_CYINIT_CO[3])
+                                                      0.595     4.117 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[5]_i_3/CO[3]
+                         net (fo=1, routed)           0.000     4.117    RECIPROCAL/SECOND_ITERATION/normalized_reg[5]_i_3_n_0
+    SLICE_X2Y15          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.234 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_35/CO[3]
+                         net (fo=1, routed)           0.000     4.234    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_35_n_0
+    SLICE_X2Y16          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.351 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_36/CO[3]
+                         net (fo=1, routed)           0.000     4.351    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_36_n_0
+    SLICE_X2Y17          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.468 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_33/CO[3]
+                         net (fo=1, routed)           0.000     4.468    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_33_n_0
+    SLICE_X2Y18          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.585 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_34/CO[3]
+                         net (fo=1, routed)           0.000     4.585    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_34_n_0
+    SLICE_X2Y19          CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.219     4.804 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_15/O[0]
+                         net (fo=1, routed)           0.661     5.465    RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_15_n_7
+    SLICE_X3Y19          LUT3 (Prop_lut3_I0_O)        0.295     5.760 f  RECIPROCAL/SECOND_ITERATION/normalized[23]_i_12/O
+                         net (fo=7, routed)           0.827     6.587    RECIPROCAL/SECOND_ITERATION/p_20_in
+    SLICE_X3Y20          LUT6 (Prop_lut6_I5_O)        0.124     6.711 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_14/O
+                         net (fo=3, routed)           0.828     7.539    RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_14_n_0
+    SLICE_X3Y19          LUT5 (Prop_lut5_I0_O)        0.124     7.663 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_4/O
+                         net (fo=28, routed)          1.967     9.630    RECIPROCAL/SECOND_ITERATION/w_clip[23]_1
+    SLICE_X3Y16          LUT6 (Prop_lut6_I1_O)        0.124     9.754 r  RECIPROCAL/SECOND_ITERATION/normalized[19]_i_4/O
+                         net (fo=41, routed)          1.711    11.466    RECIPROCAL/SECOND_ITERATION_n_4
+    SLICE_X6Y17          LUT6 (Prop_lut6_I2_O)        0.124    11.590 r  RECIPROCAL/normalized[17]_i_3/O
+                         net (fo=1, routed)           1.035    12.625    RECIPROCAL/normalized[17]_i_3_n_0
+    SLICE_X8Y18          LUT5 (Prop_lut5_I2_O)        0.124    12.749 r  RECIPROCAL/normalized[17]_i_1/O
+                         net (fo=1, routed)           0.000    12.749    RECIPROCAL/normalized[17]_i_1_n_0
+    SLICE_X8Y18          FDCE                                         r  RECIPROCAL/normalized_reg[17]/D
   -------------------------------------------------------------------    -------------------
 
 Slack:                    inf
   Source:                 w_clip[0]
                             (input port)
-  Destination:            recip/scale_shift_s5_reg[3]_srl6_recip_valid_pipe_reg_c_4/D
+  Destination:            RECIPROCAL/normalized_reg[22]/D
   Path Group:             (none)
   Path Type:              Max at Slow Process Corner
-  Data Path Delay:        14.307ns  (logic 3.828ns (26.754%)  route 10.480ns (73.246%))
-  Logic Levels:           14  (CARRY4=6 IBUF=1 LUT1=1 LUT2=3 LUT4=1 LUT6=2)
+  Data Path Delay:        12.735ns  (logic 3.252ns (25.535%)  route 9.483ns (74.465%))
+  Logic Levels:           14  (CARRY4=6 IBUF=1 LUT1=1 LUT3=1 LUT5=2 LUT6=3)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    J5                                                0.000     0.000 f  w_clip[0] (IN)
+    U11                                               0.000     0.000 f  w_clip[0] (IN)
                          net (fo=0)                   0.000     0.000    w_clip[0]
-    J5                   IBUF (Prop_ibuf_I_O)         0.928     0.928 f  w_clip_IBUF[0]_inst/O
-                         net (fo=17, routed)          3.046     3.974    recip/w_clip_IBUF[0]
-    SLICE_X15Y58         LUT1 (Prop_lut1_I0_O)        0.124     4.098 r  recip/normalized_s0[1]_i_4/O
-                         net (fo=1, routed)           0.189     4.287    recip/normalized_s0[1]_i_4_n_0
-    SLICE_X14Y58         CARRY4 (Prop_carry4_CYINIT_CO[3])
-                                                      0.595     4.882 r  recip/normalized_s0_reg[1]_i_2/CO[3]
-                         net (fo=1, routed)           0.000     4.882    recip/normalized_s0_reg[1]_i_2_n_0
-    SLICE_X14Y59         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     4.999 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_13/CO[3]
-                         net (fo=1, routed)           0.000     4.999    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_13_n_0
-    SLICE_X14Y60         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.116 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_12/CO[3]
-                         net (fo=1, routed)           0.000     5.116    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_12_n_0
-    SLICE_X14Y61         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.233 r  recip/normalized_s0_reg[23]_i_19/CO[3]
-                         net (fo=1, routed)           0.000     5.233    recip/normalized_s0_reg[23]_i_19_n_0
-    SLICE_X14Y62         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.350 r  recip/normalized_s0_reg[0]_i_3/CO[3]
-                         net (fo=1, routed)           0.000     5.350    recip/normalized_s0_reg[0]_i_3_n_0
-    SLICE_X14Y63         CARRY4 (Prop_carry4_CI_O[1])
-                                                      0.323     5.673 f  recip/normalized_s0_reg[0]_i_2/O[1]
-                         net (fo=4, routed)           0.864     6.537    recip/normalized_s0_reg[0]_i_2_n_6
-    SLICE_X15Y63         LUT4 (Prop_lut4_I3_O)        0.334     6.871 f  recip/normalized_s0[1]_i_3/O
-                         net (fo=5, routed)           0.984     7.855    recip/normalized_s0[1]_i_3_n_0
-    SLICE_X13Y64         LUT6 (Prop_lut6_I0_O)        0.332     8.187 f  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_3/O
-                         net (fo=19, routed)          0.895     9.082    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_3_n_0
-    SLICE_X12Y64         LUT2 (Prop_lut2_I0_O)        0.124     9.206 f  recip/normalized_s0[15]_i_2/O
-                         net (fo=17, routed)          1.171    10.376    recip/normalized_s0[15]_i_2_n_0
-    SLICE_X12Y61         LUT6 (Prop_lut6_I4_O)        0.124    10.500 f  recip/normalized_s0[23]_i_5/O
-                         net (fo=41, routed)          1.358    11.859    recip/normalized_s0[23]_i_5_n_0
-    SLICE_X10Y61         LUT2 (Prop_lut2_I0_O)        0.148    12.007 r  recip/scale_shift_s5_reg[7]_srl6_recip_valid_pipe_reg_c_4_i_2/O
-                         net (fo=3, routed)           1.143    13.150    recip/scale_shift_s5_reg[7]_srl6_recip_valid_pipe_reg_c_4_i_2_n_0
-    SLICE_X11Y60         LUT2 (Prop_lut2_I0_O)        0.328    13.478 r  recip/scale_shift_s5_reg[3]_srl6_recip_valid_pipe_reg_c_4_i_1/O
-                         net (fo=1, routed)           0.829    14.307    recip/scale_shift_s5_reg[3]_srl6_recip_valid_pipe_reg_c_4_i_1_n_0
-    SLICE_X10Y50         SRL16E                                       r  recip/scale_shift_s5_reg[3]_srl6_recip_valid_pipe_reg_c_4/D
+    U11                  IBUF (Prop_ibuf_I_O)         0.931     0.931 f  w_clip_IBUF[0]_inst/O
+                         net (fo=12, routed)          2.129     3.060    RECIPROCAL/SECOND_ITERATION/w_clip_IBUF[0]
+    SLICE_X4Y14          LUT1 (Prop_lut1_I0_O)        0.124     3.184 r  RECIPROCAL/SECOND_ITERATION/normalized[5]_i_4/O
+                         net (fo=1, routed)           0.338     3.522    RECIPROCAL/SECOND_ITERATION/normalized[5]_i_4_n_0
+    SLICE_X2Y14          CARRY4 (Prop_carry4_CYINIT_CO[3])
+                                                      0.595     4.117 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[5]_i_3/CO[3]
+                         net (fo=1, routed)           0.000     4.117    RECIPROCAL/SECOND_ITERATION/normalized_reg[5]_i_3_n_0
+    SLICE_X2Y15          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.234 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_35/CO[3]
+                         net (fo=1, routed)           0.000     4.234    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_35_n_0
+    SLICE_X2Y16          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.351 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_36/CO[3]
+                         net (fo=1, routed)           0.000     4.351    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_36_n_0
+    SLICE_X2Y17          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.468 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_33/CO[3]
+                         net (fo=1, routed)           0.000     4.468    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_33_n_0
+    SLICE_X2Y18          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.585 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_34/CO[3]
+                         net (fo=1, routed)           0.000     4.585    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_34_n_0
+    SLICE_X2Y19          CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.219     4.804 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_15/O[0]
+                         net (fo=1, routed)           0.661     5.465    RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_15_n_7
+    SLICE_X3Y19          LUT3 (Prop_lut3_I0_O)        0.295     5.760 f  RECIPROCAL/SECOND_ITERATION/normalized[23]_i_12/O
+                         net (fo=7, routed)           0.827     6.587    RECIPROCAL/SECOND_ITERATION/p_20_in
+    SLICE_X3Y20          LUT6 (Prop_lut6_I5_O)        0.124     6.711 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_14/O
+                         net (fo=3, routed)           0.828     7.539    RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_14_n_0
+    SLICE_X3Y19          LUT5 (Prop_lut5_I0_O)        0.124     7.663 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_4/O
+                         net (fo=28, routed)          1.967     9.630    RECIPROCAL/SECOND_ITERATION/w_clip[23]_1
+    SLICE_X3Y16          LUT6 (Prop_lut6_I1_O)        0.124     9.754 r  RECIPROCAL/SECOND_ITERATION/normalized[19]_i_4/O
+                         net (fo=41, routed)          1.698    11.453    RECIPROCAL/SECOND_ITERATION_n_4
+    SLICE_X7Y17          LUT6 (Prop_lut6_I2_O)        0.124    11.577 r  RECIPROCAL/normalized[22]_i_2/O
+                         net (fo=1, routed)           1.034    12.611    RECIPROCAL/normalized[22]_i_2_n_0
+    SLICE_X9Y15          LUT5 (Prop_lut5_I0_O)        0.124    12.735 r  RECIPROCAL/normalized[22]_i_1/O
+                         net (fo=1, routed)           0.000    12.735    RECIPROCAL/normalized[22]_i_1_n_0
+    SLICE_X9Y15          FDCE                                         r  RECIPROCAL/normalized_reg[22]/D
   -------------------------------------------------------------------    -------------------
 
 Slack:                    inf
   Source:                 w_clip[0]
                             (input port)
-  Destination:            recip/scale_shift_s5_reg[4]_srl6_recip_valid_pipe_reg_c_4/D
+  Destination:            RECIPROCAL/normalized_reg[14]/D
   Path Group:             (none)
   Path Type:              Max at Slow Process Corner
-  Data Path Delay:        13.988ns  (logic 3.828ns (27.364%)  route 10.160ns (72.636%))
-  Logic Levels:           14  (CARRY4=6 IBUF=1 LUT1=1 LUT2=2 LUT4=1 LUT6=3)
+  Data Path Delay:        12.447ns  (logic 3.252ns (26.126%)  route 9.195ns (73.874%))
+  Logic Levels:           14  (CARRY4=6 IBUF=1 LUT1=1 LUT3=1 LUT5=2 LUT6=3)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    J5                                                0.000     0.000 f  w_clip[0] (IN)
+    U11                                               0.000     0.000 f  w_clip[0] (IN)
                          net (fo=0)                   0.000     0.000    w_clip[0]
-    J5                   IBUF (Prop_ibuf_I_O)         0.928     0.928 f  w_clip_IBUF[0]_inst/O
-                         net (fo=17, routed)          3.046     3.974    recip/w_clip_IBUF[0]
-    SLICE_X15Y58         LUT1 (Prop_lut1_I0_O)        0.124     4.098 r  recip/normalized_s0[1]_i_4/O
-                         net (fo=1, routed)           0.189     4.287    recip/normalized_s0[1]_i_4_n_0
-    SLICE_X14Y58         CARRY4 (Prop_carry4_CYINIT_CO[3])
-                                                      0.595     4.882 r  recip/normalized_s0_reg[1]_i_2/CO[3]
-                         net (fo=1, routed)           0.000     4.882    recip/normalized_s0_reg[1]_i_2_n_0
-    SLICE_X14Y59         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     4.999 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_13/CO[3]
-                         net (fo=1, routed)           0.000     4.999    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_13_n_0
-    SLICE_X14Y60         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.116 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_12/CO[3]
-                         net (fo=1, routed)           0.000     5.116    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_12_n_0
-    SLICE_X14Y61         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.233 r  recip/normalized_s0_reg[23]_i_19/CO[3]
-                         net (fo=1, routed)           0.000     5.233    recip/normalized_s0_reg[23]_i_19_n_0
-    SLICE_X14Y62         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.350 r  recip/normalized_s0_reg[0]_i_3/CO[3]
-                         net (fo=1, routed)           0.000     5.350    recip/normalized_s0_reg[0]_i_3_n_0
-    SLICE_X14Y63         CARRY4 (Prop_carry4_CI_O[1])
-                                                      0.323     5.673 f  recip/normalized_s0_reg[0]_i_2/O[1]
-                         net (fo=4, routed)           0.864     6.537    recip/normalized_s0_reg[0]_i_2_n_6
-    SLICE_X15Y63         LUT4 (Prop_lut4_I3_O)        0.334     6.871 f  recip/normalized_s0[1]_i_3/O
-                         net (fo=5, routed)           0.984     7.855    recip/normalized_s0[1]_i_3_n_0
-    SLICE_X13Y64         LUT6 (Prop_lut6_I0_O)        0.332     8.187 f  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_3/O
-                         net (fo=19, routed)          0.895     9.082    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_3_n_0
-    SLICE_X12Y64         LUT2 (Prop_lut2_I0_O)        0.124     9.206 f  recip/normalized_s0[15]_i_2/O
-                         net (fo=17, routed)          1.171    10.376    recip/normalized_s0[15]_i_2_n_0
-    SLICE_X12Y61         LUT6 (Prop_lut6_I4_O)        0.124    10.500 f  recip/normalized_s0[23]_i_5/O
-                         net (fo=41, routed)          1.358    11.859    recip/normalized_s0[23]_i_5_n_0
-    SLICE_X10Y61         LUT2 (Prop_lut2_I0_O)        0.148    12.007 r  recip/scale_shift_s5_reg[7]_srl6_recip_valid_pipe_reg_c_4_i_2/O
-                         net (fo=3, routed)           0.843    12.850    recip/scale_shift_s5_reg[7]_srl6_recip_valid_pipe_reg_c_4_i_2_n_0
-    SLICE_X12Y61         LUT6 (Prop_lut6_I0_O)        0.328    13.178 r  recip/scale_shift_s5_reg[4]_srl6_recip_valid_pipe_reg_c_4_i_1/O
-                         net (fo=1, routed)           0.810    13.988    recip/scale_shift_s5_reg[4]_srl6_recip_valid_pipe_reg_c_4_i_1_n_0
-    SLICE_X14Y54         SRL16E                                       r  recip/scale_shift_s5_reg[4]_srl6_recip_valid_pipe_reg_c_4/D
+    U11                  IBUF (Prop_ibuf_I_O)         0.931     0.931 f  w_clip_IBUF[0]_inst/O
+                         net (fo=12, routed)          2.129     3.060    RECIPROCAL/SECOND_ITERATION/w_clip_IBUF[0]
+    SLICE_X4Y14          LUT1 (Prop_lut1_I0_O)        0.124     3.184 r  RECIPROCAL/SECOND_ITERATION/normalized[5]_i_4/O
+                         net (fo=1, routed)           0.338     3.522    RECIPROCAL/SECOND_ITERATION/normalized[5]_i_4_n_0
+    SLICE_X2Y14          CARRY4 (Prop_carry4_CYINIT_CO[3])
+                                                      0.595     4.117 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[5]_i_3/CO[3]
+                         net (fo=1, routed)           0.000     4.117    RECIPROCAL/SECOND_ITERATION/normalized_reg[5]_i_3_n_0
+    SLICE_X2Y15          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.234 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_35/CO[3]
+                         net (fo=1, routed)           0.000     4.234    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_35_n_0
+    SLICE_X2Y16          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.351 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_36/CO[3]
+                         net (fo=1, routed)           0.000     4.351    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_36_n_0
+    SLICE_X2Y17          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.468 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_33/CO[3]
+                         net (fo=1, routed)           0.000     4.468    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_33_n_0
+    SLICE_X2Y18          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.585 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_34/CO[3]
+                         net (fo=1, routed)           0.000     4.585    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_34_n_0
+    SLICE_X2Y19          CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.219     4.804 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_15/O[0]
+                         net (fo=1, routed)           0.661     5.465    RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_15_n_7
+    SLICE_X3Y19          LUT3 (Prop_lut3_I0_O)        0.295     5.760 f  RECIPROCAL/SECOND_ITERATION/normalized[23]_i_12/O
+                         net (fo=7, routed)           0.827     6.587    RECIPROCAL/SECOND_ITERATION/p_20_in
+    SLICE_X3Y20          LUT6 (Prop_lut6_I5_O)        0.124     6.711 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_14/O
+                         net (fo=3, routed)           0.828     7.539    RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_14_n_0
+    SLICE_X3Y19          LUT5 (Prop_lut5_I0_O)        0.124     7.663 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_4/O
+                         net (fo=28, routed)          1.081     8.745    RECIPROCAL/SECOND_ITERATION/w_clip[23]_1
+    SLICE_X3Y17          LUT5 (Prop_lut5_I2_O)        0.124     8.869 r  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_1/O
+                         net (fo=44, routed)          2.207    11.076    RECIPROCAL/SECOND_ITERATION_n_1
+    SLICE_X7Y15          LUT6 (Prop_lut6_I4_O)        0.124    11.200 r  RECIPROCAL/normalized[22]_i_4/O
+                         net (fo=2, routed)           1.123    12.323    RECIPROCAL/normalized[22]_i_4_n_0
+    SLICE_X8Y14          LUT6 (Prop_lut6_I5_O)        0.124    12.447 r  RECIPROCAL/normalized[14]_i_1/O
+                         net (fo=1, routed)           0.000    12.447    RECIPROCAL/normalized[14]_i_1_n_0
+    SLICE_X8Y14          FDCE                                         r  RECIPROCAL/normalized_reg[14]/D
   -------------------------------------------------------------------    -------------------
 
 Slack:                    inf
   Source:                 w_clip[0]
                             (input port)
-  Destination:            recip/normalized_s0_reg[21]/D
+  Destination:            RECIPROCAL/normalized_reg[8]/D
   Path Group:             (none)
   Path Type:              Max at Slow Process Corner
-  Data Path Delay:        13.706ns  (logic 3.600ns (26.263%)  route 10.107ns (73.737%))
-  Logic Levels:           14  (CARRY4=6 IBUF=1 LUT1=1 LUT2=1 LUT4=1 LUT6=4)
+  Data Path Delay:        12.364ns  (logic 3.482ns (28.161%)  route 8.882ns (71.839%))
+  Logic Levels:           14  (CARRY4=6 IBUF=1 LUT1=1 LUT3=1 LUT4=1 LUT5=1 LUT6=3)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    J5                                                0.000     0.000 f  w_clip[0] (IN)
+    U11                                               0.000     0.000 f  w_clip[0] (IN)
                          net (fo=0)                   0.000     0.000    w_clip[0]
-    J5                   IBUF (Prop_ibuf_I_O)         0.928     0.928 f  w_clip_IBUF[0]_inst/O
-                         net (fo=17, routed)          3.046     3.974    recip/w_clip_IBUF[0]
-    SLICE_X15Y58         LUT1 (Prop_lut1_I0_O)        0.124     4.098 r  recip/normalized_s0[1]_i_4/O
-                         net (fo=1, routed)           0.189     4.287    recip/normalized_s0[1]_i_4_n_0
-    SLICE_X14Y58         CARRY4 (Prop_carry4_CYINIT_CO[3])
-                                                      0.595     4.882 r  recip/normalized_s0_reg[1]_i_2/CO[3]
-                         net (fo=1, routed)           0.000     4.882    recip/normalized_s0_reg[1]_i_2_n_0
-    SLICE_X14Y59         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     4.999 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_13/CO[3]
-                         net (fo=1, routed)           0.000     4.999    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_13_n_0
-    SLICE_X14Y60         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.116 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_12/CO[3]
-                         net (fo=1, routed)           0.000     5.116    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_12_n_0
-    SLICE_X14Y61         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.233 r  recip/normalized_s0_reg[23]_i_19/CO[3]
-                         net (fo=1, routed)           0.000     5.233    recip/normalized_s0_reg[23]_i_19_n_0
-    SLICE_X14Y62         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.350 r  recip/normalized_s0_reg[0]_i_3/CO[3]
-                         net (fo=1, routed)           0.000     5.350    recip/normalized_s0_reg[0]_i_3_n_0
-    SLICE_X14Y63         CARRY4 (Prop_carry4_CI_O[1])
-                                                      0.323     5.673 r  recip/normalized_s0_reg[0]_i_2/O[1]
-                         net (fo=4, routed)           0.864     6.537    recip/normalized_s0_reg[0]_i_2_n_6
-    SLICE_X15Y63         LUT4 (Prop_lut4_I3_O)        0.334     6.871 r  recip/normalized_s0[1]_i_3/O
-                         net (fo=5, routed)           0.984     7.855    recip/normalized_s0[1]_i_3_n_0
-    SLICE_X13Y64         LUT6 (Prop_lut6_I0_O)        0.332     8.187 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_3/O
-                         net (fo=19, routed)          0.895     9.082    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_3_n_0
-    SLICE_X12Y64         LUT2 (Prop_lut2_I0_O)        0.124     9.206 r  recip/normalized_s0[15]_i_2/O
-                         net (fo=17, routed)          1.171    10.376    recip/normalized_s0[15]_i_2_n_0
-    SLICE_X12Y61         LUT6 (Prop_lut6_I4_O)        0.124    10.500 r  recip/normalized_s0[23]_i_5/O
-                         net (fo=41, routed)          1.997    12.498    recip/normalized_s0[23]_i_5_n_0
-    SLICE_X12Y63         LUT6 (Prop_lut6_I5_O)        0.124    12.622 r  recip/normalized_s0[21]_i_5/O
-                         net (fo=1, routed)           0.961    13.582    recip/normalized_s0[21]_i_5_n_0
-    SLICE_X10Y63         LUT6 (Prop_lut6_I5_O)        0.124    13.706 r  recip/normalized_s0[21]_i_1/O
-                         net (fo=1, routed)           0.000    13.706    recip/normalized_s0[21]_i_1_n_0
-    SLICE_X10Y63         FDCE                                         r  recip/normalized_s0_reg[21]/D
+    U11                  IBUF (Prop_ibuf_I_O)         0.931     0.931 f  w_clip_IBUF[0]_inst/O
+                         net (fo=12, routed)          2.129     3.060    RECIPROCAL/SECOND_ITERATION/w_clip_IBUF[0]
+    SLICE_X4Y14          LUT1 (Prop_lut1_I0_O)        0.124     3.184 r  RECIPROCAL/SECOND_ITERATION/normalized[5]_i_4/O
+                         net (fo=1, routed)           0.338     3.522    RECIPROCAL/SECOND_ITERATION/normalized[5]_i_4_n_0
+    SLICE_X2Y14          CARRY4 (Prop_carry4_CYINIT_CO[3])
+                                                      0.595     4.117 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[5]_i_3/CO[3]
+                         net (fo=1, routed)           0.000     4.117    RECIPROCAL/SECOND_ITERATION/normalized_reg[5]_i_3_n_0
+    SLICE_X2Y15          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.234 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_35/CO[3]
+                         net (fo=1, routed)           0.000     4.234    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_35_n_0
+    SLICE_X2Y16          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.351 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_36/CO[3]
+                         net (fo=1, routed)           0.000     4.351    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_36_n_0
+    SLICE_X2Y17          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.468 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_33/CO[3]
+                         net (fo=1, routed)           0.000     4.468    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_33_n_0
+    SLICE_X2Y18          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.585 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_34/CO[3]
+                         net (fo=1, routed)           0.000     4.585    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_34_n_0
+    SLICE_X2Y19          CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.219     4.804 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_15/O[0]
+                         net (fo=1, routed)           0.661     5.465    RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_15_n_7
+    SLICE_X3Y19          LUT3 (Prop_lut3_I0_O)        0.295     5.760 f  RECIPROCAL/SECOND_ITERATION/normalized[23]_i_12/O
+                         net (fo=7, routed)           0.827     6.587    RECIPROCAL/SECOND_ITERATION/p_20_in
+    SLICE_X3Y20          LUT6 (Prop_lut6_I5_O)        0.124     6.711 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_14/O
+                         net (fo=3, routed)           0.828     7.539    RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_14_n_0
+    SLICE_X3Y19          LUT5 (Prop_lut5_I0_O)        0.124     7.663 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_4/O
+                         net (fo=28, routed)          1.967     9.630    RECIPROCAL/SECOND_ITERATION/w_clip[23]_1
+    SLICE_X3Y16          LUT6 (Prop_lut6_I1_O)        0.124     9.754 r  RECIPROCAL/SECOND_ITERATION/normalized[19]_i_4/O
+                         net (fo=41, routed)          1.664    11.418    RECIPROCAL/SECOND_ITERATION_n_4
+    SLICE_X8Y15          LUT4 (Prop_lut4_I0_O)        0.150    11.568 r  RECIPROCAL/normalized[16]_i_4/O
+                         net (fo=3, routed)           0.468    12.036    RECIPROCAL/normalized[16]_i_4_n_0
+    SLICE_X8Y15          LUT6 (Prop_lut6_I5_O)        0.328    12.364 r  RECIPROCAL/normalized[8]_i_1/O
+                         net (fo=1, routed)           0.000    12.364    RECIPROCAL/normalized[8]_i_1_n_0
+    SLICE_X8Y15          FDCE                                         r  RECIPROCAL/normalized_reg[8]/D
   -------------------------------------------------------------------    -------------------
 
 Slack:                    inf
   Source:                 w_clip[0]
                             (input port)
-  Destination:            recip/normalized_s0_reg[22]/D
+  Destination:            RECIPROCAL/normalized_reg[20]/D
   Path Group:             (none)
   Path Type:              Max at Slow Process Corner
-  Data Path Delay:        13.485ns  (logic 3.600ns (26.693%)  route 9.886ns (73.307%))
-  Logic Levels:           14  (CARRY4=6 IBUF=1 LUT1=1 LUT2=1 LUT4=1 LUT6=4)
+  Data Path Delay:        12.319ns  (logic 3.252ns (26.397%)  route 9.067ns (73.603%))
+  Logic Levels:           14  (CARRY4=6 IBUF=1 LUT1=1 LUT3=1 LUT5=2 LUT6=3)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    J5                                                0.000     0.000 f  w_clip[0] (IN)
+    U11                                               0.000     0.000 f  w_clip[0] (IN)
                          net (fo=0)                   0.000     0.000    w_clip[0]
-    J5                   IBUF (Prop_ibuf_I_O)         0.928     0.928 f  w_clip_IBUF[0]_inst/O
-                         net (fo=17, routed)          3.046     3.974    recip/w_clip_IBUF[0]
-    SLICE_X15Y58         LUT1 (Prop_lut1_I0_O)        0.124     4.098 r  recip/normalized_s0[1]_i_4/O
-                         net (fo=1, routed)           0.189     4.287    recip/normalized_s0[1]_i_4_n_0
-    SLICE_X14Y58         CARRY4 (Prop_carry4_CYINIT_CO[3])
-                                                      0.595     4.882 r  recip/normalized_s0_reg[1]_i_2/CO[3]
-                         net (fo=1, routed)           0.000     4.882    recip/normalized_s0_reg[1]_i_2_n_0
-    SLICE_X14Y59         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     4.999 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_13/CO[3]
-                         net (fo=1, routed)           0.000     4.999    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_13_n_0
-    SLICE_X14Y60         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.116 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_12/CO[3]
-                         net (fo=1, routed)           0.000     5.116    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_12_n_0
-    SLICE_X14Y61         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.233 r  recip/normalized_s0_reg[23]_i_19/CO[3]
-                         net (fo=1, routed)           0.000     5.233    recip/normalized_s0_reg[23]_i_19_n_0
-    SLICE_X14Y62         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.350 r  recip/normalized_s0_reg[0]_i_3/CO[3]
-                         net (fo=1, routed)           0.000     5.350    recip/normalized_s0_reg[0]_i_3_n_0
-    SLICE_X14Y63         CARRY4 (Prop_carry4_CI_O[1])
-                                                      0.323     5.673 r  recip/normalized_s0_reg[0]_i_2/O[1]
-                         net (fo=4, routed)           0.864     6.537    recip/normalized_s0_reg[0]_i_2_n_6
-    SLICE_X15Y63         LUT4 (Prop_lut4_I3_O)        0.334     6.871 r  recip/normalized_s0[1]_i_3/O
-                         net (fo=5, routed)           0.984     7.855    recip/normalized_s0[1]_i_3_n_0
-    SLICE_X13Y64         LUT6 (Prop_lut6_I0_O)        0.332     8.187 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_3/O
-                         net (fo=19, routed)          0.895     9.082    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_3_n_0
-    SLICE_X12Y64         LUT2 (Prop_lut2_I0_O)        0.124     9.206 r  recip/normalized_s0[15]_i_2/O
-                         net (fo=17, routed)          1.171    10.376    recip/normalized_s0[15]_i_2_n_0
-    SLICE_X12Y61         LUT6 (Prop_lut6_I4_O)        0.124    10.500 r  recip/normalized_s0[23]_i_5/O
-                         net (fo=41, routed)          2.014    12.515    recip/normalized_s0[23]_i_5_n_0
-    SLICE_X12Y63         LUT6 (Prop_lut6_I5_O)        0.124    12.639 r  recip/normalized_s0[22]_i_4/O
-                         net (fo=1, routed)           0.723    13.361    recip/normalized_s0[22]_i_4_n_0
-    SLICE_X11Y63         LUT6 (Prop_lut6_I3_O)        0.124    13.485 r  recip/normalized_s0[22]_i_1/O
-                         net (fo=1, routed)           0.000    13.485    recip/normalized_s0[22]_i_1_n_0
-    SLICE_X11Y63         FDCE                                         r  recip/normalized_s0_reg[22]/D
+    U11                  IBUF (Prop_ibuf_I_O)         0.931     0.931 f  w_clip_IBUF[0]_inst/O
+                         net (fo=12, routed)          2.129     3.060    RECIPROCAL/SECOND_ITERATION/w_clip_IBUF[0]
+    SLICE_X4Y14          LUT1 (Prop_lut1_I0_O)        0.124     3.184 r  RECIPROCAL/SECOND_ITERATION/normalized[5]_i_4/O
+                         net (fo=1, routed)           0.338     3.522    RECIPROCAL/SECOND_ITERATION/normalized[5]_i_4_n_0
+    SLICE_X2Y14          CARRY4 (Prop_carry4_CYINIT_CO[3])
+                                                      0.595     4.117 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[5]_i_3/CO[3]
+                         net (fo=1, routed)           0.000     4.117    RECIPROCAL/SECOND_ITERATION/normalized_reg[5]_i_3_n_0
+    SLICE_X2Y15          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.234 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_35/CO[3]
+                         net (fo=1, routed)           0.000     4.234    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_35_n_0
+    SLICE_X2Y16          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.351 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_36/CO[3]
+                         net (fo=1, routed)           0.000     4.351    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_36_n_0
+    SLICE_X2Y17          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.468 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_33/CO[3]
+                         net (fo=1, routed)           0.000     4.468    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_33_n_0
+    SLICE_X2Y18          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.585 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_34/CO[3]
+                         net (fo=1, routed)           0.000     4.585    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_34_n_0
+    SLICE_X2Y19          CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.219     4.804 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_15/O[0]
+                         net (fo=1, routed)           0.661     5.465    RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_15_n_7
+    SLICE_X3Y19          LUT3 (Prop_lut3_I0_O)        0.295     5.760 f  RECIPROCAL/SECOND_ITERATION/normalized[23]_i_12/O
+                         net (fo=7, routed)           0.827     6.587    RECIPROCAL/SECOND_ITERATION/p_20_in
+    SLICE_X3Y20          LUT6 (Prop_lut6_I5_O)        0.124     6.711 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_14/O
+                         net (fo=3, routed)           0.828     7.539    RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_14_n_0
+    SLICE_X3Y19          LUT5 (Prop_lut5_I0_O)        0.124     7.663 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_4/O
+                         net (fo=28, routed)          1.967     9.630    RECIPROCAL/SECOND_ITERATION/w_clip[23]_1
+    SLICE_X3Y16          LUT6 (Prop_lut6_I1_O)        0.124     9.754 r  RECIPROCAL/SECOND_ITERATION/normalized[19]_i_4/O
+                         net (fo=41, routed)          1.499    11.254    RECIPROCAL/SECOND_ITERATION_n_4
+    SLICE_X7Y17          LUT6 (Prop_lut6_I2_O)        0.124    11.378 r  RECIPROCAL/normalized[20]_i_2/O
+                         net (fo=1, routed)           0.817    12.195    RECIPROCAL/normalized[20]_i_2_n_0
+    SLICE_X7Y16          LUT5 (Prop_lut5_I0_O)        0.124    12.319 r  RECIPROCAL/normalized[20]_i_1/O
+                         net (fo=1, routed)           0.000    12.319    RECIPROCAL/normalized[20]_i_1_n_0
+    SLICE_X7Y16          FDCE                                         r  RECIPROCAL/normalized_reg[20]/D
   -------------------------------------------------------------------    -------------------
 
 Slack:                    inf
   Source:                 w_clip[0]
                             (input port)
-  Destination:            recip/normalized_s0_reg[15]/D
+  Destination:            RECIPROCAL/normalized_reg[0]/D
   Path Group:             (none)
   Path Type:              Max at Slow Process Corner
-  Data Path Delay:        13.334ns  (logic 3.476ns (26.067%)  route 9.858ns (73.933%))
-  Logic Levels:           13  (CARRY4=6 IBUF=1 LUT1=1 LUT4=1 LUT6=4)
+  Data Path Delay:        12.315ns  (logic 3.482ns (28.273%)  route 8.833ns (71.727%))
+  Logic Levels:           14  (CARRY4=6 IBUF=1 LUT1=1 LUT2=1 LUT3=1 LUT4=1 LUT5=1 LUT6=2)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    J5                                                0.000     0.000 f  w_clip[0] (IN)
+    U11                                               0.000     0.000 f  w_clip[0] (IN)
                          net (fo=0)                   0.000     0.000    w_clip[0]
-    J5                   IBUF (Prop_ibuf_I_O)         0.928     0.928 f  w_clip_IBUF[0]_inst/O
-                         net (fo=17, routed)          3.046     3.974    recip/w_clip_IBUF[0]
-    SLICE_X15Y58         LUT1 (Prop_lut1_I0_O)        0.124     4.098 r  recip/normalized_s0[1]_i_4/O
-                         net (fo=1, routed)           0.189     4.287    recip/normalized_s0[1]_i_4_n_0
-    SLICE_X14Y58         CARRY4 (Prop_carry4_CYINIT_CO[3])
-                                                      0.595     4.882 r  recip/normalized_s0_reg[1]_i_2/CO[3]
-                         net (fo=1, routed)           0.000     4.882    recip/normalized_s0_reg[1]_i_2_n_0
-    SLICE_X14Y59         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     4.999 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_13/CO[3]
-                         net (fo=1, routed)           0.000     4.999    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_13_n_0
-    SLICE_X14Y60         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.116 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_12/CO[3]
-                         net (fo=1, routed)           0.000     5.116    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_12_n_0
-    SLICE_X14Y61         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.233 r  recip/normalized_s0_reg[23]_i_19/CO[3]
-                         net (fo=1, routed)           0.000     5.233    recip/normalized_s0_reg[23]_i_19_n_0
-    SLICE_X14Y62         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.350 r  recip/normalized_s0_reg[0]_i_3/CO[3]
-                         net (fo=1, routed)           0.000     5.350    recip/normalized_s0_reg[0]_i_3_n_0
-    SLICE_X14Y63         CARRY4 (Prop_carry4_CI_O[1])
-                                                      0.323     5.673 r  recip/normalized_s0_reg[0]_i_2/O[1]
-                         net (fo=4, routed)           0.864     6.537    recip/normalized_s0_reg[0]_i_2_n_6
-    SLICE_X15Y63         LUT4 (Prop_lut4_I3_O)        0.334     6.871 r  recip/normalized_s0[1]_i_3/O
-                         net (fo=5, routed)           0.984     7.855    recip/normalized_s0[1]_i_3_n_0
-    SLICE_X13Y64         LUT6 (Prop_lut6_I0_O)        0.332     8.187 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_3/O
-                         net (fo=19, routed)          2.166    10.352    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_3_n_0
-    SLICE_X13Y61         LUT6 (Prop_lut6_I1_O)        0.124    10.476 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_1/O
-                         net (fo=36, routed)          1.794    12.270    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_1_n_0
-    SLICE_X10Y63         LUT6 (Prop_lut6_I4_O)        0.124    12.394 r  recip/normalized_s0[19]_i_4/O
-                         net (fo=2, routed)           0.815    13.210    recip/normalized_s0[19]_i_4_n_0
-    SLICE_X9Y63          LUT6 (Prop_lut6_I3_O)        0.124    13.334 r  recip/normalized_s0[15]_i_1/O
-                         net (fo=1, routed)           0.000    13.334    recip/normalized_s0[15]_i_1_n_0
-    SLICE_X9Y63          FDCE                                         r  recip/normalized_s0_reg[15]/D
+    U11                  IBUF (Prop_ibuf_I_O)         0.931     0.931 f  w_clip_IBUF[0]_inst/O
+                         net (fo=12, routed)          2.129     3.060    RECIPROCAL/SECOND_ITERATION/w_clip_IBUF[0]
+    SLICE_X4Y14          LUT1 (Prop_lut1_I0_O)        0.124     3.184 r  RECIPROCAL/SECOND_ITERATION/normalized[5]_i_4/O
+                         net (fo=1, routed)           0.338     3.522    RECIPROCAL/SECOND_ITERATION/normalized[5]_i_4_n_0
+    SLICE_X2Y14          CARRY4 (Prop_carry4_CYINIT_CO[3])
+                                                      0.595     4.117 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[5]_i_3/CO[3]
+                         net (fo=1, routed)           0.000     4.117    RECIPROCAL/SECOND_ITERATION/normalized_reg[5]_i_3_n_0
+    SLICE_X2Y15          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.234 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_35/CO[3]
+                         net (fo=1, routed)           0.000     4.234    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_35_n_0
+    SLICE_X2Y16          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.351 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_36/CO[3]
+                         net (fo=1, routed)           0.000     4.351    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_36_n_0
+    SLICE_X2Y17          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.468 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_33/CO[3]
+                         net (fo=1, routed)           0.000     4.468    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_33_n_0
+    SLICE_X2Y18          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.585 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_34/CO[3]
+                         net (fo=1, routed)           0.000     4.585    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_34_n_0
+    SLICE_X2Y19          CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.219     4.804 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_15/O[0]
+                         net (fo=1, routed)           0.661     5.465    RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_15_n_7
+    SLICE_X3Y19          LUT3 (Prop_lut3_I0_O)        0.295     5.760 f  RECIPROCAL/SECOND_ITERATION/normalized[23]_i_12/O
+                         net (fo=7, routed)           0.827     6.587    RECIPROCAL/SECOND_ITERATION/p_20_in
+    SLICE_X3Y20          LUT6 (Prop_lut6_I5_O)        0.124     6.711 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_14/O
+                         net (fo=3, routed)           0.828     7.539    RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_14_n_0
+    SLICE_X3Y19          LUT5 (Prop_lut5_I0_O)        0.124     7.663 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_4/O
+                         net (fo=28, routed)          1.967     9.630    RECIPROCAL/SECOND_ITERATION/w_clip[23]_1
+    SLICE_X3Y16          LUT6 (Prop_lut6_I1_O)        0.124     9.754 r  RECIPROCAL/SECOND_ITERATION/normalized[19]_i_4/O
+                         net (fo=41, routed)          1.664    11.418    RECIPROCAL/SECOND_ITERATION_n_4
+    SLICE_X8Y15          LUT4 (Prop_lut4_I0_O)        0.150    11.568 r  RECIPROCAL/normalized[16]_i_4/O
+                         net (fo=3, routed)           0.419    11.987    RECIPROCAL/normalized[16]_i_4_n_0
+    SLICE_X9Y16          LUT2 (Prop_lut2_I1_O)        0.328    12.315 r  RECIPROCAL/normalized[0]_i_1/O
+                         net (fo=1, routed)           0.000    12.315    RECIPROCAL/normalized[0]_i_1_n_0
+    SLICE_X9Y16          FDCE                                         r  RECIPROCAL/normalized_reg[0]/D
   -------------------------------------------------------------------    -------------------
 
 Slack:                    inf
   Source:                 w_clip[0]
                             (input port)
-  Destination:            recip/normalized_s0_reg[2]/D
+  Destination:            RECIPROCAL/normalized_reg[16]/D
   Path Group:             (none)
   Path Type:              Max at Slow Process Corner
-  Data Path Delay:        13.215ns  (logic 3.476ns (26.301%)  route 9.739ns (73.699%))
-  Logic Levels:           13  (CARRY4=6 IBUF=1 LUT1=1 LUT2=1 LUT4=1 LUT6=3)
+  Data Path Delay:        12.309ns  (logic 3.476ns (28.238%)  route 8.833ns (71.762%))
+  Logic Levels:           14  (CARRY4=6 IBUF=1 LUT1=1 LUT3=1 LUT4=1 LUT5=2 LUT6=2)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    J5                                                0.000     0.000 f  w_clip[0] (IN)
+    U11                                               0.000     0.000 f  w_clip[0] (IN)
                          net (fo=0)                   0.000     0.000    w_clip[0]
-    J5                   IBUF (Prop_ibuf_I_O)         0.928     0.928 f  w_clip_IBUF[0]_inst/O
-                         net (fo=17, routed)          3.046     3.974    recip/w_clip_IBUF[0]
-    SLICE_X15Y58         LUT1 (Prop_lut1_I0_O)        0.124     4.098 r  recip/normalized_s0[1]_i_4/O
-                         net (fo=1, routed)           0.189     4.287    recip/normalized_s0[1]_i_4_n_0
-    SLICE_X14Y58         CARRY4 (Prop_carry4_CYINIT_CO[3])
-                                                      0.595     4.882 r  recip/normalized_s0_reg[1]_i_2/CO[3]
-                         net (fo=1, routed)           0.000     4.882    recip/normalized_s0_reg[1]_i_2_n_0
-    SLICE_X14Y59         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     4.999 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_13/CO[3]
-                         net (fo=1, routed)           0.000     4.999    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_13_n_0
-    SLICE_X14Y60         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.116 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_12/CO[3]
-                         net (fo=1, routed)           0.000     5.116    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_12_n_0
-    SLICE_X14Y61         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.233 r  recip/normalized_s0_reg[23]_i_19/CO[3]
-                         net (fo=1, routed)           0.000     5.233    recip/normalized_s0_reg[23]_i_19_n_0
-    SLICE_X14Y62         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.350 r  recip/normalized_s0_reg[0]_i_3/CO[3]
-                         net (fo=1, routed)           0.000     5.350    recip/normalized_s0_reg[0]_i_3_n_0
-    SLICE_X14Y63         CARRY4 (Prop_carry4_CI_O[1])
-                                                      0.323     5.673 r  recip/normalized_s0_reg[0]_i_2/O[1]
-                         net (fo=4, routed)           0.864     6.537    recip/normalized_s0_reg[0]_i_2_n_6
-    SLICE_X15Y63         LUT4 (Prop_lut4_I3_O)        0.334     6.871 r  recip/normalized_s0[1]_i_3/O
-                         net (fo=5, routed)           0.984     7.855    recip/normalized_s0[1]_i_3_n_0
-    SLICE_X13Y64         LUT6 (Prop_lut6_I0_O)        0.332     8.187 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_3/O
-                         net (fo=19, routed)          2.166    10.352    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_3_n_0
-    SLICE_X13Y61         LUT6 (Prop_lut6_I1_O)        0.124    10.476 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_1/O
-                         net (fo=36, routed)          1.675    12.152    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_1_n_0
-    SLICE_X9Y59          LUT6 (Prop_lut6_I2_O)        0.124    12.276 f  recip/normalized_s0[10]_i_3/O
-                         net (fo=2, routed)           0.815    13.091    recip/normalized_s0[10]_i_3_n_0
-    SLICE_X11Y59         LUT2 (Prop_lut2_I1_O)        0.124    13.215 r  recip/normalized_s0[2]_i_1/O
-                         net (fo=1, routed)           0.000    13.215    recip/normalized_s0[2]_i_1_n_0
-    SLICE_X11Y59         FDCE                                         r  recip/normalized_s0_reg[2]/D
+    U11                  IBUF (Prop_ibuf_I_O)         0.931     0.931 f  w_clip_IBUF[0]_inst/O
+                         net (fo=12, routed)          2.129     3.060    RECIPROCAL/SECOND_ITERATION/w_clip_IBUF[0]
+    SLICE_X4Y14          LUT1 (Prop_lut1_I0_O)        0.124     3.184 r  RECIPROCAL/SECOND_ITERATION/normalized[5]_i_4/O
+                         net (fo=1, routed)           0.338     3.522    RECIPROCAL/SECOND_ITERATION/normalized[5]_i_4_n_0
+    SLICE_X2Y14          CARRY4 (Prop_carry4_CYINIT_CO[3])
+                                                      0.595     4.117 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[5]_i_3/CO[3]
+                         net (fo=1, routed)           0.000     4.117    RECIPROCAL/SECOND_ITERATION/normalized_reg[5]_i_3_n_0
+    SLICE_X2Y15          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.234 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_35/CO[3]
+                         net (fo=1, routed)           0.000     4.234    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_35_n_0
+    SLICE_X2Y16          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.351 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_36/CO[3]
+                         net (fo=1, routed)           0.000     4.351    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_36_n_0
+    SLICE_X2Y17          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.468 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_33/CO[3]
+                         net (fo=1, routed)           0.000     4.468    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_33_n_0
+    SLICE_X2Y18          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.585 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_34/CO[3]
+                         net (fo=1, routed)           0.000     4.585    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_34_n_0
+    SLICE_X2Y19          CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.219     4.804 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_15/O[0]
+                         net (fo=1, routed)           0.661     5.465    RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_15_n_7
+    SLICE_X3Y19          LUT3 (Prop_lut3_I0_O)        0.295     5.760 f  RECIPROCAL/SECOND_ITERATION/normalized[23]_i_12/O
+                         net (fo=7, routed)           0.827     6.587    RECIPROCAL/SECOND_ITERATION/p_20_in
+    SLICE_X3Y20          LUT6 (Prop_lut6_I5_O)        0.124     6.711 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_14/O
+                         net (fo=3, routed)           0.828     7.539    RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_14_n_0
+    SLICE_X3Y19          LUT5 (Prop_lut5_I0_O)        0.124     7.663 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_4/O
+                         net (fo=28, routed)          1.967     9.630    RECIPROCAL/SECOND_ITERATION/w_clip[23]_1
+    SLICE_X3Y16          LUT6 (Prop_lut6_I1_O)        0.124     9.754 r  RECIPROCAL/SECOND_ITERATION/normalized[19]_i_4/O
+                         net (fo=41, routed)          1.664    11.418    RECIPROCAL/SECOND_ITERATION_n_4
+    SLICE_X8Y15          LUT4 (Prop_lut4_I0_O)        0.150    11.568 r  RECIPROCAL/normalized[16]_i_4/O
+                         net (fo=3, routed)           0.419    11.987    RECIPROCAL/normalized[16]_i_4_n_0
+    SLICE_X9Y16          LUT5 (Prop_lut5_I4_O)        0.322    12.309 r  RECIPROCAL/normalized[16]_i_1/O
+                         net (fo=1, routed)           0.000    12.309    RECIPROCAL/normalized[16]_i_1_n_0
+    SLICE_X9Y16          FDCE                                         r  RECIPROCAL/normalized_reg[16]/D
   -------------------------------------------------------------------    -------------------
 
 Slack:                    inf
   Source:                 w_clip[0]
                             (input port)
-  Destination:            recip/normalized_s0_reg[20]/D
+  Destination:            RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][2]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3/D
   Path Group:             (none)
   Path Type:              Max at Slow Process Corner
-  Data Path Delay:        13.184ns  (logic 3.600ns (27.303%)  route 9.585ns (72.697%))
-  Logic Levels:           14  (CARRY4=6 IBUF=1 LUT1=1 LUT2=1 LUT4=1 LUT6=4)
+  Data Path Delay:        12.278ns  (logic 3.128ns (25.474%)  route 9.151ns (74.526%))
+  Logic Levels:           13  (CARRY4=6 IBUF=1 LUT1=1 LUT2=1 LUT3=1 LUT5=1 LUT6=2)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    J5                                                0.000     0.000 f  w_clip[0] (IN)
+    U11                                               0.000     0.000 f  w_clip[0] (IN)
                          net (fo=0)                   0.000     0.000    w_clip[0]
-    J5                   IBUF (Prop_ibuf_I_O)         0.928     0.928 f  w_clip_IBUF[0]_inst/O
-                         net (fo=17, routed)          3.046     3.974    recip/w_clip_IBUF[0]
-    SLICE_X15Y58         LUT1 (Prop_lut1_I0_O)        0.124     4.098 r  recip/normalized_s0[1]_i_4/O
-                         net (fo=1, routed)           0.189     4.287    recip/normalized_s0[1]_i_4_n_0
-    SLICE_X14Y58         CARRY4 (Prop_carry4_CYINIT_CO[3])
-                                                      0.595     4.882 r  recip/normalized_s0_reg[1]_i_2/CO[3]
-                         net (fo=1, routed)           0.000     4.882    recip/normalized_s0_reg[1]_i_2_n_0
-    SLICE_X14Y59         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     4.999 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_13/CO[3]
-                         net (fo=1, routed)           0.000     4.999    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_13_n_0
-    SLICE_X14Y60         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.116 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_12/CO[3]
-                         net (fo=1, routed)           0.000     5.116    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_12_n_0
-    SLICE_X14Y61         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.233 r  recip/normalized_s0_reg[23]_i_19/CO[3]
-                         net (fo=1, routed)           0.000     5.233    recip/normalized_s0_reg[23]_i_19_n_0
-    SLICE_X14Y62         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.350 r  recip/normalized_s0_reg[0]_i_3/CO[3]
-                         net (fo=1, routed)           0.000     5.350    recip/normalized_s0_reg[0]_i_3_n_0
-    SLICE_X14Y63         CARRY4 (Prop_carry4_CI_O[1])
-                                                      0.323     5.673 r  recip/normalized_s0_reg[0]_i_2/O[1]
-                         net (fo=4, routed)           0.864     6.537    recip/normalized_s0_reg[0]_i_2_n_6
-    SLICE_X15Y63         LUT4 (Prop_lut4_I3_O)        0.334     6.871 r  recip/normalized_s0[1]_i_3/O
-                         net (fo=5, routed)           0.984     7.855    recip/normalized_s0[1]_i_3_n_0
-    SLICE_X13Y64         LUT6 (Prop_lut6_I0_O)        0.332     8.187 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_3/O
-                         net (fo=19, routed)          0.895     9.082    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_3_n_0
-    SLICE_X12Y64         LUT2 (Prop_lut2_I0_O)        0.124     9.206 r  recip/normalized_s0[15]_i_2/O
-                         net (fo=17, routed)          1.171    10.376    recip/normalized_s0[15]_i_2_n_0
-    SLICE_X12Y61         LUT6 (Prop_lut6_I4_O)        0.124    10.500 r  recip/normalized_s0[23]_i_5/O
-                         net (fo=41, routed)          1.348    11.848    recip/normalized_s0[23]_i_5_n_0
-    SLICE_X9Y62          LUT6 (Prop_lut6_I2_O)        0.124    11.972 r  recip/normalized_s0[20]_i_2/O
-                         net (fo=2, routed)           1.088    13.060    recip/normalized_s0[20]_i_2_n_0
-    SLICE_X11Y63         LUT6 (Prop_lut6_I1_O)        0.124    13.184 r  recip/normalized_s0[20]_i_1/O
-                         net (fo=1, routed)           0.000    13.184    recip/normalized_s0[20]_i_1_n_0
-    SLICE_X11Y63         FDCE                                         r  recip/normalized_s0_reg[20]/D
+    U11                  IBUF (Prop_ibuf_I_O)         0.931     0.931 f  w_clip_IBUF[0]_inst/O
+                         net (fo=12, routed)          2.129     3.060    RECIPROCAL/SECOND_ITERATION/w_clip_IBUF[0]
+    SLICE_X4Y14          LUT1 (Prop_lut1_I0_O)        0.124     3.184 r  RECIPROCAL/SECOND_ITERATION/normalized[5]_i_4/O
+                         net (fo=1, routed)           0.338     3.522    RECIPROCAL/SECOND_ITERATION/normalized[5]_i_4_n_0
+    SLICE_X2Y14          CARRY4 (Prop_carry4_CYINIT_CO[3])
+                                                      0.595     4.117 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[5]_i_3/CO[3]
+                         net (fo=1, routed)           0.000     4.117    RECIPROCAL/SECOND_ITERATION/normalized_reg[5]_i_3_n_0
+    SLICE_X2Y15          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.234 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_35/CO[3]
+                         net (fo=1, routed)           0.000     4.234    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_35_n_0
+    SLICE_X2Y16          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.351 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_36/CO[3]
+                         net (fo=1, routed)           0.000     4.351    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_36_n_0
+    SLICE_X2Y17          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.468 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_33/CO[3]
+                         net (fo=1, routed)           0.000     4.468    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_33_n_0
+    SLICE_X2Y18          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.585 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_34/CO[3]
+                         net (fo=1, routed)           0.000     4.585    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_34_n_0
+    SLICE_X2Y19          CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.219     4.804 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_15/O[0]
+                         net (fo=1, routed)           0.661     5.465    RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_15_n_7
+    SLICE_X3Y19          LUT3 (Prop_lut3_I0_O)        0.295     5.760 f  RECIPROCAL/SECOND_ITERATION/normalized[23]_i_12/O
+                         net (fo=7, routed)           0.827     6.587    RECIPROCAL/SECOND_ITERATION/p_20_in
+    SLICE_X3Y20          LUT6 (Prop_lut6_I5_O)        0.124     6.711 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_14/O
+                         net (fo=3, routed)           0.828     7.539    RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_14_n_0
+    SLICE_X3Y19          LUT5 (Prop_lut5_I0_O)        0.124     7.663 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_4/O
+                         net (fo=28, routed)          1.967     9.630    RECIPROCAL/SECOND_ITERATION/w_clip[23]_1
+    SLICE_X3Y16          LUT6 (Prop_lut6_I1_O)        0.124     9.754 r  RECIPROCAL/SECOND_ITERATION/normalized[19]_i_4/O
+                         net (fo=41, routed)          1.911    11.665    RECIPROCAL/SECOND_ITERATION/normalized[19]_i_9_0
+    SLICE_X9Y20          LUT2 (Prop_lut2_I0_O)        0.124    11.789 r  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][2]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_1/O
+                         net (fo=1, routed)           0.489    12.278    RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][2]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_1_n_0
+    SLICE_X10Y20         SRL16E                                       r  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][2]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3/D
   -------------------------------------------------------------------    -------------------
 
 Slack:                    inf
   Source:                 w_clip[0]
                             (input port)
-  Destination:            recip/normalized_s0_reg[16]/D
+  Destination:            RECIPROCAL/normalized_reg[19]/D
   Path Group:             (none)
   Path Type:              Max at Slow Process Corner
-  Data Path Delay:        13.173ns  (logic 3.600ns (27.326%)  route 9.574ns (72.674%))
-  Logic Levels:           14  (CARRY4=6 IBUF=1 LUT1=1 LUT2=1 LUT4=1 LUT5=1 LUT6=3)
+  Data Path Delay:        12.257ns  (logic 3.252ns (26.530%)  route 9.005ns (73.470%))
+  Logic Levels:           14  (CARRY4=6 IBUF=1 LUT1=1 LUT3=1 LUT5=1 LUT6=4)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    J5                                                0.000     0.000 f  w_clip[0] (IN)
+    U11                                               0.000     0.000 f  w_clip[0] (IN)
                          net (fo=0)                   0.000     0.000    w_clip[0]
-    J5                   IBUF (Prop_ibuf_I_O)         0.928     0.928 f  w_clip_IBUF[0]_inst/O
-                         net (fo=17, routed)          3.046     3.974    recip/w_clip_IBUF[0]
-    SLICE_X15Y58         LUT1 (Prop_lut1_I0_O)        0.124     4.098 r  recip/normalized_s0[1]_i_4/O
-                         net (fo=1, routed)           0.189     4.287    recip/normalized_s0[1]_i_4_n_0
-    SLICE_X14Y58         CARRY4 (Prop_carry4_CYINIT_CO[3])
-                                                      0.595     4.882 r  recip/normalized_s0_reg[1]_i_2/CO[3]
-                         net (fo=1, routed)           0.000     4.882    recip/normalized_s0_reg[1]_i_2_n_0
-    SLICE_X14Y59         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     4.999 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_13/CO[3]
-                         net (fo=1, routed)           0.000     4.999    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_13_n_0
-    SLICE_X14Y60         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.116 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_12/CO[3]
-                         net (fo=1, routed)           0.000     5.116    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_12_n_0
-    SLICE_X14Y61         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.233 r  recip/normalized_s0_reg[23]_i_19/CO[3]
-                         net (fo=1, routed)           0.000     5.233    recip/normalized_s0_reg[23]_i_19_n_0
-    SLICE_X14Y62         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.350 r  recip/normalized_s0_reg[0]_i_3/CO[3]
-                         net (fo=1, routed)           0.000     5.350    recip/normalized_s0_reg[0]_i_3_n_0
-    SLICE_X14Y63         CARRY4 (Prop_carry4_CI_O[1])
-                                                      0.323     5.673 f  recip/normalized_s0_reg[0]_i_2/O[1]
-                         net (fo=4, routed)           0.864     6.537    recip/normalized_s0_reg[0]_i_2_n_6
-    SLICE_X15Y63         LUT4 (Prop_lut4_I3_O)        0.334     6.871 f  recip/normalized_s0[1]_i_3/O
-                         net (fo=5, routed)           0.984     7.855    recip/normalized_s0[1]_i_3_n_0
-    SLICE_X13Y64         LUT6 (Prop_lut6_I0_O)        0.332     8.187 f  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_3/O
-                         net (fo=19, routed)          0.895     9.082    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_3_n_0
-    SLICE_X12Y64         LUT2 (Prop_lut2_I0_O)        0.124     9.206 f  recip/normalized_s0[15]_i_2/O
-                         net (fo=17, routed)          1.171    10.376    recip/normalized_s0[15]_i_2_n_0
-    SLICE_X12Y61         LUT6 (Prop_lut6_I4_O)        0.124    10.500 f  recip/normalized_s0[23]_i_5/O
-                         net (fo=41, routed)          1.755    12.255    recip/normalized_s0[23]_i_5_n_0
-    SLICE_X8Y63          LUT5 (Prop_lut5_I3_O)        0.124    12.379 r  recip/normalized_s0[16]_i_3/O
-                         net (fo=1, routed)           0.670    13.049    recip/normalized_s0[16]_i_3_n_0
-    SLICE_X8Y63          LUT6 (Prop_lut6_I2_O)        0.124    13.173 r  recip/normalized_s0[16]_i_1/O
-                         net (fo=1, routed)           0.000    13.173    recip/normalized_s0[16]_i_1_n_0
-    SLICE_X8Y63          FDCE                                         r  recip/normalized_s0_reg[16]/D
+    U11                  IBUF (Prop_ibuf_I_O)         0.931     0.931 f  w_clip_IBUF[0]_inst/O
+                         net (fo=12, routed)          2.129     3.060    RECIPROCAL/SECOND_ITERATION/w_clip_IBUF[0]
+    SLICE_X4Y14          LUT1 (Prop_lut1_I0_O)        0.124     3.184 r  RECIPROCAL/SECOND_ITERATION/normalized[5]_i_4/O
+                         net (fo=1, routed)           0.338     3.522    RECIPROCAL/SECOND_ITERATION/normalized[5]_i_4_n_0
+    SLICE_X2Y14          CARRY4 (Prop_carry4_CYINIT_CO[3])
+                                                      0.595     4.117 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[5]_i_3/CO[3]
+                         net (fo=1, routed)           0.000     4.117    RECIPROCAL/SECOND_ITERATION/normalized_reg[5]_i_3_n_0
+    SLICE_X2Y15          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.234 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_35/CO[3]
+                         net (fo=1, routed)           0.000     4.234    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_35_n_0
+    SLICE_X2Y16          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.351 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_36/CO[3]
+                         net (fo=1, routed)           0.000     4.351    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_36_n_0
+    SLICE_X2Y17          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.468 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_33/CO[3]
+                         net (fo=1, routed)           0.000     4.468    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_33_n_0
+    SLICE_X2Y18          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.585 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_34/CO[3]
+                         net (fo=1, routed)           0.000     4.585    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_34_n_0
+    SLICE_X2Y19          CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.219     4.804 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_15/O[0]
+                         net (fo=1, routed)           0.661     5.465    RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_15_n_7
+    SLICE_X3Y19          LUT3 (Prop_lut3_I0_O)        0.295     5.760 f  RECIPROCAL/SECOND_ITERATION/normalized[23]_i_12/O
+                         net (fo=7, routed)           0.827     6.587    RECIPROCAL/SECOND_ITERATION/p_20_in
+    SLICE_X3Y20          LUT6 (Prop_lut6_I5_O)        0.124     6.711 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_14/O
+                         net (fo=3, routed)           0.828     7.539    RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_14_n_0
+    SLICE_X3Y19          LUT5 (Prop_lut5_I0_O)        0.124     7.663 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_4/O
+                         net (fo=28, routed)          1.967     9.630    RECIPROCAL/SECOND_ITERATION/w_clip[23]_1
+    SLICE_X3Y16          LUT6 (Prop_lut6_I1_O)        0.124     9.754 r  RECIPROCAL/SECOND_ITERATION/normalized[19]_i_4/O
+                         net (fo=41, routed)          1.502    11.257    RECIPROCAL/SECOND_ITERATION_n_4
+    SLICE_X7Y17          LUT6 (Prop_lut6_I2_O)        0.124    11.381 r  RECIPROCAL/normalized[19]_i_3/O
+                         net (fo=1, routed)           0.753    12.133    RECIPROCAL/normalized[19]_i_3_n_0
+    SLICE_X8Y17          LUT6 (Prop_lut6_I2_O)        0.124    12.257 r  RECIPROCAL/normalized[19]_i_1/O
+                         net (fo=1, routed)           0.000    12.257    RECIPROCAL/normalized[19]_i_1_n_0
+    SLICE_X8Y17          FDCE                                         r  RECIPROCAL/normalized_reg[19]/D
   -------------------------------------------------------------------    -------------------
 
 Slack:                    inf
   Source:                 w_clip[0]
                             (input port)
-  Destination:            recip/normalized_s0_reg[7]/D
+  Destination:            RECIPROCAL/normalized_reg[1]/D
   Path Group:             (none)
   Path Type:              Max at Slow Process Corner
-  Data Path Delay:        13.137ns  (logic 3.498ns (26.625%)  route 9.639ns (73.375%))
-  Logic Levels:           13  (CARRY4=6 IBUF=1 LUT1=1 LUT4=2 LUT6=3)
+  Data Path Delay:        12.227ns  (logic 3.244ns (26.530%)  route 8.983ns (73.470%))
+  Logic Levels:           14  (CARRY4=6 IBUF=1 LUT1=1 LUT2=1 LUT3=1 LUT5=2 LUT6=2)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    J5                                                0.000     0.000 f  w_clip[0] (IN)
+    U11                                               0.000     0.000 f  w_clip[0] (IN)
                          net (fo=0)                   0.000     0.000    w_clip[0]
-    J5                   IBUF (Prop_ibuf_I_O)         0.928     0.928 f  w_clip_IBUF[0]_inst/O
-                         net (fo=17, routed)          3.046     3.974    recip/w_clip_IBUF[0]
-    SLICE_X15Y58         LUT1 (Prop_lut1_I0_O)        0.124     4.098 r  recip/normalized_s0[1]_i_4/O
-                         net (fo=1, routed)           0.189     4.287    recip/normalized_s0[1]_i_4_n_0
-    SLICE_X14Y58         CARRY4 (Prop_carry4_CYINIT_CO[3])
-                                                      0.595     4.882 r  recip/normalized_s0_reg[1]_i_2/CO[3]
-                         net (fo=1, routed)           0.000     4.882    recip/normalized_s0_reg[1]_i_2_n_0
-    SLICE_X14Y59         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     4.999 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_13/CO[3]
-                         net (fo=1, routed)           0.000     4.999    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_13_n_0
-    SLICE_X14Y60         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.116 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_12/CO[3]
-                         net (fo=1, routed)           0.000     5.116    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_12_n_0
-    SLICE_X14Y61         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.233 r  recip/normalized_s0_reg[23]_i_19/CO[3]
-                         net (fo=1, routed)           0.000     5.233    recip/normalized_s0_reg[23]_i_19_n_0
-    SLICE_X14Y62         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     5.350 r  recip/normalized_s0_reg[0]_i_3/CO[3]
-                         net (fo=1, routed)           0.000     5.350    recip/normalized_s0_reg[0]_i_3_n_0
-    SLICE_X14Y63         CARRY4 (Prop_carry4_CI_O[1])
-                                                      0.323     5.673 r  recip/normalized_s0_reg[0]_i_2/O[1]
-                         net (fo=4, routed)           0.864     6.537    recip/normalized_s0_reg[0]_i_2_n_6
-    SLICE_X15Y63         LUT4 (Prop_lut4_I3_O)        0.334     6.871 r  recip/normalized_s0[1]_i_3/O
-                         net (fo=5, routed)           0.984     7.855    recip/normalized_s0[1]_i_3_n_0
-    SLICE_X13Y64         LUT6 (Prop_lut6_I0_O)        0.332     8.187 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_3/O
-                         net (fo=19, routed)          2.166    10.352    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_3_n_0
-    SLICE_X13Y61         LUT6 (Prop_lut6_I1_O)        0.124    10.476 r  recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_1/O
-                         net (fo=36, routed)          1.707    12.183    recip/scale_shift_s5_reg[0]_srl6_recip_valid_pipe_reg_c_4_i_1_n_0
-    SLICE_X9Y59          LUT6 (Prop_lut6_I4_O)        0.124    12.307 r  recip/normalized_s0[23]_i_6/O
-                         net (fo=4, routed)           0.684    12.991    recip/normalized_s0[23]_i_6_n_0
-    SLICE_X8Y59          LUT4 (Prop_lut4_I2_O)        0.146    13.137 r  recip/normalized_s0[7]_i_1/O
-                         net (fo=1, routed)           0.000    13.137    recip/normalized_s0[7]_i_1_n_0
-    SLICE_X8Y59          FDCE                                         r  recip/normalized_s0_reg[7]/D
+    U11                  IBUF (Prop_ibuf_I_O)         0.931     0.931 f  w_clip_IBUF[0]_inst/O
+                         net (fo=12, routed)          2.129     3.060    RECIPROCAL/SECOND_ITERATION/w_clip_IBUF[0]
+    SLICE_X4Y14          LUT1 (Prop_lut1_I0_O)        0.124     3.184 r  RECIPROCAL/SECOND_ITERATION/normalized[5]_i_4/O
+                         net (fo=1, routed)           0.338     3.522    RECIPROCAL/SECOND_ITERATION/normalized[5]_i_4_n_0
+    SLICE_X2Y14          CARRY4 (Prop_carry4_CYINIT_CO[3])
+                                                      0.595     4.117 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[5]_i_3/CO[3]
+                         net (fo=1, routed)           0.000     4.117    RECIPROCAL/SECOND_ITERATION/normalized_reg[5]_i_3_n_0
+    SLICE_X2Y15          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.234 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_35/CO[3]
+                         net (fo=1, routed)           0.000     4.234    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_35_n_0
+    SLICE_X2Y16          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.351 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_36/CO[3]
+                         net (fo=1, routed)           0.000     4.351    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_36_n_0
+    SLICE_X2Y17          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.468 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_33/CO[3]
+                         net (fo=1, routed)           0.000     4.468    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_33_n_0
+    SLICE_X2Y18          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.585 r  RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_34/CO[3]
+                         net (fo=1, routed)           0.000     4.585    RECIPROCAL/SECOND_ITERATION/normalized_reg[23]_i_34_n_0
+    SLICE_X2Y19          CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.219     4.804 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_15/O[0]
+                         net (fo=1, routed)           0.661     5.465    RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_15_n_7
+    SLICE_X3Y19          LUT3 (Prop_lut3_I0_O)        0.295     5.760 f  RECIPROCAL/SECOND_ITERATION/normalized[23]_i_12/O
+                         net (fo=7, routed)           0.827     6.587    RECIPROCAL/SECOND_ITERATION/p_20_in
+    SLICE_X3Y20          LUT6 (Prop_lut6_I5_O)        0.124     6.711 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_14/O
+                         net (fo=3, routed)           0.828     7.539    RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_14_n_0
+    SLICE_X3Y19          LUT5 (Prop_lut5_I0_O)        0.124     7.663 f  RECIPROCAL/SECOND_ITERATION/shift_delay_reg[1][1]_srl8_RECIPROCAL_SECOND_ITERATION_valid_delay_reg_c_3_i_4/O
+                         net (fo=28, routed)          1.967     9.630    RECIPROCAL/SECOND_ITERATION/w_clip[23]_1
+    SLICE_X3Y16          LUT6 (Prop_lut6_I1_O)        0.124     9.754 r  RECIPROCAL/SECOND_ITERATION/normalized[19]_i_4/O
+                         net (fo=41, routed)          1.664    11.418    RECIPROCAL/SECOND_ITERATION_n_4
+    SLICE_X8Y15          LUT5 (Prop_lut5_I0_O)        0.124    11.542 r  RECIPROCAL/normalized[17]_i_4/O
+                         net (fo=3, routed)           0.569    12.111    RECIPROCAL/normalized[17]_i_4_n_0
+    SLICE_X8Y18          LUT2 (Prop_lut2_I1_O)        0.116    12.227 r  RECIPROCAL/normalized[1]_i_1/O
+                         net (fo=1, routed)           0.000    12.227    RECIPROCAL/normalized[1]_i_1_n_0
+    SLICE_X8Y18          FDCE                                         r  RECIPROCAL/normalized_reg[1]/D
   -------------------------------------------------------------------    -------------------
 
 
@@ -720,173 +724,173 @@ Slack:                    inf
 Min Delay Paths
 --------------------------------------------------------------------------------------
 Slack:                    inf
-  Source:                 recip/normalized_s0_reg[12]/C
+  Source:                 RECIPROCAL/FIRST_ITERATION/guess_delay_reg[0][8]/C
                             (rising edge-triggered cell FDCE)
-  Destination:            recip/normalized_s1_reg[12]/D
+  Destination:            RECIPROCAL/FIRST_ITERATION/guess_delay_reg[1][8]/D
   Path Group:             (none)
   Path Type:              Min at Fast Process Corner
-  Data Path Delay:        0.197ns  (logic 0.141ns (71.611%)  route 0.056ns (28.389%))
+  Data Path Delay:        0.214ns  (logic 0.128ns (59.943%)  route 0.086ns (40.057%))
   Logic Levels:           1  (FDCE=1)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    SLICE_X9Y63          FDCE                         0.000     0.000 r  recip/normalized_s0_reg[12]/C
-    SLICE_X9Y63          FDCE (Prop_fdce_C_Q)         0.141     0.141 r  recip/normalized_s0_reg[12]/Q
-                         net (fo=1, routed)           0.056     0.197    recip/normalized_s0_reg_n_0_[12]
-    SLICE_X9Y63          FDCE                                         r  recip/normalized_s1_reg[12]/D
+    SLICE_X13Y17         FDCE                         0.000     0.000 r  RECIPROCAL/FIRST_ITERATION/guess_delay_reg[0][8]/C
+    SLICE_X13Y17         FDCE (Prop_fdce_C_Q)         0.128     0.128 r  RECIPROCAL/FIRST_ITERATION/guess_delay_reg[0][8]/Q
+                         net (fo=1, routed)           0.086     0.214    RECIPROCAL/FIRST_ITERATION/guess_delay_reg_n_0_[0][8]
+    SLICE_X13Y17         FDCE                                         r  RECIPROCAL/FIRST_ITERATION/guess_delay_reg[1][8]/D
   -------------------------------------------------------------------    -------------------
 
 Slack:                    inf
-  Source:                 recip/normalized_s0_reg[13]/C
+  Source:                 RECIPROCAL/FIRST_ITERATION/guess_delay_reg[0][14]/C
                             (rising edge-triggered cell FDCE)
-  Destination:            recip/normalized_s1_reg[13]/D
+  Destination:            RECIPROCAL/FIRST_ITERATION/guess_delay_reg[1][14]/D
   Path Group:             (none)
   Path Type:              Min at Fast Process Corner
-  Data Path Delay:        0.197ns  (logic 0.141ns (71.611%)  route 0.056ns (28.389%))
+  Data Path Delay:        0.242ns  (logic 0.128ns (52.946%)  route 0.114ns (47.054%))
   Logic Levels:           1  (FDCE=1)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    SLICE_X9Y63          FDCE                         0.000     0.000 r  recip/normalized_s0_reg[13]/C
-    SLICE_X9Y63          FDCE (Prop_fdce_C_Q)         0.141     0.141 r  recip/normalized_s0_reg[13]/Q
-                         net (fo=1, routed)           0.056     0.197    recip/normalized_s0_reg_n_0_[13]
-    SLICE_X9Y63          FDCE                                         r  recip/normalized_s1_reg[13]/D
+    SLICE_X13Y15         FDCE                         0.000     0.000 r  RECIPROCAL/FIRST_ITERATION/guess_delay_reg[0][14]/C
+    SLICE_X13Y15         FDCE (Prop_fdce_C_Q)         0.128     0.128 r  RECIPROCAL/FIRST_ITERATION/guess_delay_reg[0][14]/Q
+                         net (fo=1, routed)           0.114     0.242    RECIPROCAL/FIRST_ITERATION/guess_delay_reg_n_0_[0][14]
+    SLICE_X13Y16         FDCE                                         r  RECIPROCAL/FIRST_ITERATION/guess_delay_reg[1][14]/D
   -------------------------------------------------------------------    -------------------
 
 Slack:                    inf
-  Source:                 recip/normalized_s0_reg[15]/C
+  Source:                 RECIPROCAL/normalized_reg[6]/C
                             (rising edge-triggered cell FDCE)
-  Destination:            recip/normalized_s1_reg[15]/D
+  Destination:            RECIPROCAL/nr_value_reg[6]/D
   Path Group:             (none)
   Path Type:              Min at Fast Process Corner
-  Data Path Delay:        0.197ns  (logic 0.141ns (71.611%)  route 0.056ns (28.389%))
+  Data Path Delay:        0.245ns  (logic 0.128ns (52.308%)  route 0.117ns (47.692%))
   Logic Levels:           1  (FDCE=1)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    SLICE_X9Y63          FDCE                         0.000     0.000 r  recip/normalized_s0_reg[15]/C
-    SLICE_X9Y63          FDCE (Prop_fdce_C_Q)         0.141     0.141 r  recip/normalized_s0_reg[15]/Q
-                         net (fo=1, routed)           0.056     0.197    recip/normalized_s0_reg_n_0_[15]
-    SLICE_X9Y63          FDCE                                         r  recip/normalized_s1_reg[15]/D
+    SLICE_X9Y15          FDCE                         0.000     0.000 r  RECIPROCAL/normalized_reg[6]/C
+    SLICE_X9Y15          FDCE (Prop_fdce_C_Q)         0.128     0.128 r  RECIPROCAL/normalized_reg[6]/Q
+                         net (fo=1, routed)           0.117     0.245    RECIPROCAL/normalized_reg_n_0_[6]
+    SLICE_X11Y15         FDCE                                         r  RECIPROCAL/nr_value_reg[6]/D
   -------------------------------------------------------------------    -------------------
 
 Slack:                    inf
-  Source:                 recip/normalized_s0_reg[1]/C
+  Source:                 RECIPROCAL/FIRST_ITERATION/guess_delay_reg[0][1]/C
                             (rising edge-triggered cell FDCE)
-  Destination:            recip/normalized_s1_reg[1]/D
+  Destination:            RECIPROCAL/FIRST_ITERATION/guess_delay_reg[1][1]/D
   Path Group:             (none)
   Path Type:              Min at Fast Process Corner
-  Data Path Delay:        0.197ns  (logic 0.141ns (71.611%)  route 0.056ns (28.389%))
+  Data Path Delay:        0.247ns  (logic 0.128ns (51.736%)  route 0.119ns (48.264%))
   Logic Levels:           1  (FDCE=1)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    SLICE_X13Y59         FDCE                         0.000     0.000 r  recip/normalized_s0_reg[1]/C
-    SLICE_X13Y59         FDCE (Prop_fdce_C_Q)         0.141     0.141 r  recip/normalized_s0_reg[1]/Q
-                         net (fo=1, routed)           0.056     0.197    recip/normalized_s0_reg_n_0_[1]
-    SLICE_X13Y59         FDCE                                         r  recip/normalized_s1_reg[1]/D
+    SLICE_X13Y14         FDCE                         0.000     0.000 r  RECIPROCAL/FIRST_ITERATION/guess_delay_reg[0][1]/C
+    SLICE_X13Y14         FDCE (Prop_fdce_C_Q)         0.128     0.128 r  RECIPROCAL/FIRST_ITERATION/guess_delay_reg[0][1]/Q
+                         net (fo=1, routed)           0.119     0.247    RECIPROCAL/FIRST_ITERATION/guess_delay_reg_n_0_[0][1]
+    SLICE_X13Y14         FDCE                                         r  RECIPROCAL/FIRST_ITERATION/guess_delay_reg[1][1]/D
   -------------------------------------------------------------------    -------------------
 
 Slack:                    inf
-  Source:                 recip/normalized_s0_reg[8]/C
+  Source:                 RECIPROCAL/FIRST_ITERATION/guess_delay_reg[0][22]/C
                             (rising edge-triggered cell FDCE)
-  Destination:            recip/normalized_s1_reg[8]/D
+  Destination:            RECIPROCAL/FIRST_ITERATION/guess_delay_reg[1][22]/D
   Path Group:             (none)
   Path Type:              Min at Fast Process Corner
-  Data Path Delay:        0.197ns  (logic 0.141ns (71.611%)  route 0.056ns (28.389%))
+  Data Path Delay:        0.247ns  (logic 0.128ns (51.736%)  route 0.119ns (48.264%))
   Logic Levels:           1  (FDCE=1)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    SLICE_X9Y60          FDCE                         0.000     0.000 r  recip/normalized_s0_reg[8]/C
-    SLICE_X9Y60          FDCE (Prop_fdce_C_Q)         0.141     0.141 r  recip/normalized_s0_reg[8]/Q
-                         net (fo=1, routed)           0.056     0.197    recip/normalized_s0_reg_n_0_[8]
-    SLICE_X9Y60          FDCE                                         r  recip/normalized_s1_reg[8]/D
+    SLICE_X13Y12         FDCE                         0.000     0.000 r  RECIPROCAL/FIRST_ITERATION/guess_delay_reg[0][22]/C
+    SLICE_X13Y12         FDCE (Prop_fdce_C_Q)         0.128     0.128 r  RECIPROCAL/FIRST_ITERATION/guess_delay_reg[0][22]/Q
+                         net (fo=1, routed)           0.119     0.247    RECIPROCAL/FIRST_ITERATION/guess_delay_reg_n_0_[0][22]
+    SLICE_X13Y12         FDCE                                         r  RECIPROCAL/FIRST_ITERATION/guess_delay_reg[1][22]/D
   -------------------------------------------------------------------    -------------------
 
 Slack:                    inf
-  Source:                 recip/normalized_s0_reg[9]/C
+  Source:                 RECIPROCAL/SECOND_ITERATION/guess_delay_reg[0][21]/C
                             (rising edge-triggered cell FDCE)
-  Destination:            recip/normalized_s1_reg[9]/D
+  Destination:            RECIPROCAL/SECOND_ITERATION/guess_delay_reg[1][21]/D
   Path Group:             (none)
   Path Type:              Min at Fast Process Corner
-  Data Path Delay:        0.197ns  (logic 0.141ns (71.611%)  route 0.056ns (28.389%))
+  Data Path Delay:        0.248ns  (logic 0.128ns (51.686%)  route 0.120ns (48.314%))
   Logic Levels:           1  (FDCE=1)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    SLICE_X9Y60          FDCE                         0.000     0.000 r  recip/normalized_s0_reg[9]/C
-    SLICE_X9Y60          FDCE (Prop_fdce_C_Q)         0.141     0.141 r  recip/normalized_s0_reg[9]/Q
-                         net (fo=1, routed)           0.056     0.197    recip/normalized_s0_reg_n_0_[9]
-    SLICE_X9Y60          FDCE                                         r  recip/normalized_s1_reg[9]/D
+    SLICE_X13Y21         FDCE                         0.000     0.000 r  RECIPROCAL/SECOND_ITERATION/guess_delay_reg[0][21]/C
+    SLICE_X13Y21         FDCE (Prop_fdce_C_Q)         0.128     0.128 r  RECIPROCAL/SECOND_ITERATION/guess_delay_reg[0][21]/Q
+                         net (fo=1, routed)           0.120     0.248    RECIPROCAL/SECOND_ITERATION/guess_delay_reg_n_0_[0][21]
+    SLICE_X13Y22         FDCE                                         r  RECIPROCAL/SECOND_ITERATION/guess_delay_reg[1][21]/D
   -------------------------------------------------------------------    -------------------
 
 Slack:                    inf
-  Source:                 recip/r0_s2_reg[20]/C
+  Source:                 RECIPROCAL/start_value_reg[13]/C
                             (rising edge-triggered cell FDCE)
-  Destination:            recip/r0_s3_reg[20]/D
+  Destination:            RECIPROCAL/FIRST_ITERATION/guess_delay_reg[0][13]/D
   Path Group:             (none)
   Path Type:              Min at Fast Process Corner
-  Data Path Delay:        0.197ns  (logic 0.141ns (71.611%)  route 0.056ns (28.389%))
+  Data Path Delay:        0.261ns  (logic 0.148ns (56.753%)  route 0.113ns (43.247%))
   Logic Levels:           1  (FDCE=1)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    SLICE_X13Y69         FDCE                         0.000     0.000 r  recip/r0_s2_reg[20]/C
-    SLICE_X13Y69         FDCE (Prop_fdce_C_Q)         0.141     0.141 r  recip/r0_s2_reg[20]/Q
-                         net (fo=1, routed)           0.056     0.197    recip/r0_s2[20]
-    SLICE_X13Y69         FDCE                                         r  recip/r0_s3_reg[20]/D
+    SLICE_X14Y14         FDCE                         0.000     0.000 r  RECIPROCAL/start_value_reg[13]/C
+    SLICE_X14Y14         FDCE (Prop_fdce_C_Q)         0.148     0.148 r  RECIPROCAL/start_value_reg[13]/Q
+                         net (fo=2, routed)           0.113     0.261    RECIPROCAL/FIRST_ITERATION/high_product0[13]
+    SLICE_X13Y15         FDCE                                         r  RECIPROCAL/FIRST_ITERATION/guess_delay_reg[0][13]/D
   -------------------------------------------------------------------    -------------------
 
 Slack:                    inf
-  Source:                 recip/r0_s2_reg[2]/C
+  Source:                 RECIPROCAL/FIRST_ITERATION/SECOND_MULTIPLY/product_reg[46]/C
                             (rising edge-triggered cell FDCE)
-  Destination:            recip/r0_s3_reg[2]/D
+  Destination:            RECIPROCAL/SECOND_ITERATION/guess_delay_reg[0][23]/D
   Path Group:             (none)
   Path Type:              Min at Fast Process Corner
-  Data Path Delay:        0.197ns  (logic 0.141ns (71.611%)  route 0.056ns (28.389%))
+  Data Path Delay:        0.269ns  (logic 0.141ns (52.345%)  route 0.128ns (47.655%))
   Logic Levels:           1  (FDCE=1)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    SLICE_X13Y67         FDCE                         0.000     0.000 r  recip/r0_s2_reg[2]/C
-    SLICE_X13Y67         FDCE (Prop_fdce_C_Q)         0.141     0.141 r  recip/r0_s2_reg[2]/Q
-                         net (fo=1, routed)           0.056     0.197    recip/r0_s2[2]
-    SLICE_X13Y67         FDCE                                         r  recip/r0_s3_reg[2]/D
+    SLICE_X11Y22         FDCE                         0.000     0.000 r  RECIPROCAL/FIRST_ITERATION/SECOND_MULTIPLY/product_reg[46]/C
+    SLICE_X11Y22         FDCE (Prop_fdce_C_Q)         0.141     0.141 r  RECIPROCAL/FIRST_ITERATION/SECOND_MULTIPLY/product_reg[46]/Q
+                         net (fo=2, routed)           0.128     0.269    RECIPROCAL/SECOND_ITERATION/guess_in[23]
+    SLICE_X10Y22         FDCE                                         r  RECIPROCAL/SECOND_ITERATION/guess_delay_reg[0][23]/D
   -------------------------------------------------------------------    -------------------
 
 Slack:                    inf
-  Source:                 recip/r0_s2_reg[3]/C
+  Source:                 RECIPROCAL/SECOND_ITERATION/guess_delay_reg[0][10]/C
                             (rising edge-triggered cell FDCE)
-  Destination:            recip/r0_s3_reg[3]/D
+  Destination:            RECIPROCAL/SECOND_ITERATION/guess_delay_reg[1][10]/D
   Path Group:             (none)
   Path Type:              Min at Fast Process Corner
-  Data Path Delay:        0.197ns  (logic 0.141ns (71.611%)  route 0.056ns (28.389%))
+  Data Path Delay:        0.274ns  (logic 0.164ns (59.853%)  route 0.110ns (40.147%))
   Logic Levels:           1  (FDCE=1)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    SLICE_X13Y67         FDCE                         0.000     0.000 r  recip/r0_s2_reg[3]/C
-    SLICE_X13Y67         FDCE (Prop_fdce_C_Q)         0.141     0.141 r  recip/r0_s2_reg[3]/Q
-                         net (fo=1, routed)           0.056     0.197    recip/r0_s2[3]
-    SLICE_X13Y67         FDCE                                         r  recip/r0_s3_reg[3]/D
+    SLICE_X10Y21         FDCE                         0.000     0.000 r  RECIPROCAL/SECOND_ITERATION/guess_delay_reg[0][10]/C
+    SLICE_X10Y21         FDCE (Prop_fdce_C_Q)         0.164     0.164 r  RECIPROCAL/SECOND_ITERATION/guess_delay_reg[0][10]/Q
+                         net (fo=1, routed)           0.110     0.274    RECIPROCAL/SECOND_ITERATION/guess_delay_reg_n_0_[0][10]
+    SLICE_X10Y21         FDCE                                         r  RECIPROCAL/SECOND_ITERATION/guess_delay_reg[1][10]/D
   -------------------------------------------------------------------    -------------------
 
 Slack:                    inf
-  Source:                 recip/normalized_s0_reg[0]/C
+  Source:                 RECIPROCAL/SECOND_ITERATION/guess_delay_reg[0][15]/C
                             (rising edge-triggered cell FDCE)
-  Destination:            recip/normalized_s1_reg[0]/D
+  Destination:            RECIPROCAL/SECOND_ITERATION/guess_delay_reg[1][15]/D
   Path Group:             (none)
   Path Type:              Min at Fast Process Corner
-  Data Path Delay:        0.220ns  (logic 0.164ns (74.580%)  route 0.056ns (25.420%))
+  Data Path Delay:        0.276ns  (logic 0.164ns (59.419%)  route 0.112ns (40.581%))
   Logic Levels:           1  (FDCE=1)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    SLICE_X12Y63         FDCE                         0.000     0.000 r  recip/normalized_s0_reg[0]/C
-    SLICE_X12Y63         FDCE (Prop_fdce_C_Q)         0.164     0.164 r  recip/normalized_s0_reg[0]/Q
-                         net (fo=1, routed)           0.056     0.220    recip/normalized_s0_reg_n_0_[0]
-    SLICE_X12Y63         FDCE                                         r  recip/normalized_s1_reg[0]/D
+    SLICE_X10Y25         FDCE                         0.000     0.000 r  RECIPROCAL/SECOND_ITERATION/guess_delay_reg[0][15]/C
+    SLICE_X10Y25         FDCE (Prop_fdce_C_Q)         0.164     0.164 r  RECIPROCAL/SECOND_ITERATION/guess_delay_reg[0][15]/Q
+                         net (fo=1, routed)           0.112     0.276    RECIPROCAL/SECOND_ITERATION/guess_delay_reg_n_0_[0][15]
+    SLICE_X10Y26         FDCE                                         r  RECIPROCAL/SECOND_ITERATION/guess_delay_reg[1][15]/D
   -------------------------------------------------------------------    -------------------
 
 
